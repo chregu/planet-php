@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+	<map:pipeline >
+		<map:generate type="xmlfile" src="docbook.xml"/>
+		<map:transform type="xmltransformer">
+			<map:parameter name="autoload" value="DocBook"/>
+		</map:transform>
+		<map:serialize type="html"/>
+	</map:pipeline>
+</map:pipelines>
+</map:sitemap>

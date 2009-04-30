@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript">
+<!--
+
+    function addEngine()
+    {
+        if ((typeof window.sidebar == "object") && (typeof window.sidebar.addSearchEngine == "function"))
+        {
+            window.sidebar.addSearchEngine(
+                "http://www.planet-php.net/planet-php.src",    /* engine URL */
+                "http://www.planet-php.net/themes/img/planet-php.jpg",       /* icon URL */
+                "Planet-PHP",                                  /* engine name */
+                "Web" );                                       /* category name */
+        }
+        else
+        {
+            alert("Mozilla M15 or later is required to add a search engine.");
+        }
+    }
+
+// -->
+</script>
+
+<p>
+<small>Add Planet-PHP Search to Mozilla Search
+ tab <a href="javascript:addEngine()">here</a>!</small>
+</p>
+
+</body></html>

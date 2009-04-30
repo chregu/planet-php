@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
+<package version="1.0">
+  <name>popoon</name>
+  <summary>Popoon is a open source XML Publishing framework.</summary>
+  <description>Popoon is a open source XML Publishing framework. 
+  It's modelled after cocoon and is completely written in PHP.
+  Popoon is the publishing backend within Bitflux CMS, but it can be used independently from the CMS.
+  
+  More info at http://bitflux.ch/developer/cms/popoon.html</description>
+  <maintainers>
+    <maintainer>
+      <user>chregu</user>
+      <name>Christian Stocker</name>
+      <email>chregu@bitflux.org</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+  <release>
+    <version>1.x</version>
+    <date>2004-01-28</date>
+    <license>ASFL-2.0</license>
+    <state>stable</state>
+    <notes>First official stable release of Popoon</notes>
+    <filelist>
+      <dir baseinstalldir="popoon" name="/">
+       <dir name="components">
+        <file role="php" name="action.php"/>
+        <file role="php" name="aggregator.php"/>
+        <file role="php" name="cache.php"/>
+        <file role="php" name="component.php"/>
+        <file role="php" name="generator.php"/>
+        <file role="php" name="matcher.php"/>
+        <file role="php" name="reader.php"/>
+        <file role="php" name="selector.php"/>
+        <file role="php" name="serializer.php"/>
+        <file role="php" name="transformer.php"/>
+        <dir name="actions">
+         <file role="php" name="bitfluxcms.php"/>
+         <file role="php" name="bxe_newarticle.php"/>
+         <file role="php" name="bxe_save.php"/>
+         <file role="php" name="db_query.php"/>
+         <file role="php" name="mail.php"/>
+         <file role="php" name="mygyndoc.php"/>
+         <file role="php" name="pearauth.php"/>
+         <file role="php" name="pwforgotten.php"/>
+         <file role="php" name="querybuilder.php"/>
+         <file role="data" name="querybuilder.xsl"/>
+         <file role="php" name="search2sql.php"/>
+         <file role="php" name="sessionstorer.php"/>
+         <file role="php" name="simple.php"/>
+         <file role="php" name="simpleperm.php"/>
+        </dir> <!-- components/actions -->
+        <dir name="generators">
+         <file role="php" name="bitflux.php"/>
+         <file role="php" name="bitfluxcms.php"/>
+         <file role="php" name="bitfluxnavi.php"/>
+         <file role="php" name="bitflux_ebp.php"/>
+         <file role="data" name="bla"/>
+         <file role="php" name="db2xml.php"/>
+         <file role="php" name="directory.php"/>
+         <file role="php" name="phpwiki.php"/>
+         <file role="php" name="pwforgotten.php"/>
+         <file role="php" name="search.php"/>
+         <file role="php" name="structure2xml.php"/>
+         <file role="php" name="structureslider.php"/>
+         <file role="php" name="usercomments.php"/>
+         <file role="php" name="xmlfile.php"/>
+         <file role="php" name="xmlrpc_server.php"/>
+         <file role="php" name="xmlvariable.php"/>
+         <dir name="phpwiki">
+          <file role="php" name="config.inc.php"/>
+          <file role="php" name="prepend.php"/>
+          <file role="php" name="WikiRequest.php"/>
+          <dir name="themes">
+           <dir name="popoon">
+            <file role="php" name="themeinfo.php"/>
+            <dir name="lib">
+             <file role="php" name="RecentChanges.php"/>
+            </dir> <!-- components/generators/phpwiki/themes/popoon/lib -->
+            <dir name="templates">
+             <file role="data" name="actionbar.tmpl"/>
+             <file role="data" name="blogform.tmpl"/>
+             <file role="data" name="body.tmpl"/>
+             <file role="data" name="bottom.tmpl"/>
+             <file role="data" name="browse-footer.tmpl"/>
+             <file role="data" name="browse.tmpl"/>
+             <file role="data" name="content.tmpl"/>
+             <file role="data" name="debug.tmpl"/>
+             <file role="data" name="dialog.tmpl"/>
+             <file role="data" name="editpage.tmpl"/>
+             <file role="data" name="head.tmpl"/>
+             <file role="data" name="homepage.tmpl"/>
+             <file role="data" name="html.tmpl"/>
+             <file role="data" name="info.tmpl"/>
+             <file role="data" name="login.tmpl"/>
+             <file role="data" name="navbar.tmpl"/>
+             <file role="data" name="nochanges.tmpl"/>
+             <file role="data" name="redirect.tmpl"/>
+             <file role="data" name="savepage.tmpl"/>
+             <file role="data" name="signin.tmpl"/>
+             <file role="data" name="top.tmpl"/>
+             <file role="data" name="userprefs.tmpl"/>
+             <file role="data" name="viewsource.tmpl"/>
+            </dir> <!-- components/generators/phpwiki/themes/popoon/templates -->
+           </dir> <!-- components/generators/phpwiki/themes/popoon -->
+          </dir> <!-- components/generators/phpwiki/themes -->
+         </dir> <!-- components/generators/phpwiki -->
+         <dir name="search">
+          <file role="php" name="MnogoSearch.php"/>
+          <file role="php" name="SwishE.php"/>
+         </dir> <!-- components/generators/search -->
+        </dir> <!-- components/generators -->
+        <dir name="matchers">
+         <file role="php" name="any.php"/>
+         <file role="php" name="phpglobals.php"/>
+         <file role="php" name="phpglobalvars.php"/>
+         <file role="php" name="uri.php"/>
+        </dir> <!-- components/matchers -->
+        <dir name="readers">
+         <file role="php" name="info.php"/>
+         <file role="php" name="php.php"/>
+         <file role="php" name="phpsource.php"/>
+         <file role="php" name="resource.php"/>
+         <file role="php" name="textsource.php"/>
+        </dir> <!-- components/readers -->
+        <dir name="schemes">
+         <file role="php" name="BX_BITLIB_DIR.php"/>
+         <file role="php" name="BX_PROJECT_DIR.php"/>
+         <file role="php" name="config.php"/>
+         <file role="php" name="globals.php"/>
+         <file role="php" name="lang.php"/>
+         <file role="php" name="options.php"/>
+         <file role="php" name="peardb.php"/>
+         <file role="php" name="php.php"/>
+         <file role="php" name="phpglobals.php"/>
+        </dir> <!-- components/schemes -->
+        <dir name="selectors">
+         <file role="php" name="any.php"/>
+         <file role="php" name="eval.php"/>
+         <file role="php" name="phpglobalvars.php"/>
+         <file role="php" name="uri.php"/>
+        </dir> <!-- components/selectors -->
+        <dir name="serializers">
+         <file role="php" name="debug.php"/>
+         <file role="php" name="fo2pdf.php"/>
+         <file role="php" name="html.php"/>
+         <file role="php" name="html2html.php"/>
+         <file role="php" name="htmlwithmailobfuscator.php"/>
+         <file role="php" name="xhtml.php"/>
+         <file role="php" name="xml.php"/>
+         <file role="php" name="xmldom.php"/>
+         <file role="php" name="xmlformatted.php"/>
+         <dir name="html2html">
+          <file role="data" name="html2html.xsl"/>
+         </dir> <!-- components/serializers/html2html -->
+        </dir> <!-- components/serializers -->
+        <dir name="transformers">
+         <file role="php" name="formwizard.php"/>
+         <file role="php" name="libxslt.php"/>
+         <file role="php" name="mailobfuscator.php"/>
+         <file role="php" name="mixedcontent.php"/>
+         <file role="php" name="phpprocessor.php"/>
+         <file role="php" name="phpprocessorsax.php"/>
+         <file role="php" name="xforms.php"/>
+         <file role="data" name="xforms.xsl"/>
+         <file role="php" name="xinclude.php"/>
+         <file role="php" name="xmltransformer.php"/>
+         <file role="php" name="xslt.php"/>
+         <dir name="formwizard">
+          <file role="data" name="xml2html.xsl"/>
+          <file role="data" name="xml2sqlinsert.xsl"/>
+         </dir> <!-- components/transformers/formwizard -->
+        </dir> <!-- components/transformers -->
+       </dir> <!-- components -->
+       <dir name="examples">
+        <dir name="slideml">
+         <file role="doc" name=".htaccess"/>
+         <file role="doc" name="2html_ext_css.xsl"/>
+         <file role="doc" name="index.php"/>
+         <file role="doc" name="sitemap_mod.xml"/>
+         <file role="doc" name="slideml.xml"/>
+         <file role="doc" name="styles.css"/>
+         <dir name="img">
+          <file role="doc" name="phpug_logo.gif"/>
+         </dir> <!-- examples/slideml/img -->
+        </dir> <!-- examples/slideml -->
+       </dir> <!-- examples -->
+       <dir name="functions">
+        <file role="php" name="common.php"/>
+       </dir> <!-- functions -->
+       <dir name="sitemap">
+        <file role="php" name="outputcache.php"/>
+        <file role="php" name="sitemap.php"/>
+        <file role="data" name="sitemap2php.xsl"/>
+        <file role="data" name="sitemap2phpincludes.xsl"/>
+       </dir> <!-- sitemap -->
+       <dir name="tests">
+        <file role="test" name="README"/>
+        <file role="test" name="run-tests.php4"/>
+        <file role="test" name="run-tests.php5"/>
+        <file role="test" name="run-tests.sh"/>
+        <dir name="tests">
+         <file role="test" name="001.phpt"/>
+         <file role="test" name="002.phpt"/>
+         <file role="test" name="003.phpt"/>
+         <file role="test" name="004.phpt"/>
+         <file role="test" name="005.phpt"/>
+         <file role="test" name="005usephp.xsl"/>
+         <file role="test" name="006.phpt"/>
+         <file role="test" name="007.phpt"/>
+         <file role="test" name="008.phpt"/>
+         <file role="test" name="009.phpt"/>
+         <file role="test" name="010.phpt"/>
+         <file role="test" name="empty.xml"/>
+         <file role="test" name="init.php"/>
+         <file role="test" name="popoon.sql"/>
+         <file role="test" name="sample.xml"/>
+         <file role="test" name="sample2html.xsl"/>
+         <file role="test" name="sitemap001.xml"/>
+         <file role="test" name="sitemap002.xml"/>
+         <file role="test" name="sitemap003.xml"/>
+         <file role="test" name="sitemap004.xml"/>
+         <file role="test" name="sitemap005.xml"/>
+         <file role="test" name="sitemap006.xml"/>
+         <file role="test" name="sitemap007.xml"/>
+         <file role="test" name="sitemap008.xml"/>
+         <file role="test" name="sitemap009.xml"/>
+         <file role="test" name="sitemap009m.xml"/>
+         <file role="test" name="sitemap010.xml"/>
+         <file role="test" name="slideml.xml"/>
+         <file role="test" name="slideml2xml_1page.xsl"/>
+        </dir> <!-- tests/tests -->
+       </dir> <!-- tests -->
+       <file role="data" name="ChangeLog"/>
+       <file role="php" name="globalContainer.php"/>
+       <file role="php" name="popoon.php"/>
+       <file role="php" name="sitemap.php"/>
+       <file role="data" name="VERSION"/>
+      </dir> <!-- / -->
+    </filelist>
+  </release>
+  <changelog>
+    <release>
+      <version>1.0</version>
+      <date>2004-01-28</date>
+      <license>LGPL</license>
+      <state>stable</state>
+      <notes>First official stable release of Popoon</notes>
+    </release>
+  </changelog>
+</package>

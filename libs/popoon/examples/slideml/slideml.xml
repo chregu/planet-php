@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<s:slideset xmlns:s="http://www.oscom.org/2003/SlideML/1.0/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dcterms="http://purl.org/dc/terms/"
+        xmlns:xi="http://www.w3.org/2001/XInclude"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en">
+    <s:metadata>
+        <s:title>PHP5: an object-oriented Language</s:title>
+        <s:author>
+            <s:givenname>Hannes</s:givenname>
+            <s:familyname>Gassert</s:familyname>
+
+            <s:email>hannes@phpug.ch</s:email>
+            <s:orgname s:href="http://www.mediagonal.ch">mediagonal AG</s:orgname>
+        </s:author>
+
+        <s:confgroup>
+            <s:conftitle>PHP5 in Lucerne</s:conftitle>
+            <s:address>
+                <a href="http://www.phpug.ch">PHP Usergroup Switzerland</a>
+            </s:address>
+        </s:confgroup>
+
+        <dc:subject>The new OOP language elements</dc:subject>
+
+        <dc:date>2004/01/15</dc:date> 
+
+        <dc:rights>Hannes Gassert</dc:rights>
+
+        <s:abstract>
+            <p>PHP5 remains as simple, fast and compatible as PHP4. They just poured in a sip of tasty hot Java.</p>
+        </s:abstract>
+
+    </s:metadata>
+    
+    
+
+    <s:slide>
+        <s:title>Today</s:title>
+        <s:content>
+
+            <ul>
+                <li>Object-oriented programming in PHP5</li>
+                <li>Exception handling</li>
+                <li>PAUSE</li>
+                <li>XML and other fresh features</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+    
+
+
+    <s:slide>
+        <s:title>Knowing the audience</s:title>
+        <s:content>
+
+            <ul>
+                <li>Who already has deployed a PHP5 project?</li>
+                <li>Who already has installed PHP5?</li>
+                <li>Who knows Java?</li>
+                <li>Who knows PHP4-OOP?</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+    
+    
+<s:slide>
+        <s:title>Please help!</s:title>
+        <s:content>
+        I'll try .. 
+        
+            <ul>
+                <li>not to use too special terminology</li>
+                <li>not to be too fast</li>
+                <li>neither too slow</li>
+             </ul>
+             <br />
+             <ul>   
+                <li>Please interrupt and ASK.</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>In this presentation</s:title>
+        <s:content>
+
+            <ul>
+                <li>Classes and Objects</li>
+                <li>References and cloning</li>
+                <li>The constructor and the destructor</li>
+                <li>Access and type restrictions</li>
+                <li>Interfaces and abstract alasses</li>
+                <li>A little double-underscore magic</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+   
+   
+
+
+    <s:slide>
+        <s:title>PHP5 gets better. Remains good.</s:title>
+        <s:content>
+
+            <ul>
+                <li>Object-oriented "enterprise" capabilities</li>
+                AND
+                <li>Good old procedural (or even unstructured) code</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+       
+
+
+    <s:slide>
+        <s:title>Qualities</s:title>
+        <s:content>
+
+            <ul>
+                <li>Modularity</li>
+                <li>Extensibility</li>
+                <li>Flexibility</li>
+                
+             
+             AND
+             
+             
+                <li>Simplicity</li>
+                <li>Speed of Coding</li>
+                <li>Speed of Code</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+   
+   
+    <s:slide>
+        <s:title>OOP? (motivations)</s:title>
+        <s:content>
+
+            <ul>
+                <li>Component reuse?</li>
+                <li>Extensibility?</li>
+                <li>Information hiding?</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+   
+   
+    <s:slide>
+        <s:title>OOP? (terms)</s:title>
+        <s:content>
+
+            <ul>
+                <li>A class contains <em>methods</em> and <em>properties</em></li>
+                <li>An object is an <em>instance</em> of a class</li>
+                <li>An object has: identity, state, behaviour</li>
+            </ul>
+
+        </s:content>
+    </s:slide>
+   
+
+    
+
+    <s:slide>
+        <s:title>References: To be or not to be</s:title>
+        <s:content>
+            <code language="php">
+           class Viper{
+                function bite( $animal ){
+                    $animal->alive = false;
+                }
+           }    
+           $aViper = new Viper(); //new instance
+           $aViper->bite($littleRabbit);
+           
+           var_export($littleRabbit->alive); 
+           
+           //PHP4 => alive!
+           //PHP5 => more natural: dead.		
+           </code>
+        </s:content>
+    </s:slide>
+
+    
+
+    <s:slide>
+        <s:title>Cloning</s:title>
+        <s:content>
+           If you want PHP4 behaviour, you need* to use __clone():
+           
+                <code language="php">
+$firstSheep = new Sheep();
+$firstSheep->name = 'Sally';
+
+
+$secondSheep = $firstSheep->__clone();
+$secondSheep->name = 'Dolly';
+                </code>
+                
+           * or edit php.ini
+        </s:content>
+    </s:slide>
+    
+    
+
+    <s:slide>
+        <s:title>Access restrictions</s:title>
+        <s:content><h3>Motivation: Enforce clear structures. <br />End anarchy.</h3></s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>PPP</s:title>
+        <s:content>
+            <ul>
+                <li>Private: access for methods of the enclosing class itself only</li>
+                <li>Protected: current class + children</li>
+                <li>Public: everybody welcome (default in PHP4+5)</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>PPP example</s:title>
+        <s:content>
+            <code language="php">
+class Lion {
+
+    private $stomach = array();
+    
+    //only "friends" are allowed to pet a lion
+    protected function pet(){
+        print("Schnurr... ");
+    }
+    
+    //the lion himself is the only one to decide when to sleep
+    private function sleep(){
+        print("zzZZzz.. ");
+    }
+    
+    //food is always welcome.
+    public function eat($foodItem){
+        print("eating " . get_class($foodItem));
+        $this->stomach[] = $foodItem;
+    }    
+
+    function petOther($otherLion){
+        $otherLion->pet();
+    }
+        
+}
+
+//two lions 
+$misterLion = new Lion();
+$ladyLion = new Lion();
+
+//he eats a Gnu..
+$misterLion->eat(new Gnu());
+
+//she's allowed to pet him
+$ladyLion->petOtherLion($misterLion);
+
+//..I'm not. Nothing happens.
+$misterLion->pet();
+
+//He won't sleep if I tell him
+$misterLion->sleep();
+        </code>
+        </s:content>
+    </s:slide>
+    
+    
+
+    <s:slide>
+        <s:title>Object lifecycle</s:title>
+        <s:content>
+            <ul>
+                <li>PHP4: Constructor = Method with the name of its class</li>
+                <li>PHP5: __construct() and __destruct()</li>
+            </ul>
+            <br />
+            <ul>
+                <li>Reason: Allow for easier renaming and moving of classes</li>
+                <li>Constructor chaining: parent::__construct();</li>
+            </ul>
+	
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>Inheritance, Abstraction, Interfaces</s:title>
+        <s:content>
+        New in PHP5, well known in the OOP world. They serve for:
+        <ul>
+     
+                <li>Code reuse</li>
+                <li>"roles" and "contracts"</li>                
+                <li>Better and clearer designs!</li>
+
+            </ul>
+
+        </s:content>
+    </s:slide>
+
+    <s:slide>
+        <s:title>Inheritance example (1)</s:title>
+        <s:content>
+        <ul>
+     
+                <li>Parent: Mammal</li>
+                <li>Children: Human, Pig, Cow, .. </li>                
+                <li>Subtype hierachies: Mammal -> Bear -> Grizzly</li>
+
+            </ul>
+
+        </s:content>
+    </s:slide>    
+
+    <s:slide>
+        <s:title>Inheritance example (2)</s:title>
+        <s:content>
+            <code language="php">
+class Mammal extends Animal {
+    public $hair;
+    private $breasts;
+
+    public function reproduce() {
+      
+      if ($this->isFemale()) {
+        $offspring = $this->giveBirth();
+        $offspring->breastFeed($breasts);
+      }
+     
+      $this->careForYoung($offspring);
+      
+      return $offspring;
+    }
+    
+    // etc.
+  }
+
+  class Human extends Mammal{
+  }
+  class Pig extends Mammal{
+  }
+</code>
+        </s:content>
+    </s:slide>
+        
+
+    <s:slide>
+        <s:title>Abstract class example</s:title>
+        <s:content>
+            <code language="php">
+abstract class Animal{
+	
+    public $preferredFood;
+    
+	private final function eat($foodItem){
+		$this->chew($foodItem);
+		$this->digest($foodItem);
+	}
+	
+	private abstract function digest();
+    //..
+	private abstract function reproduce();
+}
+
+
+class Mammal extends Animal{
+ //.. implementation of abstract methods 
+}
+        </code>
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>Interface example</s:title>
+        <s:content>
+            <code language="php">
+interface Fish{
+	public function dive();
+}
+
+
+interface Bird{
+	public function flutter();
+	public function cackle();
+}
+
+
+class Penguin extends Animal implements Bird, Fish{
+
+		     
+		      public function flutter(){
+			     print("swish swosh");
+		      }
+		      
+		      public function cackle(){
+			      print("eeek! fsck! eeeek!");
+		      }
+		      
+		      public function dive(){
+                  //..  
+              }
+		                 
+              //.. 
+} 
+</code>
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>extend, abstract, interface</s:title>
+        <s:content>
+            <ul>
+                <li>extend: inherit methods and properties, no obligations</li>
+                <li>interface: oblige implementors to implement set of methods</li>
+                <li>abstract: combination</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>Type hints</s:title>
+        <s:content>
+            After regulating access, regulate types: <br />
+            
+            <code language="php">
+class Cow{
+    // Eat any kind of herb, but nothing else. 
+    function eat(Herb $herb){
+         //..
+    }  
+}
+            </code>
+        </s:content>
+    </s:slide>
+    
+    
+    <s:slide>
+        <s:title>Magic Interceptors</s:title>
+        <s:content>
+		<ul>    
+       
+            <li>__autoload($class)</li>            
+            <li>__get($property)</li>
+            <li>__set($property, $value)</li>
+            <li>__call($method, $parameters)</li>
+            <li>__toString()</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+
+    <s:slide>
+        <s:title>OO-topics not addressed here</s:title>
+        <s:content>
+            <ul>
+                <li>The class context: <em>static</em> and <em>const</em></li>
+                <li>The reflection API</li>                
+                <li>Exceptions (not strictly OO)</li>
+                <li>Namespaces (got dropped from PHP5)</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    
+    <s:slide>
+        <s:title>Resources</s:title>
+        <s:content>
+
+            <ul>
+                <li>
+                    <a href="http://zend.com/zend/php5/">PHP5 articles at Zend.com</a>
+                </li>
+
+                <li>
+                    <a href="http://cvs.php.net/cvs.php/ZendEngine2/ZEND_CHANGES?login=2">
+			List of ZE2 changes
+			</a>
+                </li>
+		
+                <li>
+                    <a href="http://www.sitepoint.com/article/1192/">Harry Fuecks for sitepoint.com</a>
+                </li>
+
+                <li>
+                Slides by Sebastian Bergmann:
+                    <a href="http://www.sebastian-bergmann.de/talks/2003-11-15-OOP_mit_PHP_5.pdf">(1)</a>,
+                    <a href="http://www.sebastian-bergmann.de/talks/adam-2003-oop.pdf">(2)</a>
+                </li>
+
+            </ul>
+
+        </s:content>
+    </s:slide>
+
+    
+    <s:slide>
+        <s:title>Colophon</s:title>
+        <s:content>
+		
+			Slides authored in <a href="http://www.slideml.org/">SlideML</a>, transformation and highlighting by <a href="http://www.bitflux.ch/developer/cms/popoon.html">Popoon</a> on <a href="http://ch.php.net/">PHP4</a>. 
+            <br />
+            <a href="./2html_ext_css.xsl">XSL</a> and <a href="./styles.css">CSS</a> Stylesheet applied to the <a href="./slideml.xml">source</a> are adaptations of <a href="http://slides.bitflux.ch/">Bitflux slides</a>.  
+		
+	</s:content>
+    </s:slide>
+    
+    
+
+</s:slideset>
+
+
+

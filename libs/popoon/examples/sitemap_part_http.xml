@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:pipelines>
+    
+       <map:pipeline >
+            <map:match type="uri" pattern="page*.xml" >
+                <map:generate type="xmlfile" src="slideml.xml"/>
+                <map:transform type="libxslt" src="slideml2xml_mod.xsl">		
+                    <map:parameter name="page" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xmldom"/>
+                
+            </map:match>
+            
+        </map:pipeline>		
+        <map:pipeline >
+            <map:aggregate element="rdfs" >
+                <map:part src="http://www.slashdot.org/slashdot.rdf"/>
+                <map:part src="http://www.phphomepage.de/backend/rdf/"/>			
+            </map:aggregate>
+            <map:serialize type="xmlformatted"/>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

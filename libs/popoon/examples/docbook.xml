@@ -1,0 +1,32 @@
+<?php version="1.0"?>
+   <article>
+     <artheader>
+       <title>
+         An Article
+       </title>
+       <author>
+         <firstname>
+           Sebastian
+         </firstname>
+         <surname>
+           Bergmann
+         </surname>
+       </author>
+     </artheader>
+
+     <section id="foo">
+       <title>
+         Section One
+       </title>
+     </section>
+
+     <section id="bar">
+       <title>
+         Section Two
+       </title>
+
+       <para>
+         <xref linkend="foo" />
+       </para>
+     </section>
+   </article>

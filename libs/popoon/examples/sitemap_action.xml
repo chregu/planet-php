@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+	<map:pipeline>
+		<map:act type="simple">
+			<map:generate type="xmlfile" src="empty.xml"/>
+			<map:transform type="libxslt" src="action_hello.xsl">		
+				<map:parameter name="username" value="{username}"/>
+			</map:transform>
+			<map:serialize type="html"/>
+		</map:act>
+	</map:pipeline>
+	<map:pipeline>
+			<map:generate type="xmlfile" src="action_unknown.xml"/>
+			<map:serialize type="html"/>
+	</map:pipeline>
+
+</map:pipelines>
+</map:sitemap>

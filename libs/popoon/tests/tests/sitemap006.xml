@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:pipelines>
+
+        <map:pipeline>
+            <map:match type="uri" pattern="page*.xml">
+                <map:generate type="xmlfile" src="slideml.xml"/>
+                <map:transform type="libxslt" src="slideml2xml_1page.xsl">
+                    <map:parameter name="page" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+
+            </map:match>
+
+        </map:pipeline>
+        
+        <map:pipeline>
+            <map:aggregate element="slideset" ns="http://www.oscom.org/2002/SlideML/0.9/" prefix="s">
+                <map:part src="popoon:/page1.xml"/>
+                <map:part src="popoon:/page2.xml"/>
+            </map:aggregate>
+            <map:serialize type="xml"/>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

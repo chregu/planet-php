@@ -1,0 +1,3789 @@
+2003-10-02 10:41  chregu
+
+	* sitemap/sitemap.php:
+
+	translateScheme is now able to handle sth like
+	"foobar{phpglobals://_SERVER[foo]}/{1}"
+	
+2003-10-01 21:58  chregu
+
+	* sitemap/outputcache.php:
+
+	Last-Modified in GMT and with timezone string
+	
+2003-10-01 15:33  chregu
+
+	* sitemap/outputcache.php:
+
+	proper indenting
+	
+2003-10-01 15:32  chregu
+
+	* sitemap/outputcache.php:
+
+	some comments about 304 caching
+	
+2003-10-01 14:48  chregu
+
+	* components/transformers/xslt.php:
+
+	add warning
+	
+2003-10-01 14:48  chregu
+
+	* components/serializers/html2html.php:
+
+	Mac testing is not needed anymore
+	
+2003-10-01 14:46  chregu
+
+	* sitemap/outputcache.php:
+
+	send also a 304 if content didn't change, but not in cache (check md5 of newly generated content, if the same as the old one and ETag is also the same, just send 304...)
+	
+2003-10-01 14:45  chregu
+
+	* sitemap/sitemap.php:
+
+	do not overwrite Last-Modifed with noHttpCaching
+	
+2003-10-01 10:34  chregu
+
+	* sitemap/: outputcache.php, sitemap.php:
+
+	304 support for outputcache (not perfectyet, but almost there)
+	
+2003-09-29 09:02  chregu
+
+	* components/serializer.php, sitemap/sitemap.php:
+
+	noHttpCaching option
+	
+2003-09-26 17:50  chregu
+
+	* components/readers/resource.php:
+
+	send 404 if file not found
+	
+2003-09-26 17:11  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- use all params from main instead of just the first one
+	
+2003-09-26 17:03  chregu
+
+	* components/generators/directory.php:
+
+	mixed width and height up...
+	
+2003-09-26 16:27  chregu
+
+	* components/generators/directory.php:
+
+	add imageHeight and imageWidth as metadata
+	
+2003-09-26 16:11  chregu
+
+	* components/generators/directory.php:
+
+	directory generator 'stolen' from papaan.
+	Added mimeType Support.
+	
+2003-09-24 10:15  chregu
+
+	* components/actions/pearauth.php:
+
+	redirectTo correct language
+	
+2003-09-23 16:04  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	 - fixed parameter twist
+	
+2003-09-12 17:23  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- an already existing article gets updated on save
+	- umlauts and other funky charachters are a problem at the moment...
+	
+2003-09-12 15:16  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- use article title to generate uri
+	- new method generateURI
+	
+2003-09-10 17:16  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- flush output cache after save
+	- save article author
+	
+2003-09-10 16:47  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- removed some debug code
+	- send correct http response code
+	
+2003-09-10 15:37  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- section ID is already passed by the editor
+	- quote all relevant variables
+	
+2003-09-09 18:24  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	insert correct article language
+	
+2003-09-09 16:58  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	- starts to work, but still unstable
+	- insertion of section, document and article works
+	
+2003-09-08 14:57  philipp
+
+	* components/actions/bxe_newarticle.php:
+
+	action used to crate a new article using bxe. this stuff is extremly unstable at the moment.
+	
+2003-09-08 12:32  chregu
+
+	* components/transformers/xforms.php:
+
+	do not do CDATA if already there
+	
+2003-08-27 17:17  philipp
+
+	* components/generators/structure2xml.php:
+
+	send correct http cache headers so the sent page expires immediately
+	
+2003-08-21 16:11  philipp
+
+	* components/actions/bxe_save.php:
+
+	send appropriate http response code
+	
+2003-08-21 16:05  philipp
+
+	* sitemap/sitemap.php:
+
+	added method setResponseCode to set a HTTP response code which is sent with the first header. (usually content type)
+	
+2003-08-20 18:04  philipp
+
+	* components/actions/bxe_save.php:
+
+	- saving from bxeng works
+	- use processor from domxml if available, otherwise sablotron
+	
+2003-08-19 16:02  patrick
+
+	* sitemap/sitemap.php:
+
+	make cachedir relativ to projectdir
+	
+2003-08-19 12:11  chregu
+
+	* components/transformers/xforms.xsl:
+
+	HideOnChangedMessage
+	
+2003-08-11 14:49  chregu
+
+	* components/matchers/phpglobals.php:
+
+	prevent error
+	
+2003-07-30 11:21  chregu
+
+	* components/serializers/html2html.php:
+
+	do not encode @ when from mac ie
+	
+2003-07-23 16:40  chregu
+
+	* components/generators/search.php:
+
+	fix division by zero bug
+	
+2003-07-22 19:59  chregu
+
+	* components/generators/search/MnogoSearch.php:
+
+	make session_name portable
+	
+2003-07-22 19:57  chregu
+
+	* components/generators/search/MnogoSearch.php:
+
+	set apicheck number to a higher level
+	
+2003-07-11 15:35  philipp
+
+	* components/generators/xmlrpc_server.php:
+
+	send contentLength header. not sending one confuses several clients
+	
+2003-07-07 15:32  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	debug code removed
+	
+2003-07-07 15:27  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	added CheckModes
+	
+2003-07-03 17:06  chregu
+
+	* components/transformers/xforms.php:
+
+	a print too much
+	
+2003-07-03 17:05  chregu
+
+	* components/transformers/xforms.php:
+
+	stripslashes wenn magicquotes = on
+	
+2003-07-01 15:05  chregu
+
+	* components/transformers/xforms.php:
+
+	more options for mail body
+	
+2003-07-01 12:06  chregu
+
+	* components/transformers/xforms.xsl:
+
+	make messages multilingual
+	
+2003-06-29 12:48  chregu
+
+	* components/: serializer.php, serializers/fo2pdf.php,
+	serializers/html.php, serializers/html2html.php,
+	serializers/htmlwithmailobfuscator.php, serializers/xhtml.php,
+	serializers/xml.php, serializers/xmldom.php,
+	serializers/xmlformatted.php:
+
+	- added contentType as allowed attribute for serializers
+	- added xhtml serializer
+	
+2003-06-20 11:34  philipp
+
+	* components/matcher.php:
+
+	translate schemes in match patterns
+	
+2003-06-18 09:46  philipp
+
+	* components/generators/xmlrpc_server.php:
+
+	this generator provides a basic xmlrpc server class. see inline documentation for an example and more information.
+	
+2003-06-12 19:45  hannes
+
+	* components/transformers/xforms.xsl:
+
+	
+	Some small layout changes for mygyndoc, get strings from langdefs.xml
+	
+2003-06-04 16:50  chregu
+
+	* components/transformers/xforms.xsl:
+
+	hannes fucked up :)
+	make CDATA around secondtd value, otherwise it won't work with libxslt
+	
+2003-05-26 18:40  chregu
+
+	* components/generators/structureslider.php:
+
+	a new generator for making search result pagesy
+	
+2003-05-26 18:40  chregu
+
+	* components/transformers/libxslt.php:
+
+	utf encoding hack
+	
+2003-05-26 18:39  chregu
+
+	* components/generators/structure2xml.php:
+
+	some fixes and additions needed for gynweb
+	
+2003-05-26 18:39  chregu
+
+	* components/actions/mygyndoc.php:
+
+	check for gynweb account
+	
+2003-05-26 18:39  chregu
+
+	* components/actions/querybuilder.php:
+
+	make it more general
+	
+2003-05-26 12:28  patrick
+
+	* components/schemes/lang.php:
+
+	detects language
+	
+2003-05-26 08:21  hannes
+
+	* components/transformers/xforms.xsl:
+
+	
+	minor changes regarding file upload popup. probably need to change icon again, would be nice if someone checked that.
+	
+2003-05-23 17:58  hannes
+
+	* components/transformers/xforms.xsl:
+
+	
+	Document upload stuff and minor hacks to make htmlArea work
+	Should be tested again..
+	
+2003-05-23 17:56  hannes
+
+	* components/transformers/xforms.php:
+
+	
+	Implantated document upload
+	
+2003-05-23 17:48  chregu
+
+	* components/actions/pearauth.php:
+
+	add whereAdd as new option to pearauth
+	
+2003-05-22 11:58  chregu
+
+	* components/actions/pearauth.php:
+
+	possibility to set errors
+	
+2003-05-22 10:11  chregu
+
+	* components/transformers/libxslt.php:
+
+	hello world
+	
+2003-05-19 21:43  hannes
+
+	* components/transformers/xforms.xsl:
+
+	
+	-Added htmlArea stuff, now you can use <xforms:textarea class="htmlarea" which will transform a simple textarea
+	into a WYSIWYG area using http://www.interactivetools.com/products/htmlarea/
+	
+	-htmlArea can be configured in the xforms text, see MyGyndoc for example
+	
+	-Added possibilty to use <xforms:value class="default">some default value</xforms:value> for textareas, htmlareas and simple input fields.
+	This value is used when no other xforms:value is given.
+	
+2003-05-19 20:51  chregu
+
+	* components/transformers/xforms.php:
+
+	tabs2spaces and some indent stuff
+	(sorry hannes wegen dem ungenügend testen...)
+	
+2003-05-19 20:38  hannes
+
+	* components/transformers/xforms.php:
+
+	
+	Made gyndoc work again by adding some is_object checks to chregus last additions.
+	
+2003-05-19 18:56  chregu
+
+	* components/transformers/xforms.php:
+
+	do correct from
+	
+2003-05-19 18:53  chregu
+
+	* components/transformers/xforms.xsl:
+
+	set langdefs correctly
+	
+2003-05-19 18:47  chregu
+
+	* components/transformers/xforms.php:
+
+	possibility to send mail at data change
+	
+2003-05-19 16:51  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	tabs2spaces now :)
+	
+2003-05-19 16:50  chregu
+
+	* components/transformers/xforms.php:
+
+	tabs2spaces
+	
+2003-05-14 10:43  patrick
+
+	* components/transformers/xinclude.php:
+
+	a new xinclude transformer
+	
+2003-05-06 17:27  chregu
+
+	* components/generators/: phpwiki.php, phpwiki/config.inc.php,
+	phpwiki/themes/popoon/templates/actionbar.tmpl,
+	phpwiki/themes/popoon/templates/browse.tmpl,
+	phpwiki/themes/popoon/templates/navbar.tmpl:
+
+	quite old wiki fixes, no idea, what i really changed
+	
+2003-05-06 17:26  chregu
+
+	* popoon.php, sitemap/sitemap.php:
+
+	- get rid of realpath in saving (still wondering, why this didn't hurt us before)
+	- Better errors, if file could not be saved
+	
+2003-05-05 11:04  chregu
+
+	* components/transformers/libxslt.php:
+
+	utfHack. very ugly, but we had some problems with not proper encoded stuff..
+	
+	the parameter:
+	 <map:parameter type="options" name="utfHack" value="true"/>
+	
+	will just replace all chr(4) with "". This solved my problems...
+	
+2003-04-25 17:25  chregu
+
+	* popoon.php, sitemap/sitemap.php:
+
+	some realpaths added
+	
+2003-04-25 17:18  chregu
+
+	* sitemap/: helpers.xsl, sitemap2php.xsl:
+
+	removed helpers into sitemap2php.xsl
+	
+2003-04-17 16:59  silvan
+
+	* components/generators/search.php:
+
+	Searchmodule is now Switchable via _GET[module]
+	
+2003-04-17 15:38  chregu
+
+	* components/generators/usercomments.php:
+
+	fix for language via sitemap
+	
+2003-04-17 13:59  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	-made form userfriendly in threaded mode, too ('Affenformular')
+	-removed debugging stuff
+	
+2003-04-17 12:48  silvan
+
+	* components/generators/search/SwishE.php:
+
+	Documented
+	
+2003-04-17 12:47  silvan
+
+	* components/generators/search/MnogoSearch.php:
+
+	Documented now
+	
+2003-04-17 11:34  chregu
+
+	* components/generators/search.php:
+
+	- error_reporting raus
+	- zeige auch resultate mit einem resultset
+	
+2003-04-17 11:20  silvan
+
+	* components/generators/search/MnogoSearch.php:
+
+	Started documenting
+	
+2003-04-17 11:20  silvan
+
+	* components/generators/search.php:
+
+	started documenting
+	
+2003-04-17 10:22  chregu
+
+	* components/generators/usercomments.php:
+
+	hopefully a better detection of REQUEST_URI
+	
+2003-04-17 10:17  chregu
+
+	* components/generators/usercomments.php:
+
+	we're not interested in the stuff after the ?, so strip it away when defining
+	URL
+	
+2003-04-17 08:26  chregu
+
+	* components/generators/phpwiki/themes/popoon/: themeinfo.php,
+	lib/RecentChanges.php:
+
+	renamed to popoon
+	
+2003-04-16 22:30  chregu
+
+	* components/generators/: phpwiki.php, phpwiki/WikiRequest.php,
+	phpwiki/config.inc.php, phpwiki/prepend.php,
+	phpwiki/themes/popoon/lib/RecentChanges.php,
+	phpwiki/themes/popoon/templates/actionbar.tmpl,
+	phpwiki/themes/popoon/templates/blogform.tmpl,
+	phpwiki/themes/popoon/templates/body.tmpl,
+	phpwiki/themes/popoon/templates/bottom.tmpl,
+	phpwiki/themes/popoon/templates/browse-footer.tmpl,
+	phpwiki/themes/popoon/templates/browse.tmpl,
+	phpwiki/themes/popoon/templates/content.tmpl,
+	phpwiki/themes/popoon/templates/debug.tmpl,
+	phpwiki/themes/popoon/templates/dialog.tmpl,
+	phpwiki/themes/popoon/templates/editpage.tmpl,
+	phpwiki/themes/popoon/templates/head.tmpl,
+	phpwiki/themes/popoon/templates/homepage.tmpl,
+	phpwiki/themes/popoon/templates/html.tmpl,
+	phpwiki/themes/popoon/templates/info.tmpl,
+	phpwiki/themes/popoon/templates/login.tmpl,
+	phpwiki/themes/popoon/templates/navbar.tmpl,
+	phpwiki/themes/popoon/templates/nochanges.tmpl,
+	phpwiki/themes/popoon/templates/redirect.tmpl,
+	phpwiki/themes/popoon/templates/savepage.tmpl,
+	phpwiki/themes/popoon/templates/signin.tmpl,
+	phpwiki/themes/popoon/templates/top.tmpl,
+	phpwiki/themes/popoon/templates/userprefs.tmpl,
+	phpwiki/themes/popoon/templates/viewsource.tmpl:
+
+	phpwiki (http://phpwiki.sf.net) integration into popoon is coming (has still some rough edges)
+	
+2003-04-16 22:21  chregu
+
+	* sitemap/sitemap.php:
+
+	translate scheme in redirect-uri
+	
+2003-04-16 18:38  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	Incorrect check for parameter 'threaded', made both modes (threaded={'true','false'}) work again.
+	
+2003-04-15 17:20  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	dropped debugging line..
+	
+2003-04-15 17:19  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	Fixed bug with replies being inserted with forum_id=0.
+	
+2003-04-14 19:12  silvan
+
+	* components/generator.php:
+
+	array $entities: changed < and > to be converted as &#60,&#62 since i got strange
+	errors with <lt/><gt/>
+	
+2003-04-14 19:10  silvan
+
+	* components/generators/search/SwishE.php:
+
+	Finished Functionality. Needs to be checked whether it works on Win
+	(not sure how popen() works on win)
+	
+2003-04-14 19:09  silvan
+
+	* components/generators/search/MnogoSearch.php:
+
+	Modified Varnames, removed redundant vars
+	
+2003-04-14 19:08  silvan
+
+	* components/generators/search.php:
+
+	Handles now all display-specific stuff (Results displayed,Max.Results,Current page, etc.)
+	
+2003-04-14 15:22  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	It's getting usable.
+	There's still a strange error: I get weird database entries with forum_id = 0. They seem to be duplicates of correct entries, no idea how they
+	got ceated. I'll try to reproduce that bug _now_.
+	
+2003-04-14 14:39  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	creating new threads works like a charm now.
+	make sure you use my latest stylesheet when testing this!
+	
+2003-04-14 12:57  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	BROKEN! :(
+	
+	requires <map:parameter name="threaded" value="true" /> to work more or less..
+	Same problems as every time: When to set which $GLOBALS['PHORUM'][.. entries to which values..
+	
+	Sorry to everybody waiting for threaded-mode!
+	
+2003-04-10 22:05  chregu
+
+	* components/generator.php:
+
+	handler for < > in decodeEntities
+	
+2003-04-10 22:01  chregu
+
+	* components/selectors/eval.php:
+
+	an eval selector. you can have here any PHP expression
+	
+2003-04-10 22:01  chregu
+
+	* components/matchers/any.php:
+
+	any matcher
+	
+2003-04-10 22:00  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	map:redirect-to is now implemente
+	
+2003-04-10 22:00  chregu
+
+	* components/transformers/xforms.xsl:
+
+	take a message for output
+	
+2003-04-10 22:00  chregu
+
+	* components/actions/pearauth.php:
+
+	different password handling stuff (not saving in Session for example)
+	
+2003-04-10 18:14  silvan
+
+	* components/generators/search/SwishE.php:
+
+	Start of the Swish-E Search Module
+	
+2003-04-07 16:22  chregu
+
+	* sitemap/sitemap.php:
+
+	only set last modified if time > 0
+	
+2003-04-07 15:58  chregu
+
+	* components/serializers/: html2html.php, html2html/html2html.xsl:
+
+	html2html as new serializers, to solve problems with formatting
+	in html files, which troubles MSIE ;)
+	
+2003-04-06 18:29  chregu
+
+	* components/generators/search.php:
+
+	set CurrPage = 0 if not set
+	include results with only 1 resultset as well ;)
+	
+2003-04-06 16:18  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	it looks like, we don't have to do much of this stuff here, since
+	this is handled in db2xml now
+	
+2003-04-05 21:31  chregu
+
+	* components/: serializers/htmlwithmailobfuscator.php,
+	transformers/mailobfuscator.php:
+
+	mailobfuscator doesn't really work with libxslt
+	-> use htmlwithmailobfuscator as serializer
+	
+2003-04-05 18:36  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	with domxmlversion 20030405 we don't need mixedcontent transformer anymore.
+	bitflux generators generate the correct xml document by themself
+	
+2003-04-05 18:34  chregu
+
+	* components/generators/structure2xml.php:
+
+	use NG Classes in db2xml, if phpversion is recent enough
+	
+2003-04-04 22:30  silvan
+
+	* components/generators/search/MnogoSearch.php:
+
+	getResult() returns empty array if no result found instead of error
+	
+2003-04-04 22:30  silvan
+
+	* components/generators/search.php:
+
+	Removed dispensable instances
+	
+2003-04-04 21:42  chregu
+
+	* components/generators/search.php:
+
+	check if result is an aray
+	
+2003-04-04 21:18  silvan
+
+	* components/generators/search/MnogoSearch.php:
+
+	got Interfacefuncs doQuery() and getResult() / Var. Modifications
+	
+2003-04-04 21:18  silvan
+
+	* components/generators/search.php:
+
+	added function for dyn. loading search modules. Various cleanups/abstractions
+	
+2003-04-04 21:14  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	typo
+	
+2003-04-04 17:27  chregu
+
+	* components/readers/resource.php:
+
+	better rror message
+	
+2003-04-04 17:23  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	l,r have to be in the tree fields
+	
+2003-04-04 17:22  chregu
+
+	* components/generators/bitflux.php:
+
+	uppercas Section_left since it's a table
+	
+2003-04-04 17:21  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	return section_left section_right
+	
+2003-04-04 17:20  chregu
+
+	* components/generators/bitflux.php:
+
+	store l and r values in globals
+	
+2003-04-04 14:27  silvan
+
+	* components/generator.php:
+
+	Setter function that (array) Entities doesn't needs to be loaded each time
+	
+2003-04-04 14:06  silvan
+
+	* components/generator.php:
+
+	Moved function entity_decode() from Search-class to Generator-class
+	
+2003-04-04 11:47  silvan
+
+	* components/generators/search/: MnogoSearch.php,
+	class.MnogoSearch.php:
+
+	changed naming of class and did some cleanup
+	
+2003-04-04 11:45  silvan
+
+	* components/generators/search.php:
+
+	Some Clean up
+	
+2003-04-04 11:27  chregu
+
+	* components/: actions/sessionstorer.php,
+	generators/bitfluxnavi.php, generators/usercomments.php:
+
+	bitflux -> Bitflux (force CI ;) )
+	
+2003-04-02 18:32  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	Getting closer to threaded-mode..
+	"Affenformular" works now.
+	
+2003-04-02 16:56  chregu
+
+	* components/generators/search/class.MnogoSearch.php:
+
+	E_ALL fix
+	
+2003-04-02 16:53  chregu
+
+	* components/generators/: search.php, search/class.MnogoSearch.php:
+
+	more errorhandling
+	
+2003-04-02 15:28  chregu
+
+	* components/generators/search.php:
+
+	mnogo_dsn is written lowercase
+	
+2003-04-02 15:21  chregu
+
+	* components/generators/: search.php, search/class.MnogoSearch.php:
+
+	built in some error-checking
+	
+2003-04-02 12:45  chregu
+
+	* components/generators/: search.php, search/class.MnogoSearch.php:
+
+	some very little adjustements
+	
+2003-04-01 14:20  chregu
+
+	* components/generators/search.php:
+
+	probklems with & ...
+	
+2003-04-01 14:12  chregu
+
+	* components/generators/search.php:
+
+	some entities are not handled by mnogo_serach
+	
+2003-04-01 13:07  chregu
+
+	* components/generators/: search.php, search/class.MnogoSearch.php:
+
+	mnogo fixes
+	
+2003-04-01 13:07  chregu
+
+	* components/actions/: mygyndoc.php, pearauth.php:
+
+	mnogo stuff
+	
+2003-04-01 12:56  chregu
+
+	* components/selector.php:
+
+	- do not set maps for selector hits
+	This could make our sitemap not working anymore.
+	if you used somethign like {../value} in a <map:select><map:when> part
+	you have to change this to {value}, since there is no map-return from selector
+	matches anymore
+	
+2003-03-31 20:05  silvan
+
+	* components/generators/search.php:
+
+	fix for empty quer
+	
+2003-03-31 18:39  silvan
+
+	* components/generators/search.php:
+
+	Generator Class for Search Engines
+	
+2003-03-31 16:48  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	removed debugging line
+	
+2003-03-31 16:46  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	
+	Some steps towards threaded discussions: Every URL now gets assigned a forum, not a thread.
+	We also don't need the mapping table anymore.
+	You can chose to have threaded or flat discussions in sitemap.xml, but we still need to fix some templates to make this acutally work.
+	Multiple languages work now.
+	It seems like I introduced a new bug: error messages don't disappear, even if everything works fine in the second try. I'm checking
+	this in these minutes, just committing to allow chregu to have a look at what I've tinkered.
+	
+2003-03-31 14:38  chregu
+
+	* components/generators/bitfluxcms.php:
+
+	&amp; as seperator doess bad stuff here
+	
+2003-03-31 14:38  chregu
+
+	* components/generators/bitflux.php:
+
+	fix errors with &amp; seperators
+	
+2003-03-31 13:14  silvan
+
+	* components/generators/search/class.MnogoSearch.php:
+
+	Generator class to interface several abstract search-classes
+	Mnogosearch is currently implemented
+	
+2003-03-31 09:25  chregu
+
+	* functions/common.php:
+
+	IBA -> Bitflux CMS
+	
+2003-03-31 09:25  chregu
+
+	* components/aggregator.php:
+
+	translate popoon schemes
+	
+2003-03-30 16:19  chregu
+
+	* components/generators/structure2xml.php:
+
+	E_ALL fix
+	
+2003-03-30 14:37  chregu
+
+	* components/actions/pearauth.php:
+
+	E_ALL fixes
+	
+2003-03-29 11:15  chregu
+
+	* components/actions/pearauth.php:
+
+	allow login via http_auth (we need that for mnogosearch spider)
+	
+2003-03-29 10:33  chregu
+
+	* sitemap/sitemap2php.xsl, components/aggregator.php:
+
+	allow map:generate as child of map:part, this prevents spawning a
+	new sitemap object, if we only need the output of a generator
+	
+2003-03-29 09:39  chregu
+
+	* components/generators/usercomments.php:
+
+	do generate a url2id map only after the first post worked.. and not before
+	
+2003-03-29 09:32  chregu
+
+	* sitemap/sitemap.php:
+
+	colored error output ;)
+	
+2003-03-29 09:02  chregu
+
+	* components/generators/usercomments.php:
+
+	we don't have to make the dsn by ourself, we already have it...
+	
+2003-03-29 09:00  chregu
+
+	* components/generators/usercomments.php:
+
+	some fixes and changes (not much till now)
+	
+2003-03-28 13:24  chregu
+
+	* components/generators/usercomments.php:
+
+	first fixes (i'm not through yet :) )
+	
+2003-03-28 13:06  chregu
+
+	* sitemap/: helpers.xsl, sitemap2php.xsl:
+
+	escape SingleQuotes in parameter values
+	
+2003-03-28 11:18  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	I *REALLY* should.. :)
+	
+2003-03-28 11:13  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	
+	I should really check for typos before I commit..
+	
+2003-03-28 11:11  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	
+	Get "phorumroot" from sitemap-parameter instead from attribute.
+	Default value became bitlib/ext/phorum5/.
+	
+2003-03-28 10:29  hannes
+
+	* components/generators/usercomments.php:
+
+	
+	
+	Very first version of an attempt to implement usercomments on every page by integrating phorum5.
+	You need slightly patched version of phorum5a to use this, instructions will follow.
+	You'll also have to add another table to your DB.
+	
+2003-03-27 19:26  chregu
+
+	* components/actions/pearauth.php:
+
+	change the order for the dolang stuff
+	
+2003-03-27 19:01  chregu
+
+	* components/actions/pearauth.php:
+
+	remove some schering stuff
+	
+2003-03-27 18:49  chregu
+
+	* components/actions/db_query.php:
+
+	this action executes a db query and returns the first row
+	
+2003-03-27 17:07  chregu
+
+	* components/readers/resource.php:
+
+	check, if file exists
+	
+2003-03-27 17:07  chregu
+
+	* popoon.php:
+
+	check if outputCacheCallback has a meaningful callback name
+	
+2003-03-27 16:46  chregu
+
+	* components/schemes/phpglobals.php:
+
+	2-dim variable handling
+	
+2003-03-27 16:46  chregu
+
+	* components/generators/bitflux.php:
+
+	E_ALL fix
+	
+2003-03-26 16:40  chregu
+
+	* components/cache.php, sitemap/outputcache.php:
+
+	renamed some options, it was getting to deep and confusing
+	
+2003-03-26 16:09  chregu
+
+	* popoon.php, sitemap/outputcache.php, sitemap/sitemap.php,
+	sitemap/sitemap2php.xsl:
+
+	outputcaching final touch...
+	
+2003-03-25 17:52  chregu
+
+	* popoon.php:
+
+	debug code removal
+	
+2003-03-25 17:47  chregu
+
+	* popoon.php, sitemap/outputcache.php:
+
+	OutputCcahing integrated into popoon is coming
+	
+2003-03-25 12:55  chregu
+
+	* components/serializers/html.php:
+
+	the checking for SID was not correct
+	
+2003-03-25 12:54  chregu
+
+	* components/readers/resource.php:
+
+	use sitemap method for setting headersxy
+	
+2003-03-25 12:54  chregu
+
+	* components/matchers/phpglobals.php:
+
+	else if instead of if..
+	
+2003-03-25 08:39  chregu
+
+	* components/matchers/phpglobals.php:
+
+	allow 2 dimensional superglobals..
+	
+2003-03-25 08:39  chregu
+
+	* components/actions/pearauth.php:
+
+	make it a little bit more useful for other projects than schering..
+	
+2003-03-24 16:51  chregu
+
+	* components/actions/bxe_save.php:
+
+	use correct paths
+	
+2003-03-24 13:45  chregu
+
+	* sitemap/: sitemap.php, sitemap2phpincludes.xsl:
+
+	"map:include" a new feature coming very soon
+	
+2003-03-24 12:29  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	double setting of parameters is stupid...
+	
+2003-03-24 00:27  chregu
+
+	* components/readers/resource.php:
+
+	this reader now handles automatic mime-type detectionxy
+	
+2003-03-24 00:26  chregu
+
+	* components/actions/bxe_save.php:
+
+	bxe integration is coming. this action is needed for saving data..
+	
+2003-03-22 17:32  chregu
+
+	* components/generators/bitfluxcms.php:
+
+	added some comments
+	
+2003-03-22 17:31  chregu
+
+	* components/actions/bitfluxcms.php:
+
+	added comments
+	and cleaned/deleted a lot of code, which is not needed anymore
+	
+2003-03-22 17:02  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	typo
+	
+2003-03-22 17:02  chregu
+
+	* components/generators/bitfluxcms.php:
+
+	oops. structureFile should be in src, since this is extended from structure2xml
+	
+2003-03-22 16:45  chregu
+
+	* components/: actions/bitfluxcms.php, generators/bitfluxcms.php:
+
+	refactored bitflux.php into an action and a generator,
+	much more proper this way, better for caching (structure-xml file was
+	not resolved properly before) and more customizable within sitemap and
+	not globals anymore..
+	-> you need a different sitemap to get this working, see the demo
+	for an example.
+	More comments in the source will follow
+	
+2003-03-22 16:43  chregu
+
+	* components/generators/structure2xml.php:
+
+	use $this->db instead of getting it several times..
+	
+2003-03-22 16:35  chregu
+
+	* components/transformers/: libxslt.php, xslt.php:
+
+	honor "default" popoon parameters
+	
+2003-03-22 16:35  chregu
+
+	* components/readers/resource.php:
+
+	there was no sitemap object here
+	
+2003-03-22 13:24  chregu
+
+	* components/serializers/html.php:
+
+	SID is not always defined, check for it
+	
+2003-03-22 13:21  chregu
+
+	* components/serializers/html.php:
+
+	strlen is wrong, if cookies are not used...
+	
+2003-03-22 13:12  chregu
+
+	* components/actions/pearauth.php:
+
+	test if SID is set
+	
+2003-03-22 12:08  chregu
+
+	* components/actions/pearauth.php:
+
+	save username in a cookie
+	
+2003-03-21 19:13  chregu
+
+	* components/generators/structure2xml.php:
+
+	array2xml as new parameter type for transforming arrays into the xml
+	
+2003-03-21 19:13  chregu
+
+	* components/actions/sessionstorer.php:
+
+	del="all" deletes all variables in the session
+	
+2003-03-20 17:52  chregu
+
+	* components/generators/structure2xml.php:
+
+	new proxy stuff
+	
+2003-03-19 15:41  chregu
+
+	* components/generators/bitflux.php:
+
+	- better without /
+	
+2003-03-17 15:59  chregu
+
+	* components/generators/structure2xml.php:
+
+	make the var replacement in structure-where a function
+	
+2003-03-17 15:46  chregu
+
+	* components/actions/sessionstorer.php:
+
+	fix for uniniitialized arrays
+	
+2003-03-17 15:45  chregu
+
+	* components/actions/pearauth.php:
+
+	fix for uninitialized arrays
+	
+2003-03-17 14:40  chregu
+
+	* components/generators/structure2xml.php:
+
+	new array handling code for structure stuff
+	
+2003-03-17 14:32  chregu
+
+	* components/actions/sessionstorer.php:
+
+	an action handler to store sessions somewhere in the db
+	
+2003-03-17 14:31  chregu
+
+	* components/actions/pearauth.php:
+
+	more schering specific additions (great..)
+	
+2003-03-16 20:14  chregu
+
+	* components/generators/bitflux.php:
+
+	windows libxml2 handles relative dirs differently...
+	
+2003-02-28 14:46  chregu
+
+	* components/transformers/xforms.php:
+
+	automatically append file extension, if they are wrong
+	
+2003-02-26 09:46  chregu
+
+	* components/transformers/xforms.php:
+
+	handle umlauts and other special characters correctly in file-names
+	
+2003-02-25 17:05  chregu
+
+	* components/actions/mygyndoc.php:
+
+	move some layout stuff
+	
+2003-02-25 15:18  chregu
+
+	* components/actions/mygyndoc.php:
+
+	allow 2-part layout stuff for new layouts of mygyndoc
+	
+2003-02-24 19:29  chregu
+
+	* components/generators/structure2xml.php:
+
+	finally, http caching for type="aggregate" in your structure.xml
+	
+	you have to enable st2xmlCaching in the sitemap and then http-requests are
+	cached. the entry in structure.xml should look like:
+	<bxst:section name="blog" type="aggregate" src="http://blog.bitflux.ch/b2rdf.php"
+	expires="access minus 1 day"
+	/>
+	
+	this means, it only checks every 24 hours, if the remote page changed. if you
+	leave out expires attribute, it will check every hour.
+	
+	It checks for 304 answers and compares the response, if there's a 200 answer
+	from the remote server.
+	
+	TODO: expires should also be used for db-checking (means, only check db every hour
+	for change...)
+	
+	TODO: additionally to expires check, we should have on file, which can be touched.
+	if this file is newer than expires time, do the "Last Modified" on remote pages
+	(and later db entries), even if expires time is not over. (this would for example
+	allow to touch this file, when you update your db and want immediate update without
+	waiting until the cache expires)
+	
+2003-02-21 15:33  chregu
+
+	* components/transformers/xslt.php:
+
+	getting rid of sablotron part V
+	- the xslt transformer now takes an option mode attribute, if set to
+	mode="auto" it tries to figure out, which xslt processor is available,
+	if libxslt is present, it takes that, otherwise it takes sabltron
+	
+	mode="libxslt" is also possible to force to use libxslt , even if it's not there (very useful...)
+	
+2003-02-20 23:03  chregu
+
+	* components/generators/bitflux.php:
+
+	- pageExtension as xsl:parameter
+	- allow all extension, not only .html
+	
+2003-02-20 23:01  chregu
+
+	* sitemap/sitemap.php:
+
+	nicer error messages with php 4.3 during xml parsing (they could be even
+	nicer...)
+	----------------------------------------------------------------------
+	
+2003-02-19 17:37  chregu
+
+	* components/generators/bitflux_ebp.php:
+
+	some little adjustements
+	
+2003-02-19 17:37  chregu
+
+	* components/generators/structure2xml.php:
+
+	use setLastModified function
+	
+2003-02-19 17:36  chregu
+
+	* components/serializers/html.php:
+
+	compute file size and print header about it
+	
+2003-02-19 17:33  chregu
+
+	* components/serializer.php:
+
+	header printing happens in the sitemap
+	
+2003-02-19 17:33  chregu
+
+	* components/cache.php:
+
+	header caching stuff
+	
+2003-02-19 17:23  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	headers are now stored in the cache (bug 212)
+	
+2003-02-19 11:29  chregu
+
+	* components/cache.php:
+
+	reimplementation of metaObject and validityObject stroing implenatation.
+	- globals (and later headers) are stored as userdate with the cached data,
+	  -> they are only loaded, if cache miss or at the end of the pipeline
+	- validityObject is stillstored in the .meta file, but in an assoc array
+	   for later extension
+	
+	so, delete your cache before trying this out.
+	
+	and, you need tha latest PEAR::Cache package (1.5.3, released today), otherwise
+	it won't accept userdata longer than 256 chars, which is too short for our
+	needs.
+	
+2003-02-19 09:00  chregu
+
+	* components/cache.php:
+
+	store all "meta" data in one file (validityObject and globals till now, later
+	headers) -> less files -> less loads -> less overhead ;)
+	- will change the function names a little bit, as they are missleading now
+	
+2003-02-19 08:18  chregu
+
+	* components/generators/structure2xml.php:
+
+	seperate data and queries in different directories
+	
+2003-02-18 19:32  chregu
+
+	* components/generators/structure2xml.php:
+
+	fixes bug 221 ("st2xml caching with timestamps, but without file..")
+	
+2003-02-18 17:58  chregu
+
+	* components/generators/bitflux_ebp.php:
+
+	add lang to globals
+	
+2003-02-18 16:01  chregu
+
+	* components/generators/: bitflux.php, bitflux_ebp.php,
+	structure2xml.php:
+
+	caching stuff. should work reasonably nowm but it's not really tested
+	on real installations, take it with care...
+	
+2003-02-18 15:54  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	fixes bug 214 (send Expires header)
+	
+2003-02-18 15:11  chregu
+
+	* sitemap.php:
+
+	unnecessary backport...
+	
+2003-02-18 12:09  chregu
+
+	* components/serializers/: debug.php, fo2pdf.php, html.php,
+	xml.php, xmldom.php, xmlformatted.php:
+
+	adjust to new function setContentType
+	
+2003-02-18 12:09  chregu
+
+	* sitemap/sitemap.php:
+
+	new function:
+	setContentType
+	
+2003-02-18 11:56  chregu
+
+	* components/serializer.php:
+
+	call printHeader in init()
+	
+2003-02-18 11:55  chregu
+
+	* sitemap.php:
+
+	typo
+	
+2003-02-18 11:51  chregu
+
+	* sitemap/sitemap.php:
+
+	new functions setHeader and printHeader for setting headers (bug 212)
+	automatically print lastModified headers (bug 213)
+	
+2003-02-18 10:11  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	remove debug code
+	
+2003-02-18 10:06  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	phpprocessor stuff can't be cached, if there are <?php in the inputxml
+	otherwise, it can..
+	
+2003-02-14 14:05  chregu
+
+	* components/generators/structure2xml.php:
+
+	more accurate and sometimes faster checking for last changed timestamp in queries
+	this should improve st2xml caching (before, the whole query had to be regenerated
+	if one entry in one table changed, even if the entry did not shouw up in the output)
+	
+2003-02-13 19:17  chregu
+
+	* components/serializers/html.php:
+
+	allow mode="dom" as attribute
+	this will change the input to a domdocument, even if it's a string.
+	Without it, strange things happen with libxslt compocachign
+	(theoretically we could save the state, when the xml was saved and restore that back
+	on cache loading, this would be the more elegant solution.. i'll make a bug)
+	
+2003-02-13 17:02  chregu
+
+	* components/cache.php, sitemap/sitemap2php.xsl:
+
+	- do not serialize $this->xml but do it in store() internally, otherwise we loose information
+	and do unnecessary stuff during cache generation.
+	- only load from cache, if $this->xml is not filled with some values before. from code-comment:
+	
+		load it
+	           but just, if target is_null, if it's not null, we already have something in
+	           $this->xml. This is mostly set, when a component before also had to regenerate
+	           its data and can be mostly seen when we create a whole pipeline (eg. the generator
+	            loads xml-data, then passes that to a transformer. There is no need to read the
+	            content from the cache, if something like that happens. Moreover it leads to
+	            problems with libxslt2/libxml internal handling, as it looses some info when
+	            we serialize and deserialize xml-data (this has to be tested more thoroughly)
+	
+2003-02-13 16:58  chregu
+
+	* sitemap/sitemap.php:
+
+	register $this->xml
+	
+2003-02-13 15:45  chregu
+
+	* globalContainer.php, popoon.php, sitemap.php,
+	components/action.php, components/aggregator.php,
+	components/cache.php, components/component.php,
+	components/generator.php, components/matcher.php,
+	components/reader.php, components/selector.php,
+	components/serializer.php, components/transformer.php,
+	components/actions/mail.php, components/actions/mygyndoc.php,
+	components/actions/pearauth.php,
+	components/actions/pwforgotten.php,
+	components/actions/querybuilder.php,
+	components/actions/search2sql.php, components/actions/simple.php,
+	components/actions/simpleperm.php,
+	components/generators/bitflux.php,
+	components/generators/bitflux_ebp.php,
+	components/generators/bitfluxnavi.php,
+	components/generators/db2xml.php,
+	components/generators/pwforgotten.php,
+	components/generators/structure2xml.php,
+	components/generators/xmlfile.php,
+	components/generators/xmlvariable.php,
+	components/matchers/phpglobals.php,
+	components/matchers/phpglobalvars.php, components/matchers/uri.php,
+	components/readers/info.php, components/readers/php.php,
+	components/readers/phpsource.php, components/readers/resource.php,
+	components/readers/textsource.php,
+	components/schemes/BX_BITLIB_DIR.php,
+	components/schemes/BX_PROJECT_DIR.php,
+	components/schemes/config.php, components/schemes/globals.php,
+	components/schemes/options.php, components/schemes/peardb.php,
+	components/schemes/php.php, components/schemes/phpglobals.php,
+	components/selectors/any.php,
+	components/selectors/phpglobalvars.php,
+	components/selectors/uri.php, components/serializers/debug.php,
+	components/serializers/fo2pdf.php, components/serializers/html.php,
+	components/serializers/xml.php, components/serializers/xmldom.php,
+	components/serializers/xmlformatted.php,
+	components/transformers/libxslt.php,
+	components/transformers/mailobfuscator.php,
+	components/transformers/mixedcontent.php,
+	components/transformers/phpprocessor.php,
+	components/transformers/phpprocessorsax.php,
+	components/transformers/xforms.php,
+	components/transformers/xmltransformer.php,
+	components/transformers/xslt.php, functions/common.php,
+	sitemap/sitemap.php:
+
+	update copyright year and copyright holder
+	
+2003-02-13 15:39  chregu
+
+	* sitemap.php:
+
+	- add deprecated warnign
+	
+2003-02-13 15:08  chregu
+
+	* components/cache.php:
+
+	remove unneeded variables
+	
+2003-02-13 14:44  albert
+
+	* components/generators/bitflux.php:
+
+	There is a print command in this file that messed up the output - must be for debugging?
+	
+2003-02-13 13:01  chregu
+
+	* components/transformers/xslt.php:
+
+	WS only changes
+	
+2003-02-13 12:56  chregu
+
+	* components/transformers/xslt.php:
+
+	move xslt_create to DomStart as we don't have to create it during caching (as it would, if we'd leave it in the constructor)
+	
+2003-02-13 12:52  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	add validity checks for mixedcontent (it's always valid...)
+	and little WS stuff
+	
+2003-02-13 12:46  chregu
+
+	* components/transformer.php:
+
+	save resolved source in validityObject
+	
+2003-02-13 12:39  chregu
+
+	* components/generators/bitflux.php:
+
+	add CDATA around post and get values (if anyone relies, that this is valid xml, you have to change this...)
+	
+2003-02-13 09:42  chregu
+
+	* components/generators/xmlfile.php:
+
+	WS (spaces instead of tabs ;) )
+	
+2003-02-13 09:42  chregu
+
+	* components/generators/xmlfile.php:
+
+	- getAttrib() instead of attribs8)
+	
+2003-02-13 09:40  chregu
+
+	* components/cache.php:
+
+	Store the value of the globals also in the cache, if there are some
+	(scheme globals:// stuff, very much needed for BX CMS..)
+	
+2003-02-12 19:48  chregu
+
+	* sitemap/sitemap.php:
+
+	functions for setting and getting all global options at once
+	(used with compo caching)
+	
+2003-02-12 19:14  chregu
+
+	* components/cache.php:
+
+	wrong order in config guessing
+	
+2003-02-12 18:41  chregu
+
+	* components/transformer.php:
+
+	changed $this->attribs["src"] to $this->getAttrib("src");
+	(the first does not translate schemes, which is normally not, what you want)
+	
+2003-02-12 18:18  chregu
+
+	* components/cache.php:
+
+	more bitflux specific stuff...
+	
+2003-02-12 13:26  chregu
+
+	* components/generators/structure2xml.php:
+
+	caching of sql queries...
+	- just add st2xmlCaching="true" as attribtue to <map:generate type="bitflux">
+	and all you're sql queries are cached. This means, if the database didn't change, it gets
+	the generated XML from the filesystem and does not generate it again..
+	- Furthermore the sql-statements out of the structure are also cached. always. and only
+	generated if your structure.xml does change.
+	- Caching of aggregate queries is missing right now, will come later.
+	
+2003-02-12 13:15  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	don't check for all entities, just for the obvious ones
+	(has to be tested with our projects...)
+	
+2003-02-12 12:49  chregu
+
+	* components/transformers/: phpprocessor.php, phpprocessorsax.php:
+
+	- getting rid of sax stuff in phprocessor. it was far too slow. XPath
+	approach is much faster.
+	- If you want to use sax approache use phprocessorsax as transformer
+	
+2003-02-12 11:36  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	str_replace is faster than strtr
+	
+2003-02-07 18:37  chregu
+
+	* sitemap/sitemap.php:
+
+	replace : as well for the "unique" id... this should help on windows
+	
+2003-02-06 17:48  chregu
+
+	* components/schemes/config.php:
+
+	do not load config files, if they are already loaded
+	
+2003-02-06 12:41  chregu
+
+	* components/actions/simpleperm.php:
+
+	quick fix for /print/ mode
+	
+2003-02-04 17:21  chregu
+
+	* sitemap/sitemap.php:
+
+	the next else if has to be an if...
+	
+2003-02-04 17:19  chregu
+
+	* sitemap/sitemap.php:
+
+	try to create popoon dir, if it doesn't exists
+	
+2003-02-01 00:04  albert
+
+	* components/generators/bitflux.php:
+
+	just fixed some grammer stuff
+	
+2003-01-29 13:18  chregu
+
+	* sitemap/sitemap.php:
+
+	fix typos and unneeded lines
+	
+2003-01-29 13:11  hannes
+
+	* sitemap/sitemap.php:
+
+	
+	Translated error messages and API documentation form german to english, added a data dump to two error messages.
+	
+2003-01-27 18:54  chregu
+
+	* components/actions/mygyndoc.php:
+
+	add downloads section to mygyndoc
+	
+2003-01-27 18:54  chregu
+
+	* components/generators/db2xml.php:
+
+	add possibility for applying tableInfo data when needed
+	
+2003-01-27 14:14  hannes
+
+	* components/aggregator.php:
+
+	
+	
+	Made it work with strict error reporting and changed error handling from die() to popoon:raiseError()
+	
+2003-01-16 18:47  chregu
+
+	* components/generators/structure2xml.php:
+
+	add the possibility of doing aggregate stuff in structure xml
+	for example
+	<bxst:section name="remote" type="aggregate" src="http://blog.bitflux.ch/b2rdf.php"/>
+	will insert the rdf from blog.bitflux.ch into the generated xml under the tag "remote"
+	(needs an update db2xml as well)
+	
+2003-01-16 10:19  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	xml_set_object does not work in the constructor... strange enough, this worked
+	before, but according to http://bugs.php.net/bug.php?id=6175 it was a
+	problem before...
+	
+2003-01-16 00:47  chregu
+
+	* components/actions/simpleperm.php:
+
+	SQL statement was wrong..
+	
+2003-01-15 20:00  chregu
+
+	* components/transformers/xforms.xsl:
+
+	some little fixes
+	
+2003-01-15 19:53  chregu
+
+	* components/schemes/peardb.php:
+
+	die if popoon class is not available..
+	
+2003-01-15 19:53  chregu
+
+	* components/generators/structure2xml.php:
+
+	make it possible to add simplePerm where condition
+	
+2003-01-15 19:51  chregu
+
+	* components/actions/simpleperm.php:
+
+	provides a simple permission system. mostly only useful for BXCMS
+	
+2003-01-15 19:50  chregu
+
+	* components/actions/pearauth.php:
+
+	make it possible to give your own table,usercol,passwordcol (overriding schering defaults)
+	
+2003-01-15 19:50  chregu
+
+	* components/component.php:
+
+	replace class vars with input from default parameter as well
+	
+2003-01-06 12:20  chregu
+
+	* components/actions/: pearauth.php, querybuilder.php:
+
+	MFH stuff
+	
+2003-01-06 12:16  chregu
+
+	* components/actions/pearauth.php:
+
+	utf8_encode fullname
+	
+2003-01-06 12:02  chregu
+
+	* components/generators/bitflux.php:
+
+	fix for urls with digits
+	
+2002-12-11 17:20  chregu
+
+	* components/generators/bitflux.php:
+
+	MFH
+	
+2002-12-11 17:17  chregu
+
+	* components/component.php:
+
+	translate key of parameters as well
+	(partial MFH)
+	
+2002-12-11 17:15  chregu
+
+	* components/generators/bitflux.php:
+
+	get search/where values from map:parameter and not attributes
+	this allows to have more than one
+	
+2002-12-11 17:15  chregu
+
+	* components/component.php:
+
+	translate key of parameters as well
+	
+2002-12-09 16:06  chregu
+
+	* components/actions/querybuilder.php:
+
+	schering stuff
+	
+2002-12-09 00:54  chregu
+
+	* components/actions/pearauth.php:
+
+	email
+	
+2002-12-09 00:52  chregu
+
+	* components/actions/pearauth.php:
+
+	we need the mail
+	
+2002-12-09 00:29  chregu
+
+	* components/actions/: mail.php, querybuilder.php,
+	querybuilder.xsl:
+
+	MFH
+	
+2002-12-09 00:27  chregu
+
+	* components/actions/querybuilder.php:
+
+	lt is < not > !!!
+	
+2002-12-09 00:26  chregu
+
+	* components/actions/querybuilder.php:
+
+	lt => <
+	
+2002-12-09 00:25  chregu
+
+	* components/actions/mygyndoc.php:
+
+	no downloads
+	
+2002-12-09 00:08  chregu
+
+	* components/actions/mygyndoc.php:
+
+	downloads are handled differently as well
+	
+2002-12-08 23:59  chregu
+
+	* components/actions/querybuilder.xsl:
+
+	output iso-8859-1 please :)
+	
+2002-12-08 22:04  chregu
+
+	* components/actions/mail.php:
+
+	A mail send component
+	
+2002-12-08 20:38  chregu
+
+	* components/transformers/xforms.xsl:
+
+	MFB
+	
+2002-12-08 20:38  chregu
+
+	* components/transformers/xforms.xsl:
+
+	uploadintputsize
+	
+2002-12-08 17:19  chregu
+
+	* components/actions/: pwforgotten.php, querybuilder.php,
+	querybuilder.xsl:
+
+	MFH
+	
+2002-12-08 17:19  chregu
+
+	* components/actions/querybuilder.php:
+
+	utf8 zeugs
+	
+2002-12-06 11:33  chregu
+
+	* components/actions/querybuilder.php:
+
+	debug code away
+	
+2002-12-06 11:32  chregu
+
+	* components/actions/querybuilder.php:
+
+	make it work with 4.2..
+	
+2002-12-06 11:21  chregu
+
+	* components/actions/: querybuilder.php, querybuilder.xsl:
+
+	new querybuilder action. not finished yet. very schering specific
+	
+2002-12-06 11:21  chregu
+
+	* components/actions/search2sql.php:
+
+	fix
+	
+2002-12-05 14:34  chregu
+
+	* components/transformers/xforms.php:
+
+	MFH
+	(magic quotes test)
+	
+2002-12-05 14:32  chregu
+
+	* components/transformers/xforms.php:
+
+	argh, chregu, at least check if the code compiles before commitin
+	
+2002-12-05 14:27  chregu
+
+	* components/transformers/xforms.php:
+
+	check for magic_quotes = on
+	
+2002-12-05 08:12  chregu
+
+	* components/actions/pearauth.php:
+
+	MFH
+	
+2002-12-05 08:11  chregu
+
+	* components/actions/pearauth.php:
+
+	(schering) we need the fullname as well
+	
+2002-12-04 18:15  chregu
+
+	* components/: actions/search2sql.php, generators/bitflux.php:
+
+	MFH
+	
+2002-12-04 18:14  chregu
+
+	* components/generators/bitflux.php:
+
+	nicer formatting. ws changes only
+	
+2002-12-04 18:13  chregu
+
+	* components/generators/bitflux.php:
+
+	- if attrib searchquery, then add this to the options for structure2sql
+	- <map:parameter type="xsltparam"> is now possible for adding more xsltparamters
+	
+2002-12-04 18:12  chregu
+
+	* components/actions/search2sql.php:
+
+	This action can be used for translating querystrings into
+	sql stuff. not very advancecd yet
+	
+2002-12-02 23:47  chregu
+
+	* components/transformers/xforms.php:
+
+	better error checking
+	
+2002-12-02 23:46  chregu
+
+	* components/transformers/xforms.php:
+
+	better errorchecking
+	
+2002-12-02 17:43  chregu
+
+	* components/transformers/xforms.xsl:
+
+	MFH
+	
+2002-12-02 17:41  chregu
+
+	* components/transformers/xforms.xsl:
+
+	more css classes stuff
+	
+2002-12-02 10:54  chregu
+
+	* test:
+
+	remove etst files
+	
+2002-12-02 10:54  chregu
+
+	* test:
+
+	fjklsadj
+	
+2002-12-02 10:53  chregu
+
+	* test:
+
+	klk
+	
+2002-12-02 10:44  hannes
+
+	* sitemap/sitemap2php.xsl:
+
+	
+	Fix: Forgot call to convertXML() in map:serialize.
+	
+2002-12-02 10:06  chregu
+
+	* components/serializers/xmlformatted.php:
+
+	mmh, hat hg meine automatische XmlDom -> XmlString conversion zerstört?
+	investigate that later
+	
+2002-12-01 20:15  chregu
+
+	* test:
+
+	finished teest
+	
+2002-12-01 20:13  chregu
+
+	* test:
+
+	hahaha
+	
+2002-12-01 20:08  chregu
+
+	* test:
+
+	bla
+	
+2002-12-01 20:04  chregu
+
+	* test, test:
+
+	bla
+	
+2002-12-01 20:01  chregu
+
+	* test:
+
+	dfasf
+	
+2002-12-01 20:00  chregu
+
+	* test:
+
+	llll
+	
+2002-12-01 19:59  chregu
+
+	* test:
+
+	fsadfjlk
+	
+2002-12-01 19:55  chregu
+
+	* components/generators/bla:
+
+	fs
+	
+2002-12-01 19:54  chregu
+
+	* components/generators/pwforgotten.php:
+
+	mmmh
+	
+2002-12-01 19:53  chregu
+
+	* components/actions/pwforgotten.php:
+
+	pwforgotten more
+	
+2002-12-01 18:36  hannes
+
+	* components/transformers/phpprocessor.php:
+
+	
+	Overwrites caching-methodes inherited 'transformer' to make this component uncachable.
+	
+2002-12-01 18:21  hannes
+
+	* components/transformer.php:
+
+	
+	Caching stuff, implements cachable interface now.
+	
+2002-12-01 18:02  hannes
+
+	* components/serializer.php:
+
+	
+	
+	Now implements 'cachable'.
+	Caution: This means that all serializers look like they were cachable! This, of course, is not the case. So
+	non-cachable components must overwrite check/generateValidty and make them return false!
+	
+2002-12-01 17:36  hannes
+
+	* components/component.php:
+
+	
+	
+	Added default methods for the 'cachable' interface (generateKeyDefault(), generateValidityDefault() and
+	checkValidityDefault()). These are used by many of the file-based cachable components.
+	
+2002-12-01 17:28  hannes
+
+	* sitemap/sitemap2php.xsl:
+
+	
+	
+	Added component caching stuff for readers, generators, transformers and serializers.
+	Note that in the  current state, a pipeline marked cachable must consist but of cachable components.
+	We probably need a way to allow also halfway-cachable pipelines.
+	
+2002-12-01 17:01  hannes
+
+	* sitemap/sitemap.php:
+
+	
+	
+	Added methods to turn on and off caching
+	
+2002-12-01 16:55  hannes
+
+	* components/generators/xmlfile.php:
+
+	
+	
+	Made this component cachable. In other words it now implements the 'cachable' interface by providing
+	- generateValidity()
+	- checkValidity()
+	- generateKey()
+	
+2002-12-01 15:38  hannes
+
+	* components/cache.php:
+
+	
+	
+	This is the very first version of component caching for popoon. The intention is described in slide 23 in
+	http://chregu.tv/popoon/pres/, for more details have a look at http://bugzilla.bitflux.ch/show_bug.cgi?id=23.
+	To use this you have to add the attribute cachable='yes' and cachedir=.. to the map:pipeline tag in your sitemap.xml.
+	Note that you must only use components implementing the 'Cachable' interface in a pipeline marked cachable.
+	Ill'try to make cachable as many components as possible in the next days.
+	Please not that this is also the very first time I add something to a CVS repository, so please excuse if it's all
+	wrong.
+	
+2002-11-29 18:47  chregu
+
+	* components/transformers/xforms.php:
+
+	uuuh. much ws stuff
+	BUT, passwords should work again
+	
+2002-11-29 17:07  chregu
+
+	* components/generators/bitflux.php:
+
+	E_ALL fix
+	
+2002-11-29 17:06  chregu
+
+	* components/actions/mygyndoc.php:
+
+	parse_url..
+	
+2002-11-28 20:23  chregu
+
+	* components/transformers/xforms.php:
+
+	passwörter sollten wieder md5 sein..
+	
+2002-11-28 17:51  chregu
+
+	* components/transformers/xforms.php:
+
+	make it work with i18n
+	
+2002-11-28 17:40  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	i18n
+	
+2002-11-28 17:35  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	i18n
+	
+2002-11-28 16:48  chregu
+
+	* components/actions/mygyndoc.php:
+
+	argh, * was allright
+	
+2002-11-28 15:59  chregu
+
+	* sitemap.php, sitemap/sitemap.php:
+
+	take off error_log debug stuff
+	
+2002-11-27 22:48  chregu
+
+	* components/generators/bitflux.php:
+
+	make lang a global  var
+	
+2002-11-27 22:45  chregu
+
+	* components/transformers/xforms.php:
+
+	language switch
+	
+2002-11-27 18:56  chregu
+
+	* components/: actions/pearauth.php, generators/bitflux.php:
+
+	language stuff
+	
+2002-11-27 18:02  chregu
+
+	* components/actions/mygyndoc.php:
+
+	use lang
+	
+2002-11-27 17:17  chregu
+
+	* components/generators/bitflux.php:
+
+	fix error for documents with letters but no _ in it
+	
+2002-11-27 15:22  chregu
+
+	* components/transformers/xforms.xsl:
+
+	only use xforms which are siblings or descendents of xforms:xform
+	
+2002-11-26 22:36  chregu
+
+	* components/transformers/xmltransformer.php:
+
+	fixes for new component stuff
+	
+2002-11-26 14:51  chregu
+
+	* components/: actions/pwforgotten.php, generators/pwforgotten.php:
+
+	pwforgotten modules
+	
+2002-11-26 14:50  chregu
+
+	* components/transformers/xforms.xsl:
+
+	hidden stuff
+	and use @method
+	
+2002-11-25 16:47  chregu
+
+	* components/transformers/mailobfuscator.php:
+
+	new transformer
+	
+2002-11-21 22:07  chregu
+
+	* functions/common.php:
+
+	fix error stuff
+	
+2002-11-21 22:07  chregu
+
+	* components/: actions/pearauth.php, transformers/xforms.php:
+
+	fix challenge/response stuff
+	
+2002-11-21 17:45  chregu
+
+	* components/generators/bitflux.php:
+
+	E_ALL fixes
+	
+2002-11-21 15:50  chregu
+
+	* components/actions/pearauth.php:
+
+	E_ALL fix
+	
+2002-11-19 18:14  chregu
+
+	* components/transformers/xforms.xsl:
+
+	don't show pic, if there is none
+	
+2002-11-19 17:31  chregu
+
+	* components/transformers/xforms.php:
+
+	rtrim nl2br fields...
+	
+2002-11-19 09:48  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	give feedback
+	
+2002-11-19 09:34  chregu
+
+	* components/: matcher.php, actions/mygyndoc.php:
+
+	fixes
+	
+2002-11-18 18:08  chregu
+
+	* components/transformers/xforms.xsl:
+
+	lalala
+	
+2002-11-17 20:31  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	cleaner interace...
+	
+2002-11-17 19:41  chregu
+
+	* components/transformers/xforms.xsl:
+
+	whitespace
+	
+2002-11-17 19:40  chregu
+
+	* components/transformers/xforms.php:
+
+	WS stuff
+	
+2002-11-17 18:35  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	fixes
+	
+2002-11-17 18:05  chregu
+
+	* components/actions/mygyndoc.php:
+
+	add service
+	
+2002-11-17 17:27  chregu
+
+	* components/actions/mygyndoc.php:
+
+	return angebot
+	
+2002-11-17 16:54  chregu
+
+	* components/transformers/xforms.php:
+
+	fjkaösldfjklö
+	
+2002-11-17 16:47  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	big bad ugly hack
+	
+2002-11-17 14:12  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	select stuff
+	
+2002-11-17 13:30  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	textarea stuff
+	
+2002-11-17 12:27  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	password stuff
+	
+2002-11-17 12:27  chregu
+
+	* components/actions/pearauth.php:
+
+	return always the challenge
+	
+2002-11-17 12:20  chregu
+
+	* components/generators/structure2xml.php:
+
+	fix
+	
+2002-11-17 00:11  chregu
+
+	* components/transformers/xforms.xsl:
+
+	30 => 50
+	
+2002-11-16 23:37  chregu
+
+	* popoon.php:
+
+	no custom error-handler
+	----------------------------------------------------------------------
+	
+2002-11-16 23:36  chregu
+
+	* components/transformers/xforms.php:
+
+	utf8 encode before inserting into text_node
+	
+2002-11-16 23:29  chregu
+
+	* components/generators/bitflux.php:
+
+	E_ALL fix
+	
+2002-11-16 23:19  chregu
+
+	* components/generators/bitflux.php:
+
+	lalala
+	
+2002-11-16 18:35  chregu
+
+	* popoon.php, components/transformers/xforms.php:
+
+	fixes
+	
+2002-11-16 18:25  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	stuff
+	
+2002-11-16 18:05  chregu
+
+	* components/generators/structure2xml.php:
+
+	some fixes for 4.2.x
+	
+2002-11-16 17:33  chregu
+
+	* popoon.php, components/actions/mygyndoc.php,
+	components/actions/pearauth.php, components/readers/textsource.php,
+	components/transformers/xforms.php,
+	components/transformers/xforms.xsl:
+
+	login and xforms stuff
+	
+2002-11-16 16:06  chregu
+
+	* components/actions/mygyndoc.php:
+
+	return fulluri
+	
+2002-11-16 13:14  chregu
+
+	* components/actions/: mygyndoc.php, pearauth.php:
+
+	Login_Name
+	
+2002-11-15 17:43  hannes
+
+	* components/readers/resource.php:
+
+	Changed action to be performed from print to readfile, changed comment
+	accordingly.
+	
+2002-11-15 15:21  chregu
+
+	* components/actions/mygyndoc.php:
+
+	diversa
+	
+2002-11-15 11:18  chregu
+
+	* components/actions/mygyndoc.php:
+
+	navi for patinfo
+	
+2002-11-15 10:37  chregu
+
+	* components/: actions/mygyndoc.php, generators/db2xml.php:
+
+	include different sources
+	
+2002-11-15 09:52  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	html mode
+	
+2002-11-15 00:01  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	db update
+	
+2002-11-14 15:20  chregu
+
+	* components/transformers/xforms.php:
+
+	debug away
+	
+2002-11-14 15:19  chregu
+
+	* sitemap/sitemap.php:
+
+	errror in ../ auflösung
+	
+2002-11-14 15:04  chregu
+
+	* components/transformers/: xforms.php, xforms.xsl:
+
+	xforms
+	
+2002-11-13 17:17  chregu
+
+	* components/: component.php, selector.php:
+
+	caching of attributes did not work really
+	
+2002-11-13 16:50  chregu
+
+	* sitemap/sitemap.php:
+
+	make some simple tests at the beginning, if there are schemes parts at all
+	
+2002-11-13 16:49  chregu
+
+	* components/: component.php, selector.php:
+
+	"cache" $this->getAttrib... doesn't make sense to translate that more than once.
+	
+2002-11-13 16:49  chregu
+
+	* components/actions/pearauth.php:
+
+	return real username :)
+	
+2002-11-13 16:48  chregu
+
+	* components/selectors/any.php:
+
+	any selector matches against map style notation and scheme style notation
+	config://dns would be resolved to sth
+	{username} as well
+	quite handy for testing responses from actions for example
+	
+2002-11-13 14:58  chregu
+
+	* components/generators/bitflux.php:
+
+	make blabla_234.html possible
+	
+2002-11-13 09:57  chregu
+
+	* components/actions/pearauth.php:
+
+	challenge mode
+	
+2002-11-13 09:56  chregu
+
+	* popoon.php:
+
+	better regex
+	
+2002-11-13 09:56  chregu
+
+	* components/matchers/phpglobals.php:
+
+	phpglobals
+	allows var="_SERVER[SERVER_NAME]"
+	
+2002-11-13 00:17  chregu
+
+	* components/actions/pearauth.php:
+
+	pearauth action
+	
+2002-11-13 00:17  chregu
+
+	* components/actions/mygyndoc.php:
+
+	doe db connection later
+	
+2002-11-12 00:31  chregu
+
+	* sitemap/sitemap.php:
+
+	jj
+	
+2002-11-12 00:31  chregu
+
+	* components/: component.php, generators/db2xml.php:
+
+	lala
+	
+2002-11-12 00:31  chregu
+
+	* components/actions/mygyndoc.php:
+
+	more
+	
+2002-11-11 18:43  chregu
+
+	* functions/common.php:
+
+	return popoon errors
+	not deprecated anymore :)
+	
+2002-11-11 18:42  chregu
+
+	* components/schemes/peardb.php:
+
+	change some stuff and using global DB_Handles again. so we can interact with
+	getDBfromDSN in common.php and use both approaches
+	
+2002-11-11 18:23  chregu
+
+	* sitemap/sitemap.php:
+
+	more scheme handling
+	
+2002-11-11 18:23  chregu
+
+	* functions/common.php:
+
+	some docu
+	
+2002-11-11 18:19  chregu
+
+	* components/schemes/peardb.php:
+
+	add peardb handler for global peardb handle pooling
+	
+2002-11-11 18:18  chregu
+
+	* components/component.php:
+
+	add getParameterDefault
+	
+2002-11-11 18:18  chregu
+
+	* components/generators/bitflux.php:
+
+	this->dsn is de-schemed already in the init-class
+	
+2002-11-11 16:06  chregu
+
+	* components/component.php, sitemap/sitemap.php,
+	sitemap/sitemap2php.xsl:
+
+	setParameter() is now called before init()
+	
+2002-11-11 11:59  chregu
+
+	* sitemap.php, components/component.php, components/matcher.php,
+	components/selector.php, components/schemes/config.php,
+	components/serializers/debug.php, functions/common.php,
+	sitemap/sitemap.php:
+
+	replace $GLOBALS["globalContainer"] by $GLOBALS["_POPOON_globalContainer"]
+	
+2002-11-11 11:51  chregu
+
+	* components/actions/mygyndoc.php:
+
+	first serious action
+	
+2002-11-11 11:51  chregu
+
+	* components/readers/info.php:
+
+	outputs phpinfo and maps array (usefull for debugging)
+	
+2002-11-11 11:50  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	map:generate and map:serialize can contain map:parameter now as well
+	
+2002-11-11 10:38  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	support readers
+	
+2002-11-11 10:37  chregu
+
+	* components/aggregator.php:
+
+	use options
+	
+2002-11-11 09:33  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	support for map:component/map:schemes
+	
+2002-11-11 09:32  chregu
+
+	* popoon.php:
+
+	just give all options to the sitemap
+	
+2002-11-10 22:40  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	support map:action/map:parameter
+	
+2002-11-10 22:39  chregu
+
+	* components/component.php:
+
+	getParameterByType($type) is now getParameter($type,$key)
+	getParameter is getParameterAll
+	
+2002-11-10 20:21  chregu
+
+	* sitemap/sitemap.php:
+
+	check, if file exists
+	
+2002-11-10 20:14  chregu
+
+	* popoon.php, sitemap/sitemap.php:
+
+	more error checking and take ./tmp as default cache dir
+	
+2002-11-10 19:42  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	map:mount support
+	
+2002-11-10 14:11  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	support actors, aggregrate
+	
+2002-11-10 14:10  chregu
+
+	* sitemap/sitemap.php:
+
+	user popoon::raiseError instead of pear::raiseError
+	
+2002-11-10 12:58  chregu
+
+	* sitemap/sitemap2php.xsl:
+
+	selectors/matchers should work now
+	
+2002-11-10 12:03  chregu
+
+	* sitemap.php, sitemap/sitemap.php, sitemap/sitemap2php.xsl:
+
+	every component should have now a prefix..
+	
+2002-11-10 12:02  chregu
+
+	* components/: generators/bitflux.php, generators/bitflux_ebp.php,
+	generators/bitfluxnavi.php, generators/db2xml.php,
+	generators/structure2xml.php, generators/xmlfile.php,
+	generators/xmlvariable.php, matchers/phpglobalvars.php,
+	matchers/uri.php, serializers/debug.php, serializers/fo2pdf.php,
+	serializers/html.php, serializers/xml.php, serializers/xmldom.php,
+	serializers/xmlformatted.php, transformers/libxslt.php,
+	transformers/mixedcontent.php, transformers/phpprocessor.php,
+	transformers/xmltransformer.php, transformers/xslt.php:
+
+	every component has now a prefix (like generator_xmlfile for example)
+	
+2002-11-10 10:56  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	first working draft. works only for generate/serialize/transform at the moment...
+	
+2002-11-10 10:55  chregu
+
+	* popoon.php:
+
+	some cosmetic  changes
+	
+2002-11-10 08:46  chregu
+
+	* popoon.php:
+
+	- constructor can now be executed without having to run the sitemap
+	immediately.
+	- new function setOptions() and run()
+	- some doc fixes
+	
+2002-11-10 08:25  chregu
+
+	* sitemap/sitemap.php:
+
+	Sablotron support
+	
+2002-11-09 22:44  chregu
+
+	* components/component.php:
+
+	component main class shouldn't include PEAR.php
+	
+2002-11-09 22:43  chregu
+
+	* sitemap/: sitemap.php, sitemap2php.xsl:
+
+	new sitemap class with cached sitemap generation und using
+	
+2002-11-09 22:43  chregu
+
+	* popoon.php:
+
+	new popoon class
+	and introduction of error_handling
+	
+2002-11-04 11:32  chregu
+
+	* sitemap.php, components/matcher.php, components/reader.php,
+	components/readers/php.php, components/readers/phpsource.php,
+	components/readers/textsource.php:
+
+	train session
+	
+2002-11-02 11:06  chregu
+
+	* sitemap.php, components/action.php,
+	components/actions/simple.php:
+
+	first action example
+	
+2002-11-01 17:15  chregu
+
+	* globalContainer.php, sitemap.php, components/action.php,
+	components/aggregator.php, components/component.php,
+	components/generator.php, components/matcher.php,
+	components/reader.php, components/selector.php,
+	components/serializer.php, components/transformer.php,
+	components/actions/simple.php, components/generators/bitflux.php,
+	components/generators/bitflux_ebp.php,
+	components/generators/bitfluxnavi.php,
+	components/generators/db2xml.php,
+	components/generators/structure2xml.php,
+	components/generators/xmlfile.php,
+	components/generators/xmlvariable.php,
+	components/matchers/phpglobalvars.php, components/matchers/uri.php,
+	components/readers/php.php, components/readers/resource.php,
+	components/schemes/BX_BITLIB_DIR.php,
+	components/schemes/BX_PROJECT_DIR.php,
+	components/schemes/config.php, components/schemes/globals.php,
+	components/schemes/options.php, components/schemes/php.php,
+	components/schemes/phpglobals.php,
+	components/selectors/phpglobalvars.php,
+	components/selectors/uri.php, components/serializers/debug.php,
+	components/serializers/fo2pdf.php, components/serializers/html.php,
+	components/serializers/xml.php, components/serializers/xmldom.php,
+	components/serializers/xmlformatted.php,
+	components/transformers/libxslt.php,
+	components/transformers/mixedcontent.php,
+	components/transformers/phpprocessor.php,
+	components/transformers/xmltransformer.php,
+	components/transformers/xslt.php, functions/common.php:
+
+	replace Bitflux CMS by popoon
+	
+2002-11-01 16:47  chregu
+
+	* components/: component.php, generator.php, serializer.php,
+	generators/bitflux.php, generators/bitflux_ebp.php,
+	generators/bitfluxnavi.php, generators/db2xml.php,
+	generators/structure2xml.php, generators/xmlfile.php,
+	matchers/uri.php, serializers/debug.php, transformers/libxslt.php,
+	transformers/xslt.php:
+
+	sitemap we need everywhere now..
+	
+2002-11-01 16:31  chregu
+
+	* sitemap.php, components/component.php, components/generator.php,
+	components/matcher.php, components/selector.php,
+	components/transformer.php, components/generators/xmlfile.php,
+	components/selectors/phpglobalvars.php,
+	components/selectors/uri.php, components/transformers/libxslt.php:
+
+	map support (not implemented everywhere till now)
+	
+2002-11-01 14:53  chregu
+
+	* components/: aggregator.php, serializers/html.php,
+	serializers/xmldom.php:
+
+	whatever
+	
+2002-11-01 11:40  chregu
+
+	* components/serializers/: html.php, xml.php:
+
+	send header and finalDom
+	
+2002-11-01 11:39  chregu
+
+	* components/generators/structure2xml.php:
+
+	allwo treeStartID from different sources
+	
+2002-11-01 11:39  chregu
+
+	* components/matcher.php:
+
+	better stuff
+	
+2002-10-31 20:43  chregu
+
+	* components/aggregator.php:
+
+	handle http://protocol (maybe this should be modulerized as well...)
+	
+2002-10-31 20:42  chregu
+
+	* sitemap.php, components/component.php:
+
+	
+	allow supplying of protocols, which should not be translated
+	
+2002-10-31 20:12  chregu
+
+	* components/serializers/xmldom.php:
+
+	this serializer does not output anything, if it's already a dom. useful for aggregators
+	
+2002-10-31 20:12  chregu
+
+	* sitemap.php, components/aggregator.php,
+	components/serializers/xml.php:
+
+	more stuff concerning aggregator
+	
+2002-10-31 19:30  chregu
+
+	* components/aggregator.php:
+
+	first working implementation of aggregator/part
+	
+2002-10-31 19:29  chregu
+
+	* sitemap.php, components/matcher.php, components/matchers/uri.php,
+	components/serializers/xmlformatted.php:
+
+	some fixes to the new uri stuff (don't use SERVER["REQUEST_URI"] anymore)
+	and aggregate/part stuff
+	
+2002-10-29 11:48  chregu
+
+	* components/transformers/xmltransformer.php:
+
+	debug stuff away
+	
+2002-10-29 11:37  chregu
+
+	* sitemap.php, components/component.php,
+	components/transformers/xmltransformer.php:
+
+	better parameter handling..
+	
+2002-10-29 09:43  chregu
+
+	* components/transformers/xmltransformer.php:
+
+	define cache stuff
+	
+2002-10-29 09:28  chregu
+
+	* components/transformers/xmltransformer.php:
+
+	more customizable
+	
+2002-10-28 22:55  chregu
+
+	* components/transformers/xmltransformer.php:
+
+	first draft for XML_Transformer
+	
+2002-10-28 19:48  chregu
+
+	* components/serializers/fo2pdf.php:
+
+	fo2pdf serializer!!!
+	
+2002-10-28 17:29  chregu
+
+	* components/schemes/phpglobals.php:
+
+	kkk
+	
+2002-10-28 17:04  chregu
+
+	* sitemap.php, components/component.php,
+	components/transformers/libxslt.php,
+	components/transformers/xslt.php:
+
+	allow map:param in transformers
+	
+2002-10-28 17:04  chregu
+
+	* components/schemes/phpglobals.php:
+
+	parse also _SERVER, _GET, etc globals...
+	
+2002-10-15 18:20  chregu
+
+	* components/generators/: bitflux.php, structure2xml.php:
+
+	support langtag for preview
+	
+2002-10-15 14:54  chregu
+
+	* components/generators/bitfluxnavi.php:
+
+	attribs are taken in parent class
+	
+2002-10-15 14:52  chregu
+
+	* components/component.php:
+
+	take default value if attribute is null
+	
+2002-10-15 14:51  chregu
+
+	* components/schemes/config.php:
+
+	do something sensible if no config options was given (return null..)
+	
+2002-08-26 15:51  chregu
+
+	* components/generators/bitflux.php:
+
+	path is also adjustable now :)
+	
+2002-08-09 12:50  chregu
+
+	* components/generators/bitflux_ebp.php:
+
+	special ebp stuff
+	
+2002-08-09 12:50  chregu
+
+	* components/generators/bitflux.php:
+
+	lang stuff
+	
+2002-08-03 20:41  chregu
+
+	* components/transformers/libxslt.php:
+
+	profiling...
+	
+2002-08-03 20:31  chregu
+
+	* components/transformers/libxslt.php:
+
+	ws
+	
+2002-08-03 20:31  chregu
+
+	* components/transformers/libxslt.php:
+
+	styling
+	
+2002-08-03 12:10  chregu
+
+	* components/selectors/phpglobalvars.php:
+
+	phpglobalvars as selector
+	
+2002-07-18 08:40  chregu
+
+	* components/generators/bitflux.php:
+
+	- add possibility of nicer urls instead of those ugly numbers for Documents
+	
+2002-06-25 16:12  chregu
+
+	* components/generators/bitflux.php:
+
+	print here away :)
+	
+2002-06-20 09:30  chregu
+
+	* sitemap.php, sitemap.php:
+
+	classname of $xmldoc is now (in php 4.3) "domdocument" not "DomDocument" anymore
+	
+2002-06-20 09:30  chregu
+
+	* components/transformers/: mixedcontent.php, xslt.php:
+
+	revert fix for BC break in php 4.3 (sitemap.php handles that correctly now)
+	
+2002-06-19 14:56  chregu
+
+	* components/transformers/: mixedcontent.php, xslt.php,
+	mixedcontent.php, xslt.php:
+
+	[no log message]
+	
+2002-06-07 01:16  chregu
+
+	* components/: generators/bitfluxnavi.php, transformers/xslt.php:
+
+	lalala
+	
+2002-06-06 17:16  chregu
+
+	* components/generators/bitflux.php:
+
+	mmmh
+	
+2002-06-05 20:38  chregu
+
+	* components/generators/bitflux.php:
+
+	little clean up
+	
+2002-06-04 19:48  chregu
+
+	* components/: reader.php, readers/php.php, readers/resource.php,
+	schemes/php.php:
+
+	added reader support and some new schemes (to read the output of an included php-script..)
+	
+2002-06-04 19:47  chregu
+
+	* sitemap.php, components/generators/bitflux.php:
+
+	added reader support
+	
+2002-06-04 10:19  chregu
+
+	* sitemap.php, components/selector.php,
+	components/selectors/uri.php:
+
+	Added map:mount, map:select, map:when, map:otherwise support
+	
+2002-06-03 10:18  chregu
+
+	* components/: generators/xmlvariable.php, schemes/phpglobals.php:
+
+	new stuff for drupal
+	
+2002-05-29 20:06  chregu
+
+	* components/generators/bitflux.php:
+
+	caching stuff
+	
+2002-05-28 18:15  chregu
+
+	* components/schemes/BX_BITLIB_DIR.php:
+
+	new sxhem handler
+	
+2002-05-28 18:15  chregu
+
+	* components/generators/bitflux.php:
+
+	reorganisation ...
+	
+2002-05-28 12:56  chregu
+
+	* sitemap.php, components/generators/bitflux.php,
+	components/schemes/BX_PROJECT_DIR.php,
+	components/schemes/config.php:
+
+	new admin stuff (too much to state here)
+	
+2002-05-28 10:59  chregu
+
+	* components/schemes/config.php:
+
+	allow global vars for input
+	
+2002-05-27 17:52  chregu
+
+	* components/serializers/xml.php:
+
+	dump xml if it's an xml...
+	
+2002-05-13 20:09  chregu
+
+	* components/component.php:
+
+	not by reference for sax
+	
+2002-05-07 17:31  chregu
+
+	* components/transformers/libxslt.php:
+
+	add more debug info
+	
+2002-05-04 14:53  chregu
+
+	* components/: matcher.php, transformers/libxslt.php:
+
+	make a correct preg_quote
+	
+2002-05-04 14:53  chregu
+
+	* components/component.php:
+
+	check if $array is an array before foreach
+	
+2002-05-04 10:53  chregu
+
+	* sitemap.php:
+
+	Multiple pipelines are now possible.
+	Only the first one, which has a matched generator gets executed (have to
+	look how cocoon does that with multiple pipelines, the docs in this area are
+	rather weak.. ask michi :) )
+	
+2002-05-02 23:48  chregu
+
+	* components/serializers/xml.php:
+
+	send image/xml
+	
+2002-05-02 23:47  chregu
+
+	* components/generators/: db2xml.php, structure2xml.php:
+
+	let xml_seperator configurable in sitemap.xml
+	
+2002-05-02 14:01  chregu
+
+	* sitemap.php, components/generators/db2xml.php:
+
+	[no log message]
+	
+2002-05-02 11:36  chregu
+
+	* components/generators/bitflux.php:
+
+	1.0 not 1.1 as http protocoll
+	
+2002-04-29 17:31  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	do not output php errors
+	
+2002-04-25 11:29  chregu
+
+	* components/generators/bitflux.php:
+
+	301 not 302
+	
+2002-04-25 11:21  chregu
+
+	* components/generators/bitflux.php:
+
+	redirectOnNotFound
+	
+2002-04-24 15:55  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	whitespace stuff
+	
+2002-04-24 15:54  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	do better error messages
+	
+2002-04-23 20:30  chregu
+
+	* components/generators/bitflux.php:
+
+	E_ALL fix
+	
+2002-04-10 16:39  chregu
+
+	* components/component.php:
+
+	removed unnecessary linebreak at the end
+	
+2002-04-10 16:38  chregu
+
+	* components/generators/bitfluxnavi.php:
+
+	removed unnecessary linebreaks at the end
+	
+2002-04-10 16:38  chregu
+
+	* components/generators/bitflux.php:
+
+	send 404 if section not found
+	
+2002-04-08 11:08  chregu
+
+	* components/matcher.php:
+
+	e_ALL fix
+	
+2002-04-08 11:08  chregu
+
+	* sitemap.php:
+
+	create references instead of copies
+	
+2002-04-07 10:31  chregu
+
+	* functions/common.php:
+
+	do not publish dsn to public people
+	
+2002-04-06 14:19  chregu
+
+	* sitemap.php, components/component.php, components/generator.php,
+	components/matcher.php, components/serializer.php,
+	components/transformer.php, components/generators/bitflux.php,
+	components/generators/bitfluxnavi.php,
+	components/generators/db2xml.php,
+	components/generators/structure2xml.php,
+	components/generators/xmlfile.php,
+	components/serializers/debug.php, components/serializers/html.php,
+	components/serializers/xml.php,
+	components/serializers/xmlformatted.php,
+	components/transformers/libxslt.php,
+	components/transformers/mixedcontent.php,
+	components/transformers/phpprocessor.php,
+	components/transformers/xslt.php:
+
+	sax support (not finished yet...)
+	
+2002-04-04 12:08  chregu
+
+	* components/serializers/xmlformatted.php:
+
+	new standard for transforimng xml
+	
+2002-04-04 11:23  chregu
+
+	* sitemap.php, components/component.php, components/serializer.php,
+	components/transformer.php,
+	components/transformers/mixedcontent.php:
+
+	do the convertsion of XML Documents in sitemap.php as a preparation to handle sax-modules
+	
+2002-04-04 11:04  chregu
+
+	* globalContainer.php, sitemap.php, components/component.php,
+	components/generator.php, components/matcher.php,
+	components/serializer.php, components/transformer.php,
+	components/generators/bitflux.php,
+	components/generators/bitfluxnavi.php,
+	components/generators/db2xml.php,
+	components/generators/structure2xml.php,
+	components/generators/xmlfile.php,
+	components/matchers/phpglobalvars.php, components/matchers/uri.php,
+	components/schemes/config.php, components/schemes/globals.php,
+	components/schemes/options.php, components/serializers/debug.php,
+	components/serializers/html.php, components/serializers/xml.php,
+	components/serializers/xmlformatted.php,
+	components/transformers/libxslt.php,
+	components/transformers/mixedcontent.php,
+	components/transformers/phpprocessor.php,
+	components/transformers/xslt.php, functions/common.php:
+
+	changed copyright notice
+	
+2002-04-04 09:45  chregu
+
+	* components/transformers/phpprocessor.php:
+
+	@ new module. evaluates php code in xml documents
+	
+2002-04-04 09:44  chregu
+
+	* components/transformers/xslt.php:
+
+	removed init function
+	
+2002-04-04 09:44  chregu
+
+	* components/serializers/debug.php:
+
+	new module for outputting debug information to the browser
+	
+2002-04-04 09:43  chregu
+
+	* components/serializers/html.php:
+
+	debug output is in serializers/debug
+	
+2002-04-04 09:43  chregu
+
+	* components/generators/bitflux.php:
+
+	code cleanup
+	E_ALL fixes
+	
+2002-04-04 09:42  chregu
+
+	* components/component.php:
+
+	do "sitemap attribute" -> "class variable" conversion for every component
+	
+2002-04-04 09:41  chregu
+
+	* sitemap.xml:
+
+	wrong place
+	
+2002-04-04 09:41  chregu
+
+	* sitemap.php:
+
+	@ added Benchmark Function. to be used in <map:pipeline benchmakr="yes">
+	@ (and at the end to be output with <map:serialize type="debug" debug="yes"/>
+	
+2002-04-03 16:19  chregu
+
+	* components/: component.php, generators/structure2xml.php:
+
+	more debug stuff
+	
+2002-04-03 15:06  chregu
+
+	* components/matchers/phpglobalvars.php:
+
+	new matcher to match against any super global from PHP (like $_SERVER, $_REQUEST, etc...)
+	
+2002-04-03 15:05  chregu
+
+	* components/: matcher.php, matchers/uri.php,
+	transformers/mixedcontent.php:
+
+	new matcher API. error reporting and extensible.
+	matchtype = regex or matchtype = simple (as before) is now possible as attribute in map:match
+	
+2002-04-03 14:54  chregu
+
+	* sitemap.php:
+
+	new matcher behaviour
+	
+2002-04-03 12:52  chregu
+
+	* components/matchers/uri.php:
+
+	renamed from wildcard to uri
+	
+2002-04-03 12:34  chregu
+
+	* components/generators/structure2xml.php:
+
+	more E_ALL fixes
+	
+2002-04-03 10:56  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	some entities were not catched by the preg rule
+	
+2002-04-03 10:52  chregu
+
+	* components/generators/: bitflux.php, bitfluxnavi.php,
+	structure2xml.php:
+
+	- make include of structure_xml optional
+	- code cleanup
+	
+2002-04-03 09:56  chregu
+
+	* functions/common.php:
+
+	added get_xml()
+	
+2002-04-03 09:55  chregu
+
+	* components/serializers/html.php:
+
+	debug stuff start
+	
+2002-04-03 09:55  chregu
+
+	* components/schemes/: config.php, globals.php, options.php:
+
+	documentation stuff (PHPDoc)
+	
+2002-04-03 09:53  chregu
+
+	* components/generators/structure2xml.php:
+
+	removed adding of structrure.xml (not sure about that, but demo app, doesn't need it..)
+	
+2002-04-03 09:52  chregu
+
+	* components/: component.php, transformers/xslt.php:
+
+	added first implementation of debug support
+	
+2002-04-03 09:12  chregu
+
+	* components/schemes/options.php:
+
+	Deprecated, use globals:// instead
+	
+2002-04-03 09:11  chregu
+
+	* components/schemes/globals.php:
+
+	will replace options ...
+	
+2002-04-03 08:54  chregu
+
+	* components/generators/bitfluxnavi.php:
+
+	E_ALL fixes in admin
+	
+2002-04-03 08:45  chregu
+
+	* components/generators/: bitflux.php, structure2xml.php:
+
+	a lot of E_ALL fixes
+	
+2002-04-02 16:30  chregu
+
+	* components/transformers/mixedcontent.php:
+
+	entities should work now (hopefully...)
+	
+2002-04-02 09:15  chregu
+
+	* components/schemes/config.php:
+
+	print die message about not-existing config file (should be a PEAR::Error in the future)
+	
+2002-04-02 09:14  chregu
+
+	* functions/common.php:
+
+	pool DB Handles in globalContainer (only applies to DbFromDsn() )
+	
+2002-04-02 09:14  chregu
+
+	* components/generators/structure2xml.php:
+
+	get dsn from sitemap, not from structure.xml
+	
+2002-04-02 08:38  chregu
+
+	* sitemap.php:
+
+	parse map:scheme from sitemap to give global init values
+	(needed for path to config file for config:// scheme)
+	
+2002-04-02 08:37  chregu
+
+	* components/schemes/config.php:
+
+	config:// as new scheme to read values from a config file...
+	
+2002-04-02 07:56  chregu
+
+	* sitemap.php:
+
+	missread the cocoon docu. reverted back
+	
+2002-04-02 07:36  chregu
+
+	* sitemap.php, functions/common.php:
+
+	a more verbose error message
+	
+2002-04-02 07:36  chregu
+
+	* components/generators/bitfluxnavi.php:
+
+	debug code was in the way...
+	
+2002-04-02 07:23  chregu
+
+	* sitemap.php:
+
+	repplaced type with name to get more conformance to cocoon
+	
+2002-04-02 06:59  chregu
+
+	* components/generators/bitfluxnavi.php:
+
+	[no log message]
+	

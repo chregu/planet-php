@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+    <map:pipeline>
+        <map:match type="uri" pattern="examples.tgz">
+            <map:read type="tgz" src="." name="examples.tgz"/>
+            </map:match>
+        </map:pipeline>
+        
+	<map:pipeline >
+		<map:generate type="xmlfile" src="examples.xml"/>
+		<map:transform type="libxslt" src="examples.xsl"/>
+		<map:serialize type="html"/>
+	</map:pipeline>
+</map:pipelines>
+</map:sitemap>

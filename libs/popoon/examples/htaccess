@@ -1,0 +1,10 @@
+#php_value include_path "./:/usr/local/lib/php"
+php_value error_reporting 2047
+
+
+RewriteEngine On
+RewriteRule .*(page.*)$ ./examples.php?sitemap=sitemap_mod.xml&page=$1 [L]
+
+
+
+

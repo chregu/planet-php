@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="iso-8859-1"?> 
+<s:slideset xmlns:s="http://www.oscom.org/2002/SlideML/0.9/" 
+    xmlns:dc="http://purl.org/dc/elements/1.1"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    >
+    <s:metadata>
+        <s:title>Popoon</s:title>
+        <s:authorgroup>
+            <s:author>Christian Stocker
+                <s:email>chregu@bitflux.ch</s:email>
+                <s:orgname href="http://www.bitflux.com">Bitflux GmbH</s:orgname>
+            </s:author>
+        </s:authorgroup>
+        <s:confgroup>
+            <s:confdates>
+                <s:start>2002-11-03</s:start>
+                <s:end>2002-11-26</s:end>
+            </s:confdates>
+            <s:conftitle>International PHP Conference, Frankfurt</s:conftitle>
+            <s:address>
+            </s:address>
+        </s:confgroup>
+        
+        
+        <dc:subject>Bitflux Editor, CSS, XML, XSLT, Mozilla, XHTML</dc:subject>
+        <dc:date>2002-09-12</dc:date>
+        <dc:rights>Bitflux  GmbH</dc:rights>
+        <s:abstract>
+            <p>Popoon is a open source XML Publishing framework. It's modelled after cocoon and is completely written in PHP.</p>
+        </s:abstract>
+    </s:metadata>
+    
+    <s:slide>
+        <s:title>Fragen?</s:title>
+        <s:content>Nur keine Hemmungen</s:content>
+    </s:slide>
+    
+    <s:slide >
+        <s:title>Was ist Popoon?</s:title>
+        <s:content>
+            
+            <ul>
+                <li>XML Publishing Framework </li>
+                <li>Pipeline Processing für XML-Dokumente</li>
+                <li>Sehr modular</li>
+                <li>Backend für Bitflux CMS (aber nicht nur)</li>
+                <li>Popoon basiert auf Ideen von Apaches Cocoon</li>
+            </ul>
+        </s:content>
+    </s:slide> 	
+    
+    <s:slide >
+        <s:title>Was ist die Idee dahinter?</s:title>
+        <s:content>
+            
+            <ul> 
+                <li>Cocoon für PHP</li>
+				<li>Single Source, Multiple Output</li>
+                <li>Wiederverwendbare Komponenten</li>
+                <li>Konfiguration möglich, ohne PHP zu kennen</li>
+                <li>Einfach erweiterbar und ausbaubar</li>
+
+            </ul>
+        </s:content>
+    </s:slide> 	
+    
+    <s:slide >
+        <s:title>Warum XML?</s:title>
+        <s:content>
+            <ul>
+                <li>Alles ist XML
+                    <ul>
+                        <li>Content</li>
+                        <li>Transformation</li>
+                        <li>Output</li>
+                        <li>Sitemap</li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    Trennung von Inhalt und Layout
+                </li>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    <s:slide >
+        <s:title>Warum Popoon?</s:title>
+        <s:content>
+            <ul>
+                <li>
+                    Trennung von Inhalt, Layout und Logik :)
+                    <ul>
+                        <li>Content = Inhalt</li>
+                        <li>Transformation, Output = Layout</li>
+                        <li>Transformation, Actions, Pipelines = Logik </li>
+                    </ul>
+                </li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide >
+        <s:title>Voraussetzungen</s:title>
+        <s:content>
+            Technisch: 
+            <ul>
+                <li>php 4.3 (bald) empfohlen, php 4.2 reicht aber</li>
+                <li>ext/xml</li>
+                <li> ext/domxml</li>
+                <li> xslt aus domxml oder ext/xslt</li>
+                <li>ext/java für pdf generation</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    
+    
+    
+    
+    <s:slide >
+        <s:title>Sitemap</s:title>
+        <s:content>
+            <ul>
+                <li>Die Sitemap ist das Herzstück von Popoon.</li>
+                <li>Sie definiert den Workflow</li>
+                <li>Besteht aus mehreren "Komponenten":</li>
+                
+                <ul>
+                    <li>Pipelines</li>
+                    <li>Matchers, Selectors</li>
+                    <li>Generators, Transformers,Serializers</li>
+                    <li>Actions, Aggregators</li>			
+                    <li>etc..</li>
+                </ul>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    <s:slide >
+        <s:title>Pipelines</s:title>
+        <s:content>
+            <p>
+                Eine Sitemap besteht aus einer oder mehreren Pipelines.
+            </p>
+            <p>
+                Eine Pipeline = 1 Generator, 0+ Transformer, 1 Serializer
+            </p><br/>
+            
+            <img src="./imgs/flow.png"/><br/>
+        </s:content>
+    </s:slide> 
+    
+    
+    <s:slide >
+        <s:title>Sitemap</s:title>
+        <s:content><pre><![CDATA[<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:pipelines>
+    <map:pipeline >
+      <map:generate type="xmlfile" src="slideml.xml"/>
+      <map:transform type="libxslt" src="slideml2html.xsl"/>	  
+      <map:serialize type="xml"/>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>
+]]></pre>
+        </s:content>
+    </s:slide> 
+    
+    <s:slide >
+        <s:title>Generators</s:title>
+        <s:content>
+            <ul>
+                <li> Generators produzieren XML-Daten </li>
+                <li> Einfachster Generator => XMLFileReader</li>
+                <li> Komplexer Generator => sql2xml Generator </li>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    
+    <s:slide >
+        <s:title>Transformers</s:title>
+        <s:content>
+            <ul>
+                <li>Transformer transformieren ein XML-Dokument in ein nächstes</li>
+                <li>"normaler" Transformer: XSLT-Transformation (Sablotron oder libxslt)</li>
+                <li>PHPProcessor: Führt PHP Code in XML-Dokumenten aus.</li>
+                <li>XML Transformer: Nutzt PEAR:XML_Transformer statt XSLT zur Transformation </li>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    <s:slide >
+        <s:title>Serializer</s:title>
+        <s:content>
+            <ul>
+                <li>Serializer schreiben das XML-Dokument für das    Endausgabegerät um und geben es aus.</li>
+                <li>"normale" Serializer: HTML und XML</li>
+                <li>Weitere Serializer: PDF, Images, RTF, PlainText, ... </li>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    <s:slide >
+        <s:title>Reader</s:title>
+        <s:content>
+            <ul>
+                <li>Lesen die Daten und geben sie gleich wieder aus.</li>
+                <li>z.B. für Bilder oder andere nicht XML-Dateien</li>
+            </ul>
+        </s:content>
+    </s:slide> 
+    
+    
+    <s:slide>
+        <s:title>Matchers/Selector</s:title>
+        <s:content>
+            <ul>
+                <li>Matchers/Selector = if/switch</li>
+                <li>Normalfall auf URI, aber auch z.B. globale PHP-Variablen möglich.</li>
+                <li>Einfache Substution oder komplettes Regex-Arsenal.</li>
+                <li>Auf Hits kann zurückgegriffen werden, z.B.
+                    <pre> <![CDATA[
+<map:match type="uri" pattern="/tutorial/part*/>
+  <map:match type="uri" pattern="*.html">
+     <map:generator src="/docs/tuto/{../1}/xml/{1}.xml" type="xmlfile" />
+     <map:transformer type="xslt" src="xsl/sheet.xsl" />
+     <map:serialize type="html" />
+  </map:match>
+</map:match>]]>
+                </pre></li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Schemes</s:title>
+        <s:content>
+            
+            <ul>
+                <li>Klassische Schemes sind http:// und ftp://</li>
+                <li> Wichtige Schemes in Popoon: </li>
+                <ul>
+                    <li>Config:// -> Daten aus Konfigurationsdatei</li>
+                    <li> Phpglobals:// -> globle PHP-Variablen</li>
+                    <li> Globals:// -> globale Popoon-Daten</li>
+                </ul>
+                <li>Beispiel:</li>
+                <pre><![CDATA[<map:parameter value="phpglobals://_GET[page]" name="page" />]]></pre>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    
+    <s:slide>
+        <s:title>Aggregators</s:title>
+        <s:content>
+            <ul>
+                <li>Aggregator führen XML Inhalte zusammen</li>
+                <li> Beispiel:
+                    <pre><![CDATA[<map:aggregate element="root" >
+  <map:part src="http://www.slashdot.org/slashdot.rdf"/>
+  <map:part src="popoon:/page3.xml"/>			
+</map:aggregate>
+			
+			]]></pre>
+                </li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Actions</s:title>
+        <s:content>
+            <ul>
+                <li>Actions produzieren keinen Output</li>
+                <li>Actions werden vor allem zur Formularverarbeitung und Authentifikation benutzt</li>
+                <li>Actions können einen Error zurückgeben und die nachfolgenden Pipeline wird nicht ausgeführt</li>
+                <li>Beispiel:<pre><![CDATA[<map:pipeline>
+  <map:act type="simple">
+    <map:generate type="xmlfile" src="empty.xml"/>
+    <map:transform type="libxslt" src="{file}.xsl"/>		
+    <map:serialize type="html"/>
+  </map:act>
+</map:pipeline>
+<map:pipeline>
+  <map:generate type="xmlfile" src="action_unknown.xml"/>
+  <map:serialize type="html"/>
+</map:pipeline>
+	]]></pre></li>
+            </ul>
+            
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Mount</s:title>
+        <s:content>
+            <ul>
+                <li>Mit map:mount lassen sich weitere Sitemaps einbinde</li>
+                <li>Werden zur Laufzeit eingebunden</li>
+                <li>Beispiel: 
+                    <pre><![CDATA[<map:mount src="../sitemap/other.xml" uri-prefix="other"/>]]></pre>
+                </li>
+            </ul>
+            
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Internals</s:title>
+        <s:content>
+            <ul>
+                <li>Momentan vor allem DomDokumente intern</li>
+                <li>z.T. auch einfach "XML-Strings"</li>
+                <li>SAX Support ist angetestet </li>
+            </ul>
+            =&gt; Konversion zwischen verschiedenen Formaten nötig :(
+            <ul>
+                <li>Keine gemeinsame XML-API in PHP, wie in Java</li>
+                <li>Deshalb ist libxslt gegenüber Sablotron vorzuziehen</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Performance</s:title>
+        <s:content>
+            <ul>
+                <li>Popoon produziert einiges an Overhead</li>
+                <li>Dafür einfach zu unterhalten und auch von nicht PHP-Experten anzupassen</li>
+                <li>Performance kann mit Caching massiv gesteigert werden</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Caching</s:title>
+        <s:content>
+            4 Arten von Caching
+            <ul>
+                <li>PHP "Zend Engine" Caching</li>
+                <li>Sitemap Caching (SM2PHP)</li>			
+                <li>Komponenten Caching</li>						
+                <li>Output Caching</li>						
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>PHP "Zend Engine" Caching</s:title>
+        <s:content>
+            <ul>
+                <li>Zend Cache, PHP Accelerator et al.</li>
+                <li>verdoppelt ungefähr die p/sec</li>
+                <li>Einfach und schnell installiert, keine Anpassungen am Code nötig</li>
+            </ul>
+            
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Sitemap Caching</s:title>
+        <s:content>
+            <ul>
+                <li>Sitemap.xml => sitemap.php</li>
+                <li>XML muss nicht jedesmal geparsed werden</li>
+                <li>php kann von Zend-Engine-Caches zusätzlich gecacht werden</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Komponenten Caching</s:title>
+        <s:content>
+            <ul>
+                <li> Jede Komponente (Generator/Transformer/Serializer) kann gecacht werden </li>
+                <li>Nur neu berechnen, was sich geändert hat</li>
+                <li> Verfahren:</li>
+                <ul>
+                    <li>Jede Komponente liefert eindeutige ID bei gleichen Inputparameter</li>
+                    <li>Cache-Objekt überprüft diese mit gecachten IDs</li>
+                    <li>Falls vorhanden und gültige -> cached XML wird genommen</li>
+                    <li>andernfalls, neu generieren des XML</li>
+                    <li>nächste Komponente wird gefragt, usw.</li>
+                </ul>
+                <li>Komponenente muss nichts über Caching Verfahren wissen.</li>
+                <li>Betastatus. Tests stehen aus</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Output Caching</s:title>
+        <s:content>
+            <ul>
+                <li>Simples all-or-nothing Outputcaching mit PEAR::Cache_Output</li>
+                <li>Steigert bei rel. statischen Seiten die Performance enorm</li>
+                <li>Nicht in popoon implementiert, da besser ausserhalb gemanaged</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Beispiele</s:title>
+        <s:content>
+            <ul>
+                <li><a href="../"> Ein paar einfache Beispiele</a></li>
+                
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Zukunft</s:title>
+        <s:content>
+            <ul>
+                <li>Komponenten Caching</li>
+                <li>Sitemap -&gt; xsl -&gt; php</li>
+                <li>Sitemap Validation</li>
+                <li>map:action-set</li>
+                <li>SAX-Support</li>
+                <li>Zend Engine 2 Support</li>
+                <li>... und mehr Komponenten :)</li>
+            </ul>
+        </s:content>
+    </s:slide>
+    
+    <s:slide>
+        <s:title>Links</s:title>
+        <s:content>
+            <ul>
+                <li><a href="http://slides.bitflux.ch/">http://slides.bitflux.ch/</a>: Slides by us</li>						
+                <li><a href="http://bitflux.org">Bitflux Developer Site</a></li>
+                <li><a href="http://bitflux.ch/developer/cms/download.html">Download</a></li>		
+                <li><a href="http://bitflux.org/api/">API Documentation (not really up to date)</a></li>				
+                <li><a href="http://cvs.bitflux.ch/chora/cvs.php/popoon?login=2">CVS-Web</a></li>						
+                <li><a href="http://bugs.bitflux.ch/buglist.cgi?short_desc_type=allwordssubstr&amp;short_desc=&amp;product=Popoon&amp;long_desc_type=allwordssubstr&amp;long_desc=&amp;bug_file_loc_type=allwordssubstr&amp;bug_file_loc=&amp;status_whiteboard_type=allwordssubstr&amp;status_whiteboard=&amp;keywords_type=allwords&amp;keywords=&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;emailassigned_to1=1&amp;emailtype1=substring&amp;email1=&amp;emailassigned_to2=1&amp;emailreporter2=1&amp;emailcc2=1&amp;emailtype2=substring&amp;email2=&amp;bugidtype=include&amp;bug_id=&amp;votes=&amp;changedin=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;cmdtype=doit&amp;namedcmd=Editor+Bugs&amp;newqueryname=&amp;order=Reuse+same+sort+as+last+time&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=">Open Popoon Bugs</a></li>								
+                <li><a href="http://nbwz.bitflux.ch/">Maybe some real docu some day :) </a></li>
+                <li><a href="http://slides.bitflux.ch/">Some of our presentations</a></li>
+                <li><a href="http://xml.apache.org/cocoon/">Official Cocoon Website</a></li>
+                <li><a href="http://bitflux.ch/slideml">About SlideML</a></li>		
+            </ul>
+            
+        </s:content>
+    </s:slide>
+    
+    
+</s:slideset>
+
+
+

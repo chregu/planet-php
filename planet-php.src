@@ -1,0 +1,22 @@
+# PEAR Web Mozilla Search Tab plug-in
+# Tomas V.V.Cox <cox idecnet.com>
+
+<search
+   name="Planet-PHP"
+   description="Planet PHP Blog Search"
+   method="GET"
+   action="http://www.planet-php.net/"
+   update="http://www.planet-php.net/planet-php.src"
+   updateCheckDays=3
+>
+
+<input name="search" user>
+
+<interpret
+    browserResultType="result"
+    resultListStart="<!-- resultListStart -->"
+    resultListEnd="<!-- resultListEnd -->"
+    resultItemStart="<!-- resultItemStart -->"
+    resultItemEnd="<!-- resultItemEnd -->"
+>
+</search>

@@ -1,0 +1,45 @@
+This is the tests directory for popoon.
+
+It was created for a proper upgrade from php4 to php5, but should be
+used later nevertheless, when php4 is all history ;)
+
+The test system is based on the traditional PHP test system, so read
+there more about. I chose this not because it's fantastically good, but
+I'm used to it. If anyone wants to use a "real" unit-testing framework,
+just go ahead.
+
+Background
+-------------
+
+The main goal of the php4-to-php5 transition is, that the old sitemaps
+still can be used and nothing has to be changed in the application code.
+We branched already the popoon code. PHP4 is still the HEAD and PHP5 is
+the PHP5 branch (this will change later). 
+
+But for the tests directory, you should always use HEAD as the
+tests/tests directory shouldn't differ, otherwise the goal isn't reached
+;)
+
+How to use it
+-------------
+
+go to popoon dir 
+$ cvs up -A # for HEAD
+$ cvs up -r PHP5 # for PHP5 branch
+
+then go to tests and check out head (if you didn't do it above)
+
+$ cd tests/
+$ cvs up -A
+
+now you can run the tests with
+
+$ bash run-tests.sh
+
+it should automatically take to correct php-binaries, if you corrected
+the paths in run-tests.sh for your php4 and php5 binaries
+
+Hope that helps
+
+chregu
+

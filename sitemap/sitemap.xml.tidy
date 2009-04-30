@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:components>
+    <map:schemes>
+      <map:scheme name="config"
+      path="BX_PROJECT_DIR:///inc/config.inc.php" global="yes"
+      variable="BX_config" />
+    </map:schemes>
+  </map:components>
+  <map:pipelines>
+    <!-- pipeline for theme files -->
+    <map:pipeline>
+      <map:match matchtype="regex" type="uri"
+      pattern="#themes/*(.*)#">
+        <map:read type="resource"
+        src="BX_PROJECT_DIR://themes/{config://theme}/{1}"
+        mime-type="auto" />
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <map:match type="uri" pattern="blog/*">
+        <map:generate type="s9y" src="{1}" />
+        <map:transform type="libxslt"
+        src="BX_PROJECT_DIR://themes/{config://theme}/blog.xsl" />
+        <map:transform type="tidy">
+          <map:parameter name="remove-xmlns" value="true" />
+        </map:transform>
+        <map:serialize type="xhtml">
+          <map:parameter name="stripScriptCDATA" value="true" />
+          <map:parameter name="obfuscateMail" value="true" />
+        </map:serialize>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <map:match type="uri" pattern="wiki/*">
+        <map:generate type="yawiki" src="{1}">
+          <map:parameter name="yawikiRoot"
+          value="/usr/local/apache/htdocs/yawiki" />
+        </map:generate>
+        <map:transform type="libxslt"
+        src="BX_PROJECT_DIR://themes/{config://theme}/yawiki.xsl" />
+        <map:serialize type="html">
+          <map:parameter name="obfuscateMail" value="true" />
+        </map:serialize>
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <map:match type="uri" pattern="*.jpg">
+        <map:read type="resource" mime-type="auto"
+        src="BX_PROJECT_DIR:///data/{1}.jpg" />
+      </map:match>
+    </map:pipeline>
+    <map:pipeline>
+      <map:select type="uri">
+        <map:when test="/search">
+          <map:match type="uri" pattern="search/*">
+            <map:generate type="planet">
+              <map:parameter name="db" value="config://dsn" />
+              <map:parameter name="feedsList" value="yes" />
+              <map:parameter name="startEntry"
+              value="phpglobals://_GET[start]" default="0" />
+              <map:parameter name="search" value="{1}" />
+              <map:parameter name="deliciousRss" value="tag/php" />
+            </map:generate>
+          </map:match>
+        </map:when>
+        <map:otherwise>
+          <map:generate type="planet">
+            <map:parameter name="db" value="config://dsn" />
+            <map:parameter name="feedsList" value="yes" />
+            <map:parameter name="startEntry"
+            value="phpglobals://_GET[start]" default="0" />
+            <map:parameter name="search"
+            value="phpglobals://_GET[search]" />
+            <map:parameter name="deliciousRss" value="tag/php" />
+          </map:generate>
+        </map:otherwise>
+      </map:select>
+      <map:select type="phpglobalvars" var="GET" key="XML">
+        <map:when test="1">
+          <map:serialize type="xml" />
+        </map:when>
+        <map:otherwise>
+          <map:select type="uri">
+            <map:when test="/rss*">
+              <map:transform type="libxslt"
+              src="BX_PROJECT_DIR://xsl/rss091.xsl" />
+              <map:serialize type="xml" />
+            </map:when>
+            <map:when test="/rdf*">
+              <map:transform type="libxslt"
+              src="BX_PROJECT_DIR://xsl/rss1.xsl" />
+              <map:serialize type="xml" />
+            </map:when>
+            <map:when test="/atom*">
+              <map:transform type="libxslt"
+              src="BX_PROJECT_DIR://xsl/atom03.xsl" />
+              <map:serialize type="xml" />
+            </map:when>
+            <map:otherwise>
+              <map:transform type="libxslt"
+              src="BX_PROJECT_DIR://themes/{config://theme}/main.xsl">
+
+                <map:parameter name="startEntry"
+                value="phpglobals://_GET[start]" default="0" />
+              </map:transform>
+              <map:transform type="tidy" />
+              <map:serialize type="xhtml"
+              contentType="text/html; charset=utf-8">
+                <map:parameter name="stripScriptCDATA"
+                value="true" />
+                <map:parameter name="obfuscateMail" value="true" />
+              </map:serialize>
+            </map:otherwise>
+          </map:select>
+        </map:otherwise>
+      </map:select>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>

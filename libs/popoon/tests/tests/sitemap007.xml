@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:pipelines>
+    
+    	
+        <map:pipeline >
+            <map:aggregate element="rdfs" >
+                <map:part src="http://www.bitflux.org/download/slashdot.rdf"/>
+                <map:part src="http://www.bitflux.org/download/phphomepage.rdf"/>
+            </map:aggregate>
+            <map:serialize type="xml"/>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

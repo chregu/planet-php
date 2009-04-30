@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:pipelines>
+    
+       <map:pipeline >
+            <map:match type="uri" pattern="page*.xml" >
+                <map:generate type="xmlfile" src="slideml.xml"/>
+                <map:transform type="libxslt" src="slideml2xml_mod.xsl">		
+                    <map:parameter name="page" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+                
+            </map:match>
+            
+        </map:pipeline>		
+        <map:pipeline >
+<!--
+there is no create_element_ns in php 4.2 (but 4.3), so we can't add an namespace on this server..
+	<map:aggregate element="slideset" ns="http://www.oscom.org/2002/SlideML/0.9/" prefix="s"> -->
+            <map:aggregate element="slideset" > 
+                <map:part src="popoon:/page1.xml"/>
+                <map:part src="popoon:/page2.xml"/>			
+            </map:aggregate>
+            <map:serialize type="xmlformatted"/>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<examples>
+    <example sitemap="sitemap1.xml">
+        <text>Output as xml</text>
+    </example>
+
+    <example sitemap="sitemap2.xml">
+        <text>XSL Transformation (Output as html)</text>
+        <additional>
+            <file>slideml2html.xsl</file>
+        </additional>
+    </example>
+	
+    <example sitemap="sitemap_php.xml">
+        <text>XSL and "PHP" Transformation </text>
+        <additional>
+            <file>slideml2html_php.xsl</file>
+        </additional>
+    </example>
+
+    <example sitemap="sitemap3.xml&amp;page=1">
+        <text>XSL Transformation with params(Output as html)</text>
+        <additional>
+            <file>slideml2html_get.xsl</file>
+        </additional>
+    </example> 
+
+
+    
+    <example sitemap="sitemap_mod.xml" link="page2.html">
+        <text>The Power of mod_rewrite (html)</text>
+        <additional>
+            <file>slideml2html_mod.xsl</file>
+            <file>htaccess</file>			
+        </additional>
+    </example> 
+    
+    <example sitemap="sitemap_mod.xml" link="page2.xml">
+        <text>The Power of mod_rewrite (xml)</text>
+        <additional>
+            <file>slideml2xml_mod.xsl</file>
+            <file>htaccess</file>			
+        </additional>
+    </example> 
+    <example sitemap="sitemap_mod.xml" link="page2.pdf">
+        <text>The Power of mod_rewrite (pdf)</text>
+        <additional>
+            <file>slideml2pdf_mod.xsl</file>
+            <file>htaccess</file>			
+            <file>page7.pdf</file>			
+            <file>Xhtml2fo.xsl</file>			
+        </additional>
+    </example> 
+    
+    <example sitemap="sitemap_xmlt.xml" >
+        <text>XML_Transformer. DocBook Example</text>
+        <additional>
+            <file>docbook.xml</file>
+        </additional>
+    </example> 
+
+    <example sitemap="sitemap_xmlt2.xml" >
+        <text>XML_Transformer. Image Example</text>
+        <additional>
+            <file>XMLT_Image.xml</file>
+        </additional>
+    </example> 
+
+    <example sitemap="sitemap_part.xml" >
+        <text>map:aggregate example</text>
+        <additional>
+            <file></file>
+        </additional>
+    </example> 
+
+    <example sitemap="sitemap_part_http.xml" >
+        <text>map:aggregate example with http</text>
+        <additional>
+            <file></file>
+        </additional>
+    </example> 
+
+    <example sitemap="sitemap_action.xml" >
+        <text>map:action example </text>
+        <additional>
+            <file>action_unknown.xml</file>
+            <file>action_hello.xml</file>
+        </additional>
+    </example> 
+	
+	   <example sitemap="sitemap_mount.xml" >
+        <text>map:mount example </text>
+        <additional>
+            <file>sitemap_mount.xml</file>
+            <file>sitemap_mounted.xml</file>
+        </additional>
+    </example> 
+	
+	 <example sitemap="examples_sitemap.xml" link="./">
+        <text>This page :)</text>
+        <additional>
+            <file>index.phps</file>
+			<file>examples.xml</file>
+			<file>examples.xsl</file>			
+        </additional>
+    </example> 
+
+
+</examples>

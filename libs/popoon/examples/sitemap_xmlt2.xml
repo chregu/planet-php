@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+	<map:pipeline >
+		<map:generate type="xmlfile" src="XMLT_Image.xml"/>
+		<map:transform type="xmltransformer">
+			<map:parameter name="autoload" value="Image"/>
+			<map:parameter type="constant" name="PEAR_XML_TRANSFORMER_IMAGE_cacheDir" value="/tmp/"/>
+			<map:parameter type="constant" name="PEAR_XML_TRANSFORMER_IMAGE_FONTPATH" value="/usr/local/bxphp/apache/htdocs/quickstart/t3lib/fonts/"/>
+		</map:transform>
+		<map:serialize type="html"/>
+	</map:pipeline>
+</map:pipelines>
+</map:sitemap>

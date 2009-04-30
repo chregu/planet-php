@@ -1,0 +1,41 @@
+<?php
+
+define(PATH_SEPARATOR,":");
+define('BX_PROJECT_DIR',substr(__FILE__,0,-18));
+define('BX_POPOON_DIR', BX_PROJECT_DIR.'libs/popoon/');
+define('BX_INCLUDE_DIR', BX_PROJECT_DIR. 'libs/');
+define('BX_TEMP_DIR', BX_PROJECT_DIR. 'tmp/');
+
+ini_set('include_path',BX_INCLUDE_DIR.PATH_SEPARATOR.BX_POPOON_DIR.PATH_SEPARATOR.ini_get('include_path'));
+include_once(BX_POPOON_DIR.'/autoload.php');
+//this global is somehow ugly...
+$GLOBALS['POOL'] = popoon_pool::getInstance("popoon_classes_config");
+$BX_config = $GLOBALS['POOL']->config;
+
+
+
+$BX_config['dsn'] = 'mysql://user:pass@localhost/planet-php';
+$BX_config['webRoot'] = "/";
+
+
+// local timezone relative to utc (in hours)
+
+$BX_config['webTimezone'] = "0";
+$BX_config['theme'] = 'planet-php';
+
+define('VERBOSE', TRUE);
+define('MAGPIE_CACHE_DIR', BX_PROJECT_DIR.'/tmp/magpie/');
+define('MAGPIE_CACHE_AGE', 1000);
+define('MAGPIE_USER_AGENT', 'PlanetPHPAggregator/0.2 (PHP5) (http://planet-php.org/)');
+
+
+$BX_config->setOutputCacheCallback("checkOutputCaching");
+function checkOutputCaching() {
+if ($_SERVER['REMOTE_ADDR'] == "212.71.98.109") {
+  return false;  
+}
+    return true;
+
+}
+
+?>

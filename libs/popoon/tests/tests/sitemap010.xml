@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+	<map:pipeline>
+	
+			<map:generate type="db2xml" src="select * from bands" dsn="'mysql://root@localhost/popoon'" />
+			<map:serialize type="html"/>
+	</map:pipeline>
+	
+</map:pipelines>
+</map:sitemap>

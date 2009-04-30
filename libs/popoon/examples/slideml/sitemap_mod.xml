@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:pipelines>
+        <map:pipeline>
+
+            <map:generate type="xmlfile" src="slideml.xml"/>
+    
+	
+            <map:match type="uri" pattern="slide_*.html">
+                <map:transform type="libxslt" src="2html_ext_css.xsl">
+                    <map:parameter name="page" value="{1}"/>
+                    <map:parameter name="position" value="{1}"/>
+                </map:transform>
+                <map:transform type="phpsource" match="//code[@language='php']"/>
+            </map:match>
+    
+    
+	
+            <map:match type="uri" pattern="toc.html">
+                <map:transform type="libxslt" src="2html_ext_css.xsl">
+                    <map:parameter name="page" value="toc"/>
+                    <map:parameter name="position" value="0"/>
+                </map:transform>
+            </map:match>
+    
+	
+            <map:match type="uri" pattern="#(title\.html|index\.php|/?$)#" matchtype="regex">
+                <map:transform type="libxslt" src="2html_ext_css.xsl">
+                    <map:parameter name="page" value="title"/>
+                    <map:parameter name="position" value="0"/>
+                </map:transform>
+            </map:match>
+    
+
+            <map:serialize type="html"/>
+    
+	
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

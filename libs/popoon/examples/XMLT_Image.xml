@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<html xmlns:img="http://jjj">
+<body >
+   <img:img src="somepng.png" alt="A sample image" />
+
+
+
+</body>
+</html>

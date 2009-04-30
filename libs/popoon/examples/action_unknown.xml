@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator"
+content="HTML Tidy for Linux/x86 (vers 1st March 2002), see www.w3.org" />
+<title></title>
+</head>
+<body>
+<h2>
+You didn't provide a username: 
+</h2>
+<form action="./examples.php">
+here -&gt; <input name="sitemap" type="hidden" value="sitemap_action.xml"/>
+<input name="user" /></form>
+</body>
+</html>
+

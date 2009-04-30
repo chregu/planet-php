@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /rss/
+Disallow: /rdf/
+Disallow: /atom/
+Disallow: /admin/
+Disallow: /stats/
+

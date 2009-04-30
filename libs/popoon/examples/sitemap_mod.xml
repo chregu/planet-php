@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+<map:pipelines>
+	<map:pipeline>
+	<map:match type="uri" pattern="page*.*" >
+		<map:generate type="xmlfile" src="slideml.xml"/>
+		<map:transform type="libxslt" src="slideml2{2}_mod.xsl">		
+			<map:parameter name="page" value="{1}"/>
+		</map:transform>
+		<map:select type="uri">
+			<map:when test=".pdf">
+				<map:serialize type="fo2pdf"  commandline="/Users/chregu/tmp/fop-0.20.5/fop.sh" />
+			</map:when>
+			<map:when test=".html">
+				<map:serialize type="html"/>
+			</map:when>
+
+			<map:otherwise>
+				<map:serialize type="xml"/>
+			</map:otherwise>
+		</map:select>
+
+	</map:match>
+	</map:pipeline>
+</map:pipelines>
+</map:sitemap>

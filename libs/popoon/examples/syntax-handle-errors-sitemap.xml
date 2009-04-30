@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<map:pipelines>
+    <map:pipeline>
+        <!-- some pipeline stuff here -->
+        <map:handler-errors>
+            <map:select type="exception">
+            <!-- 
+                If we encounter a PopoonFileNotFoundException, the following
+                "pipeline" is called
+            -->
+                <map:when test="PopoonFileNotFoundException">
+                    <map:generate type="xmlfile" src="filenotfound.xhtml"/>
+                    <map:serialize type="xhtml"/>
+                </map:when>
+            <!-- 
+                for every other exception, this one is called
+                If you don't have a "otherwise" exception handler, the default one
+                is called (see below)
+            -->
+             
+                <map:otherwise>
+                    <map:generate type="xmlfile" src="unknownexception.xhtml"/>
+                    <map:serialize type="xhtml"/>
+                </map:otherwise>
+            </map:select>
+        </map:handler-errors>
+    </map:pipeline>
+<!--
+    here you can define the standard error handler, which is called, if nothing else is defined.
+    If you don't define that, the following below is called. This is the builtin default error handler,
+-->
+    <map:handle-errors>
+        <map:generate type="error">
+            <map:parameter name="exception"/>
+        </map:generate>
+        <map:transform type="xslt" src="BX_PROJECT_DIR://inc/popoon/xsl/error2html.xsl"/>
+        <map:serialize type="xhtml"/>
+
+    </map:handle-errors>
+</map:pipelines>

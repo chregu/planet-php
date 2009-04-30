@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+    <map:components>
+        <map:schemes>
+            <map:scheme name="config" path="BX_PROJECT_DIR:///inc/config.inc.php" global="yes" variable="BX_config"/>
+        </map:schemes>
+    </map:components>
+
+    <map:pipelines>
+
+
+        <map:pipeline>
+            <map:match type="uri" pattern="webdav/*">
+                <map:generate type="webdav_file">
+                    <map:parameter name="fsroot" value="BX_PROJECT_DIR:///data/"/>
+                    <map:parameter name="webroot" value="webdav"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+
+            </map:match>
+        </map:pipeline>
+        
+        <map:pipeline>
+            <map:match type="uri" pattern="edit/*.xhtml">
+                <map:generate type="xmlfile" src="BX_PROJECT_DIR:///admin/epoz/common/epozmacros.html"/>
+                <map:transform type="xslt" mode="libxslt" src="BX_PROJECT_DIR:///admin/xsl/epoz.xsl">
+                    <map:parameter name="src" value="../data/{1}.xhtml"/>
+                </map:transform>
+                <map:serialize type="html"/>
+            </map:match>
+        </map:pipeline>
+        
+
+
+        <map:pipeline>
+            <map:match type="uri" pattern="data/*.xhtml">
+                <map:select type="requestmethod">
+                    <map:when test="PUT">
+                        <map:act type="davput">
+                            <map:parameter name="src" value="BX_PROJECT_DIR:///data/{1}.xhtml"/>
+                        </map:act>
+                       <!-- <map:generate type="xmlfile" src="BX_PROJECT_DIR:///data/{1}.xhtml"/>
+                        <map:serialize type="xhtml"/>-->
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="xmlfile" src="BX_PROJECT_DIR:///data/{1}.xhtml"/>
+                        <map:serialize type="xhtml"/>
+                    </map:otherwise>
+                </map:select>
+
+            </map:match>
+        </map:pipeline>
+
+
+    </map:pipelines>
+
+</map:sitemap>
