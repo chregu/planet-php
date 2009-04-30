@@ -30,5 +30,5 @@ INSTALLATION
 - open the page ;)
 
 - Administration has to be done via phpMyAdmin (or similar), just add your 
-   RSS feeds to the entries table. The rest should be done automatically.
+   RSS feeds to the feeds table. The rest should be done automatically.
 .
