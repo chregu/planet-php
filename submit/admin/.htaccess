@@ -1,6 +1,0 @@
-deny from all
-AuthType Basic
-AuthName "Planet PHP"
-AuthUserFile /var/www/planet-php.org/www/submit/admin/.htpasswd
-Satisfy any
-require valid-user

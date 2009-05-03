@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+    <map:components>
+        <map:schemes>
+            <map:scheme name="config" path="BX_PROJECT_DIR:///inc/config.inc.php" global="yes" variable="BX_config"/>
+        </map:schemes>
+    </map:components>
+
+    <map:pipelines>
+
+        <!-- pipeline for theme files -->
+        <map:pipeline>
+            <map:match matchtype="regex" type="uri" pattern="#themes/*(.*)#">
+                <map:read type="resource" src="BX_PROJECT_DIR://themes/{config://theme}/{1}" mime-type="auto"/>
+            </map:match>
+        </map:pipeline>
+<!--        <map:pipeline>
+            <map:match type="uri" pattern="blog/*">
+                <map:generate type="s9y" src="{1}"/>
+                <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/blog.xsl"/>
+                <map:transform type="tidy">
+                    <map:parameter name="remove-xmlns" value="true"/>
+                </map:transform>
+                <map:serialize type="xhtml">
+                    <map:parameter name="stripScriptCDATA" value="true"/>
+                    <map:parameter name="obfuscateMail" value="true"/>
+                </map:serialize>
+
+
+            </map:match>
+           
+
+        </map:pipeline>
+-->
+         
+         <!--
+
+        <map:pipeline>
+            <map:match type="uri" pattern="*.jpg">
+                <map:read type="resource" mime-type="auto" src="BX_PROJECT_DIR:///data/{1}.jpg"/>
+            </map:match>
+        </map:pipeline>
+   -->
+
+                
+        <map:pipeline>
+                
+                  <map:select matchtype="regex" type="uri"> 
+                <map:when test="#^/*user#">
+                       <map:act type="openid">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="tagsList" value="yes"/>
+                            
+                            <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
+                            <map:parameter name="tag" value="{1}"/>
+                            <map:parameter name="postsPerPage" value="100"/>
+                        </map:generate>
+                        </map:act>
+                    
+                </map:when>
+                </map:select>
+                </map:pipeline>
+
+        <map:pipeline>
+            <map:select matchtype="regex" type="uri">
+            
+                <map:when test="#^/*search#">
+                    <map:match type="uri" pattern="search/*">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                           <!-- <map:parameter name="feedsList" value="yes"/>-->
+                            <map:parameter name="tagsList" value="yes"/>
+                            <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
+                            <map:parameter name="search" value="{1}"/>
+                            <map:parameter name="linksList" value="yes"/>
+                        <map:parameter name="postsPerPage" value="100"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                
+                
+                
+                 
+                <map:when test="#^/*tag#">
+                    <map:match type="uri" pattern="tag/*">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="tagsList" value="yes"/>
+                            
+                            <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
+                            <map:parameter name="tag" value="{1}"/>
+                            <map:parameter name="postsPerPage" value="100"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                  
+        
+                 <map:when test="#^/*(atom|rss|rdf|georss|kml)/tag#">
+                    <map:match type="uri" pattern="tag/*">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="tag" value="{1}"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                
+                <map:when test="#^/*(atom|rss|rdf|georss|kml)/search#">
+                    <map:match type="uri" pattern="search/*">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="search" value="{1}"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                
+                
+                <map:when test="#^/*(atom|rss|rdf|georss|kml)/tag#">
+                    <map:match type="uri" pattern="tag/*">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="tag" value="{1}"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                
+                  <map:when test="#^/*(atom|rss|rdf|georss|kml)/#">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                           
+                        </map:generate>
+                    
+                </map:when>
+                
+              
+                <map:when test="#^/*(l/|)moreinfo#">
+                    <map:match type="uri" matchtype="regex" pattern="#moreinfo/*([^/]*)/*([^/]*)#">
+                        <map:generate type="planetmore">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="blog" value="{1}"/>
+                            <map:parameter name="entry" value="{2}"/>
+                            
+                        
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                
+                <map:when test="#^/*(l/|)moretext#">
+                    <map:match type="uri" matchtype="regex" pattern="#moretext/*([^/]*)#">
+                        <map:generate type="planetch">
+                            <map:parameter name="db" value="config://dsn"/>
+                           <map:parameter name="search" value="pid:{1}"/>
+                         <map:parameter name="startEntry" value="0"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+                  <map:when test="#^/*s/(.*)#">
+                    <map:match type="uri" matchtype="regex" pattern="#^/*s/(.*)#">
+                        <map:generate type="xmlfile" src="static/{1}"/>
+                     </map:match>
+                            
+                </map:when>
+              
+                
+                
+                <map:otherwise>
+                    <map:generate type="planetch">
+                        <map:parameter name="db" value="config://dsn"/>
+                        <map:parameter name="tagsList" value="yes"/>
+                        <map:parameter name="linksList" value="yes"/>
+                            
+                        <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
+                        <map:parameter name="search" value="phpglobals://_GET[search]"/>
+                     <map:parameter name="postsPerPage" value="78"/>
+                    </map:generate>
+                </map:otherwise>
+            </map:select>
+            <map:select type="phpglobalvars" var="GET" key="XML">
+                <map:when test="1">
+                    <map:serialize type="xml"/>
+                </map:when>
+
+                <map:otherwise>
+                    <map:select matchtype="regex" type="uri">
+                        <map:when test="#^/*rss#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/rss091.xsl"/>
+                            <map:serialize type="xml"/>
+                        </map:when>
+                        <map:when test="#^/*rdf#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/rss1.xsl"/>
+                            <map:serialize type="xml"/>
+                        </map:when>
+                        <map:when test="#^/*atom#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/atom1.xsl">
+                                <map:parameter type="options" name="registerPhpFunctions" value="true"/>
+                            </map:transform>
+                            <map:serialize type="xml"/>
+                        </map:when>
+                        <map:when test="#^/*georss#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/georss.xsl">
+                                <map:parameter type="options" name="registerPhpFunctions" value="true"/>
+				</map:transform>
+                            <map:serialize type="xml"/>
+                        </map:when>
+
+                        <map:when test="#^/*kml#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/georss.xsl">
+                                <map:parameter type="options" name="registerPhpFunctions" value="true"/>
+				</map:transform>
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/rss2kml.xsl">
+                                <map:parameter type="options" name="registerPhpFunctions" value="true"/>
+				</map:transform>
+                            <map:serialize type="xml" contentType="application/vnd.google-earth.kml+xml" />
+                        </map:when>
+
+
+                        <map:when test="#^/*(l/|)moreinfo#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/moreinfo.xsl">
+                            <map:parameter name="webroot" value="config://webroot" />
+                            </map:transform>
+                            <map:serialize type="xhtml"/>
+                        </map:when>
+
+                        <map:when test="#^/*(l/|)moretext#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/moretext.xsl">
+                            <map:parameter name="webroot" value="config://webroot" />
+                            </map:transform>
+                            <map:serialize type="xhtml"/>
+                        </map:when>
+                        <map:when test="#^/*s/#">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/static.xsl">
+                            <map:parameter name="webroot" value="config://webroot" />
+                            </map:transform>
+                            <map:serialize type="xhtml"/>
+                        </map:when>
+
+                        
+            
+                        
+                        <map:otherwise>
+                        <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/list-list.xsl">
+                                <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
+                                <map:parameter name="webroot" value="config://webroot" />
+                                <map:parameter type="options" name="registerPhpFunctions" value="true"/>
+                            </map:transform>
+                            <map:transform type="tidy"/>
+                            <map:serialize type="xhtml" contentType="text/html; charset=utf-8">
+                                <map:parameter name="stripScriptCDATA" value="true"/>
+
+                                <map:parameter name="obfuscateMail" value="true"/>
+                            </map:serialize>
+                            
+                        </map:otherwise>
+                        -->
+                    </map:select>
+
+                </map:otherwise>
+            </map:select>
+
+        </map:pipeline>
+
+
+    </map:pipelines>
+
+</map:sitemap>
