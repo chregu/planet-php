@@ -6,10 +6,6 @@ AddDefaultCharset utf-8
 php_value default_charset utf-8
 
 RewriteEngine On
-RewriteRule blog/rss.php ./s9y/rss.php [L]
-RewriteRule blog/serendipity_xmlrpc.php ./s9y/serendipity_xmlrpc.php [L]
-RewriteRule blog/templates/(.+) ./s9y/templates/$1 [L]
-RewriteRule blog/pixel/(.+) ./s9y/pixel/$1 [L]
 
 RewriteCond     %{REQUEST_URI}  !^/*themes/planet-whatever/.*
 RewriteCond     %{REQUEST_URI}  !^/*themes/standard/.*
@@ -30,7 +26,6 @@ RewriteCond     %{REQUEST_URI}  !^.*osd.xml
 RewriteCond     %{REQUEST_URI}  !^.*map.php
 RewriteCond     %{REQUEST_URI}  !^.*info.php
 RewriteCond     %{REQUEST_URI}  !^.*robots.txt
-RewriteCond     %{REQUEST_URI}  !^/*s9y/
 RewriteCond     %{REQUEST_URI}  !^.*admin/
 RewriteCond     %{REQUEST_URI}  !^.*_vti_.*
 RewriteCond     %{REQUEST_URI}  !favicon.ico
