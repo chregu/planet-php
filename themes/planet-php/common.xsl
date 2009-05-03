@@ -84,7 +84,8 @@
                 
 <a class="blogLinkPad" href="http://blog.liip.ch/archive/2005/05/26/planet-php-faq.html">Planet PHP FAQ</a>
 <a class="blogLinkPad" href="/submit/">Add your PHP blog</a>
-                <a class="blogLinkPad" href="http://svn.bitflux.ch/repos/public/planet-php/trunk/">Subversion Repository</a>
+                <a class="blogLinkPad" href="http://github.com/chregu/planet-php/">Code on GitHub</a>
+<!--                <a class="blogLinkPad" href="http://svn.bitflux.ch/repos/public/planet-php/trunk/">Subversion Repository</a>-->
             </fieldset>
 
         </div>
