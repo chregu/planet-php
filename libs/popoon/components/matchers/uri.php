@@ -37,7 +37,7 @@ class popoon_components_matchers_uri extends popoon_components_matcher
 
 	function match($value)
     {
-		return $this->_match($value,$this->sitemap->uri);
+        return $this->_match($value,$this->sitemap->uri);
 	}
 	
 	function getVarName()

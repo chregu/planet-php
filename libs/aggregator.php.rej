@@ -1,21 +1,100 @@
 ***************
-*** 261,269 ****
-          $id =  $this->mdb->nextID("planet");
-          $query = "insert into blogs (ID,title,link,description) VALUES (".
-          $id . ",'" .
--         mysql_escape_string($channel['title']) . "','" .
-          mysql_escape_string($channel['link']) . "','" .
--         mysql_escape_string($channel['description']) . "')";
-          $res = $this->mdb->query($query);
-          if (MDB2::isError($res)) {
-              print "DB ERROR: ". $res->getMessage() . "\n". $res->getUserInfo(). "\n";
---- 261,269 ----
-          $id =  $this->mdb->nextID("planet");
-          $query = "insert into blogs (ID,title,link,description) VALUES (".
-          $id . ",'" .
-+         mysql_escape_string(utf2entities($channel['title'])) . "','" .
-          mysql_escape_string($channel['link']) . "','" .
-+         mysql_escape_string(utf2entities($channel['description'])) . "')";
-          $res = $this->mdb->query($query);
-          if (MDB2::isError($res)) {
-              print "DB ERROR: ". $res->getMessage() . "\n". $res->getUserInfo(). "\n";
+*** 67,74 ****
+              //loop through feeds
+  
+              foreach ($feed->items as $item) {
+-                 $item['md5']  = $this->generateMD5($item);       
+-                 $feedInDB = $this->getEntry($item['link']);
+                  if (!$feedInDB) {
+                      // check for categroy stuff
+                      // we only do that for new entries 
+--- 66,79 ----
+              //loop through feeds
+  
+              foreach ($feed->items as $item) {
++                 $item['md5']  = $this->generateMD5($item);
++                 if (isset($item['guid'])) {
++                     $guid = $item['guid'];
++                 } else {
++                     $guid = $item['link'];
++                 }
++                 
++                 $feedInDB = $this->getEntry($guid);
+                  if (!$feedInDB) {
+                      // check for categroy stuff
+                      // we only do that for new entries 
+***************
+*** 77,89 ****
+                      }
+                      if ($row['cats']) {
+                          $cats = explode(",",$row['cats']);
+- 			$hit = false;
+- 			foreach ($cats as $cat) {
+- 				if (strpos($item['category'],$cat) !== false) {
+- 					$hit = true;
+- 				}
+- 			}
+- 		
+                          if (!$hit) {
+                              print $item['title'] . " - " . $item['category'] . " not in list\n";
+                              continue;
+--- 82,94 ----
+                      }
+                      if ($row['cats']) {
+                          $cats = explode(",",$row['cats']);
++                         $hit = false;
++                         foreach ($cats as $cat) {
++                             if (strpos($item['category'],$cat) !== false) {
++                                 $hit = true;
++                             }
++                         }
++                         
+                          if (!$hit) {
+                              print $item['title'] . " - " . $item['category'] . " not in list\n";
+                              continue;
+***************
+*** 92,97 ****
+                      // insert it in the db
+                      $this->insertEntry($item, $row['id'], array("newBlog"=>$newBlog));
+                  } else if ($item['md5'] != $feedInDB['md5']) {
+                      $this->updateEntry($item,$feedInDB['id']);
+                  }
+                      
+--- 97,105 ----
+                      // insert it in the db
+                      $this->insertEntry($item, $row['id'], array("newBlog"=>$newBlog));
+                  } else if ($item['md5'] != $feedInDB['md5']) {
++                     print $item['md5'] ."\n";
++                     print $feedInDB['md5'] ."\n";
++                     
+                      $this->updateEntry($item,$feedInDB['id']);
+                  }
+                      
+***************
+*** 167,178 ****
+         
+          $date =  $this->getDcDate($item, $offset);
+          
+-         $query = "insert into entries (ID,feedsID, title,link,description,dc_date, dc_creator, content_encoded, md5) VALUES (".
+          $id . "," .
+          $feedID . ",'" .
+          
+          mysql_escape_string(utf2entities($item['title'])) . "','" .
+          mysql_escape_string(($item['link'])) . "','" .
+          mysql_escape_string(utf2entities($item['description'])) . "','".
+          $date . "','" .
+          $item['dc']['creator'] . "','" .
+--- 177,189 ----
+         
+          $date =  $this->getDcDate($item, $offset);
+          
++         $query = "insert into entries (ID,feedsID, title,link, guid,description,dc_date, dc_creator, content_encoded, md5) VALUES (".
+          $id . "," .
+          $feedID . ",'" .
+          
+          mysql_escape_string(utf2entities($item['title'])) . "','" .
+          mysql_escape_string(($item['link'])) . "','" .
++         mysql_escape_string(($item['guid'])) . "','" .
+          mysql_escape_string(utf2entities($item['description'])) . "','".
+          $date . "','" .
+          $item['dc']['creator'] . "','" .

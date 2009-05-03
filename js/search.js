@@ -1,6 +1,9 @@
   function niceURL () {
             var value=document.getElementById("searchtext").value;
-            window.location.href = "/search/" + value;
+            value = webroot + "search/" + encodeURI(value);
+			value = value.replace(/\+/g,"%252B");
+			
+			window.location.href = value
             return false;
           }
 

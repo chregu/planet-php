@@ -1,0 +1,365 @@
+/* css by sis.slowli.com for *.blogug.ch - all rights reserved */
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #fff url(/themes/planet-whatever/img/bg.gif) no-repeat 780px 160px;
+	background-attachment:fixed;
+	color: #444;
+	font:62.5%/125% Verdana, Arial, Helvetica, Sans-Serif;
+}
+a {
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:visited {}
+a:hover {
+	border-bottom: 1px solid #f00;
+}
+#wrap {
+	width: 770px;
+	margin: 40px 0 0 0;
+    
+}
+#header {
+	display: block;
+}
+h1 {
+	float: left;
+	width: 190px;
+}
+h1 a, h1 a:hover {
+	display: block;
+	width: 51px;
+	height: 102px;
+	background: url(/themes/planet-whatever/img/blogug.png) no-repeat top left;
+	border-bottom: 0;
+}
+h1 a span {
+	display: none;
+}
+ul#nav {
+	list-style: none;
+	padding: 60px 0 0 0;
+}
+ul#nav li {
+	float: left;
+}
+ul#nav li a {
+	display: block;
+	width: 100px;
+	padding: 25px 0 2px 6px;
+	border-right: 1px dotted #aaa;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	color: #666;
+	text-decoration: none;
+}
+ul#nav li.first-child a {
+	border-left: 1px dotted #aaa;
+}
+ul#nav li a.current {
+	border-right: 1px dotted #888;
+	background: #f3f3f3;
+	color: #333;
+}
+ul#nav li a:hover {
+	border-right: 1px dotted #888;
+	border-bottom: 0;
+	background: #eee;
+	color: #333;
+}
+#content {
+	clear: both;
+	padding: 5px 0 0 0;
+}
+#navigation {
+	clear: both;
+	width: 190px;
+	float: left;
+    margin-top: 20px;
+}
+ul.subnav {
+	width: 170px;
+	margin: 20px 0 0 0;
+}
+ul.subnav {
+	list-style: none;
+	width: 170px;
+}
+ul.subnav li {
+	display: inline; /* IE, pff */
+}
+ul.subnav li a {
+	display: block;
+	padding: 0 0 0 25px;
+	border-bottom: 1px dotted #aaa;
+	font-size: 1.0em;
+	line-height: 1.6em;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	color: #888;
+	text-decoration: none;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px 3px;
+}
+ul.subnav li a:hover {
+	border-bottom: 1px dotted #888;
+	color: #666;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px -27px;
+}
+ul.subnav li a.current {
+	border-bottom: 1px dotted #888;
+	color: #666;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px -57px;
+	cursor: default;
+}
+ul.miscnav {
+	list-style: none;
+	width: 170px;
+	margin: 40px 0 0 0;
+}
+ul.miscnav li {
+	text-align: center;
+	}
+ul.miscnav li a {
+	color: #666;
+	text-decoration: none;	
+}
+#contentxt {
+	margin: 0 0 0 190px;
+	padding: 20px 0 0 0;
+}
+#content p {
+	margin: 0 0 10px 0;
+}
+table {
+	background:#f9f9f9;
+	border-collapse:collapse;
+	width:99%;
+	border:5px solid #f9f9f9;
+	margin: 5px 0 10px 0;
+ 	font-size:1em;
+	width: 570px;
+}
+table a {
+	font-weight: normal;
+}
+thead th {
+	padding: .5em 1em;
+ 	border-bottom:1px dotted #FFF;
+ 	font-size:1.2em;
+ 	text-align:left;
+	background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+}
+td {
+	padding:.5em 1em;
+}
+tbody tr.odd td {
+	background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+}
+tfoot td {
+	padding-bottom:1.5em;
+}
+col.odd {
+	background-color:#f3f3f3;
+}
+#footer {
+	clear: both;
+	padding: 50px 0 2px 0;
+}
+#footer p {
+	margin: 0 0 0 190px;
+}
+
+input {
+        border: 1px #888 solid;
+}        
+
+h2 {
+    padding-bottom: 1em;
+}
+
+
+
+
+
+/* additions by chregu */
+table a.nounder, table a.nounder:hover {
+    border-bottom: none;
+}
+
+table tr.subtitle td, table tr.subtitle td a {
+    font-weight: bold;   
+}
+
+table .r {
+    text-align: right;
+}
+
+
+input {
+        border: 1px #888 solid;
+}
+
+h2 {
+    padding-bottom: 1em;   
+}
+
+#navigation .menu a {
+    font-weight: normal;
+    border-bottom: 1px  solid transparent;
+}
+
+#navigation .menu a:hover {
+    	border-bottom: 1px solid #f00;
+}
+
+.blogLinkPad {
+ margin-left: 10px;
+ display: block;
+}
+
+fieldset
+{
+	margin: 0;
+	padding: 1em 2em;
+    margin-bottom: 2em;
+	border:  #aaa dotted 1px;
+	text-align: left;
+    
+    
+}
+
+.menu fieldset {
+    
+    padding-left: 1em;   
+    border: 0px;
+    border-bottom: 1px dotted #aaa;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    
+}
+
+
+legend,  .blogTitle
+{
+	padding: 0px 3px;
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+    overflow: hidden;
+    
+    
+    
+}
+
+
+
+.blogTitle {
+    font-size: 12px;
+    text-decoration: none;
+    color: #000000;
+    
+}
+
+.menu legend, .buttons legend {
+    color: #000000;
+    background-color: white;
+    font-size: 9px;
+    padding: 0px 0px;
+}
+
+.box {
+    
+    margin-bottom: 2em;
+    font-size: 11px;
+}
+
+.box h3, .morediv h5{
+    padding: 2px 3px 2px 5px;
+    
+	color: #000000;
+	font-size: 13px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+    overflow: hidden;
+    background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+    
+}
+
+#content .box h4 {
+    padding: 4px 3px;
+	color: #000000;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    line-height: 2em;    
+    
+}
+
+.morediv h6 {
+    background-image: none;
+    font-size: 13px;
+    background-color: #f3f3f3;
+    letter-spacing: normal;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 2px 0px 2px 4px;
+    font-weight: normal;
+    
+}
+
+.morediv div {
+    padding-left: 4px;
+}
+
+.morediv p {
+    padding-left: 4px;
+}
+
+.box h4 a {
+    font-size: 15px;
+}
+
+.box h3 a, .box legend a, .menu legend a { 
+color: #000000;
+text-decoration: none; 
+
+}
+
+.box .feedcontent {
+   
+    margin-bottom: 1em;
+    padding-left: 1em;
+    
+}
+
+
+#content .box p.date {
+     text-align: right;
+     margin-bottom: 1px;
+     padding-bottom: 0px;
+    
+}
+
+.box p.more,.box p.planetLinks, .box .morediv {
+      padding-left: 1em;
+}
+
+
+.box legend a:hover, .menu legend a:hover {
+    text-decoration: underline;
+}
+
+
+.gallBig {
+     display: none; 
+     z-index: 10; 
+     left: 180px; 
+     position: absolute;
+}

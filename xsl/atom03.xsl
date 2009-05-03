@@ -2,40 +2,43 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" indent="yes" omit-xml-declaration="no"/>
 
-    <xsl:param name="channelLink" select="'http://planet-php.net'"/>
-    <xsl:param name="channelTitle" select="'Planet PHP'"/>
-    <xsl:param name="channelDescription" select="'People blogging about PHP'"/>
+    <xsl:param name="channelLink" select="'http://planet.chregu.tv/'"/>
+    <xsl:param name="channelTitle" select="'Planet Ping'"/>
+    <xsl:param name="channelDescription" select="'Blgos which ping ping.blogug.ch'"/>
 
 
     <xsl:template match="/">
-        <feed version="0.3" xml:lang="en-GB" xmlns="http://purl.org/atom/ns#">
+
+ <feed xmlns="http://www.w3.org/2005/Atom">
+
             <title>
                 <xsl:value-of select="$channelTitle"/>
             </title>
             <link rel="alternate" type="text/html" href="{$channelLink}"/>
-            <tagline>
+            <link rel="self" type="text/html" href="{$channelLink}atom/"/>
+            <subtitle>
                 <xsl:value-of select="$channelDescription"/>
-            </tagline>
+            </subtitle>
             <id>
                 <xsl:value-of select="$channelLink"/>
             </id>
-            <generator url="http://planet-php.net/">
-            Planet PHP Aggregator
+            <generator uri="http://planet-php.net/">
+            Planet Ping Aggregator
             </generator>
             <!--<copyright type="text/plain" mode="escaped">All rights reserved, all wrongs reversed. Bring lawyers, guns, and money</copyright>
             -->
 
-            <modified>
+            <updated>
                 <xsl:value-of select="/planet/entries/entry[1]/date_iso"/>
-            </modified>
+            </updated>
 
             <xsl:apply-templates select="/planet/entries/entry"/>
         </feed>
     </xsl:template>
 
     <xsl:template match="entries/entry">
-        <entry>
-            <title type="text/plain" mode="escaped">
+        <entry xmlns="http://www.w3.org/2005/Atom">
+            <title type="text">	
        <xsl:value-of select="title"/>
        </title>
             <link rel="alternate" type="text/html" href="{link}" title="{title}"/>
@@ -53,12 +56,12 @@
 </name>
             </author>
             <id> 
-            <xsl:value-of select="link"/>
+            <xsl:value-of select="guid"/>
             </id>
-            <modified> <xsl:value-of select="date_iso"/></modified>
-            <issued><xsl:value-of select="date_iso"/></issued>
+            <updated> <xsl:value-of select="date_iso"/></updated>
+            <published><xsl:value-of select="date_iso"/></published>
           
-            <content type="text/html" mode="escaped">
+            <content type="html">
             <xsl:call-template name="description"/>
             </content>
         </entry>

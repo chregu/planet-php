@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>search options</title>
+</head>
+<body>
+<h2>Search Options</h2>
+<h3>Fulltext Search</h3>
+<p>Fulltext search in content and title: <a href="http://planet.blogug.ch/search/Liip">Liip</a></p>
+
+<p>We use the <a href="http://dev.mysql.com/doc/refman/4.1/en/fulltext-boolean.html">MySQL boolean fulltext search</a> for that, so you can use all those parameters here, but forget about the relevancy stuff, we always order the output by date.</p>
+<p><em>Examples</em>:<br/>
+
+Find rows that contain at least one of the two words: <a href="http://planet.blogug.ch/search/Liip%20blog">Liip blog</a><br/>
+
+Find rows that contain both words "Liip" and "blog": <a href="http://planet.blogug.ch/search/%252BLiip%20%252Bblog">+Liip +blog</a><br/>
+Find rows that contain the word “Liip” but not “blog”: <a href="http://planet.blogug.ch/search/%252BLiip%20-blog">+Liip -blog</a>
+<br/>
+Find rows that contain the exact phrase “Liip blog”: <a href="http://planet.blogug.ch/search/%22Liip%20blog%22">"Liip blog"</a>
+</p>
+<h3>No paid postings</h3>
+Just add <em>publireport=off</em> to your search URL and paid postings from well-known companies don't show up anymore.
+<h3>Tags</h3>
+<h4>tag/</h4>
+<p>
+Search all posts with a certain tag<br/>
+<em>Example</em>: <a href="http://planet.blogug.ch/tag/bloggertreffen">/tag/bloggertreffen</a>
+</p>
+<p>
+Search all posts with two tags<br/>
+<em>Example</em>: <a href="http://planet.blogug.ch/tag/bloggertreffen+zurich">/tag/bloggertreffen+zurich</a>
+</p>
+<p>
+Search all posts with an exact tag<br/>
+<em>Example</em> <a href="http://planet.blogug.ch/tag/%21politics">/tag/!politik</a>
+</p>
+<p>
+The last one is needed, since I introduced taggroups (that's what usually is displayed in the right column). "politik" and "politics" build the taggroup "politics", so if you search for /tag/politik or /tag/politics all posts tagged as "politics" or "politik" are displayed (with both queries). But if you search for /tag/!politik really only posts with "politik" are shown and not those with "politics".
+</p>
+<h4>btag:</h4>
+<p>Searches all posts from a blog with a certain tag from <a href="http://list.blogug.ch">list.blogug.ch</a>.</p>
+<p><em>Examples</em>:<br/>
+<a href="http://planet.blogug.ch/search/btag:politics">politics</a>, <a href="http://planet.blogug.ch/search/btag:Liip">Liip</a>, 
+<a href="http://planet.blogug.ch/search/btag:namics_alumni">namics_alumni</a>
+</p>
+
+<h3>URLs</h3>
+<h4>site:</h4>
+<p>
+Search all posts from a site/blog<br/>
+<em>Example</em>: <a href="http://planet.blogug.ch/search/site:blog.Liip.ch">site:blog.Liip.ch</a>
+</p>
+<h4>inurl:</h4>
+<p>
+Search all posts with "something" in the entry link<br/>
+<em>Example</em>: <a href="http://planet.blogug.ch/search/inurl:klum">inurl:klum</a></p>
+<h3>Links</h3>
+<h4>link:</h4>
+<p>
+Search all posts, which link to a site/blog<br/>
+<em>Example</em>: 
+<a href="http://planet.blogug.ch/search/link:blog.Liip.ch">link:blog.Liip.ch</a>
+</p>
+<h4>linkex:</h4>
+<p>
+Search all posts, which link to an entry<br/>
+<em>Example</em>: <a href="http://planet.blogug.ch/search/linkex:www.sequenz.ch/blog/archive/2006/01/18/spontanes-zuercher-feierabend-bloggertreffen-2.html">linkex:www.sequenz.ch/blog/archive/[...]bloggertreffen-2.html</a>
+</p>
+
+<h3>Language</h3>
+<h4>lang:</h4>
+<p>You can search for posts only written in a certain language (only german, english, french and italian are supported right now). It's an automatic detection, so won't be correct 100% of the time:
+<br/>
+<em>Examples</em><br/>
+German: <a href="http://planet.blogug.ch/search/lang:de">lang:de</a><br/>
+English: <a href="http://planet.blogug.ch/search/lang:en">lang:en</a><br/>
+French: <a href="http://planet.blogug.ch/search/lang:fr">lang:fr</a><br/>
+Italian: <a href="http://planet.blogug.ch/search/lang:it">lang:it</a>
+</p>
+<p>More info about this <a href="http://blog.Liip.ch/archive/2006/03/09/search-by-language-on-planet-switzerland.html">here</a>.</p>
+<h3>Location</h3>
+
+<p>
+Search by city or canton (defined by the geolocation information provided in blogs)</p>
+
+
+<p><em>Examples</em><br/>
+<a href="http://planet.blogug.ch/search/city:Z%C3%BCrich">city:Zürich</a>, 
+<a href="http://planet.blogug.ch/search/city:Bern">city:Bern</a>, 
+<a href="http://planet.blogug.ch/search/city:Sankt%20Gallen">city:Sankt Gallen</a><br/>
+<a href="http://planet.blogug.ch/search/canton:Z%C3%BCrich">canton:Zürich</a>, 
+<a href="http://planet.blogug.ch/search/canton:Bern">canton:Bern</a>, 
+<a href="http://planet.blogug.ch/search/canton:Sankt%20Gallen">canton:Sankt Gallen</a></p>
+<p>More info about this <a href="http://blog.Liip.ch/archive/2006/02/28/planet-switzerland-goes-local.html">here</a>.
+</p>
+
+<h3>Blog ID</h3>
+<h4>id:</h4>
+<p>Each blog listed on <a href="http://list.blogug.ch">list.blogug.ch</a> has an unique ID and you can search with that as well.<br/>
+<em>Example:</em> <a href="http://planet.blogug.ch/search/id:24">id:24</a>
+</p>
+
+<h3>Microformats</h3>
+<h4>micro:calendar<br/>
+micro:card<br/>
+micro:listing<br/>
+micro:review<br/>
+micro:formats</h4>
+<p>
+You can search for <a href="http://microformats.org">microformats</a>-annotated blog posts
+</p>
+<p><em>Examples</em><br/>
+<a href="http://planet.blogug.ch/search/micro:calendar">micro:calendar</a>
+<a href="http://planet.blogug.ch/search/micro:card">micro:card</a>
+<a href="http://planet.blogug.ch/search/micro:listing">micro:listing</a>
+<a href="http://planet.blogug.ch/search/micro:review">micro:review</a><br/>
+<a href="http://planet.blogug.ch/search/micro:formats">micro:formats</a> (all)
+</p>
+
+<h4>micro:podcast</h4>
+<p>Not really a microformat, but I didn't find a better category. Search for all podcasts.</p>
+<p><em>Examples</em><br/>
+<a href="http://planet.blogug.ch/search/micro:podcast">micro:podcast</a>
+</p>
+<h3>Top Talk</h3>
+
+<p>
+Bored with reading blog posts which noone else interests? Just want to read, what everyone else is talking about and how they do it? Then look no further than <a href="http://planet.blogug.ch/search/top:talk">top:talk</a> (or as <a href="http://planet.blogug.ch/atom/search/top:talk">Atom-Feed</a>) :) It just shows all the recent blogposts, which link to the "Top Links last 7 days" from the right side (and the Top Linked-to post itself) and leaves out the boring rest :)</p>
+<h2>Combining searches</h2>
+
+<p>"and" and "or" are supported for combining search queries.<br/>
+ For example <a href="http://planet.blogug.ch/search/inlink:Liip.ch%20or%20inlink:blogug.ch">inlink:Liip.ch or inlink:blogug.ch</a> shows all the blog posts, which link to something with Liip.ch or blogug.ch in their links.</p>
+<p> Parenthesis don't work yet, btw...</p>
+<p>If you do a fulltext search, you don't have to add "or" and "and", eg. "<a href="http://planet.blogug.ch/search/Liip%20blogug">Liip blogug</a>" searches for all posts containing the word "Liip" or "blogug", on the other hand "<a href="http://planet.blogug.ch/search/%252BLiip%20%252Bblogug">+Liip +blogug</a>" searches for all posts, which contain both terms. "and/or" does work, too, but is much slower on the DB server side"</p>
+<h2>Feeds</h2>
+<p>All the output is also available as Atom or RSS feed, just prepend the URL with /atom/ or /rss/, eg: <a href="http://planet.blogug.ch/atom/search/link:blog.Liip.ch">/atom/search/link:blog.Liip.ch</a>
+</p>
+</body>
+</html>

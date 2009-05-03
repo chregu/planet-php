@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://purl.org/rss/1.0/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-    <xsl:output method="xml" indent="yes" omit-xml-declaration="no"/>
+<xsl:import href="../inc/options.xsl"/>
+    
+<xsl:output method="xml" indent="yes" omit-xml-declaration="no"/>
 
-    <xsl:param name="channelLink" select="'http://planet-php.net'"/>
-    <xsl:param name="channelTitle" select="'Planet PHP'"/>
-    <xsl:param name="channelDescription" select="'People blogging about PHP'"/>
 
 
 
@@ -53,6 +52,8 @@
 
         <item rdf:about="{link}">
             <title>
+               <xsl:if test="haswerbung/text() = 1"><xsl:value-of select="$sponsoredEntries"/> </xsl:if>
+
                 <xsl:value-of select="title"/>
             </title>
             <link>

@@ -75,9 +75,7 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             }
         }
 
-        if (class_exists("tidy")) {
-            $tidy = new tidy();
-        }
+            $tidy = new Tidy();
         if(!$tidy) {
             throw new Exception("Something went wrong with tidy initialisation. Maybe you didn't enable ext/tidy in your PHP installation. Either install it or remove the tidy transformer from your sitemap.xml");
         }

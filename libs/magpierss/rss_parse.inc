@@ -22,25 +22,25 @@
  *   - Magpie is based on expat, an XML parser, and therefore will only parse
  *     valid XML files.  This includes all properly constructed RSS or Atom.
  *
- *   - Magpie is an inclusive parser.  It will include any elements that 
- *     it can turn into a key value pair in the parsed feed object it returns. 
- *      
- *   - Magpie supports namespaces, and will return any elements found in a 
- *     namespace in a sub-array, with the key point to that array being the 
- *     namespace prefix.  
- *     (e.g. if an item contains a <dc:date> element, then that date can 
+ *   - Magpie is an inclusive parser.  It will include any elements that
+ *     it can turn into a key value pair in the parsed feed object it returns.
+ *
+ *   - Magpie supports namespaces, and will return any elements found in a
+ *     namespace in a sub-array, with the key point to that array being the
+ *     namespace prefix.
+ *     (e.g. if an item contains a <dc:date> element, then that date can
  *     be accessed at $item['dc']['date']
- *      
- *   - Magpie supports nested elements by combining the names.  If an item 
+ *
+ *   - Magpie supports nested elements by combining the names.  If an item
  *     includes XML like:
  *      <author>
  *        <name>Kellan</name>
  *      </author>
- *      
+ *
  *    The name field is accessible at $item['author_name']
- *  
+ *
  *   - Magpie makes no attempt validate a feed beyond insuring that it
- *     is valid XML.   
+ *     is valid XML.
  *     RSS validators are readily available on the web at:
  *       http://feeds.archive.org/validator/
  *       http://www.ldodds.com/rss_validator/1.0/validator.html
@@ -61,7 +61,7 @@
  *   <ev:location>Northampton, MA</ev:location>
  *   <ev:type>Protest</ev:type>
  * </item>
- * 
+ *
  * Would transform it into the following associative array, and push it
  * onto the array $rss-items
  *
@@ -119,9 +119,9 @@ class MagpieRSS {
 	 *
 	 * see: rss_fetch.inc for a simpler interface
 	 */
-	 
+
 	var $parser;
-	
+
 	var $current_item	= array();	// item currently being parsed
 	var $items			= array();	// collection of parsed items
 	var $channel		= array();	// hash of channel fields
@@ -134,41 +134,45 @@ class MagpieRSS {
 	var $stack				= array(); // parser stack
 	var $inchannel			= false;
 	var $initem 			= false;
-	var $incontent			= false; // if in Atom <content mode="xml"> field 
+	var $incontent			= false; // if in Atom <content mode="xml"> field
 	var $intextinput		= false;
 	var $inimage 			= false;
 	var $current_field		= '';
 	var $current_namespace	= false;
-	
-	
-	var $namespaces = array(   'http://purl.org/rss/1.0/'=>'', 
+
+
+	var $namespaces = array(   'http://purl.org/rss/1.0/'=>'',
                                RDFNS=>'rdf',
                                'http://purl.org/dc/elements/1.1/'=>'dc' ,
-                               'http://purl.org/rss/1.0/modules/syndication/'=>'sy', 
+                               'http://purl.org/rss/1.0/modules/syndication/'=>'sy',
                                'http://webns.net/mvcb/'=>'admin' ,
-                               'http://purl.org/rss/1.0/modules/content/'=>'content'
-); 
-	
-	
+                               'http://purl.org/rss/1.0/modules/content/'=>'content',
+                               'http://www.w3.org/2003/01/geo/wgs84_pos#'=>'geo',
+                               'http://www.w3.org/2005/atom' => 'atom',
+                               'http://wellformedweb.org/CommentAPI/' => 'wfw'
+);
+    var $seperateContentNS = array(":category","dc:subject");
+    var $seperateContent = array("category");
+
+
 	var $ERROR = "";
-	
+
 	var $_CONTENT_CONSTRUCTS = array('content', 'summary', 'info', 'title', 'tagline', 'copyright');
 /*======================================================================*\
 	Function: MagpieRSS
 	Purpose:  Constructor, sets up XML parser,parses source,
-			  and populates object.. 
+			  and populates object..
 	Input:	  String containing the RSS to be parsed
 \*======================================================================*/
 	function MagpieRSS ($source) {
-		
 		# if PHP xml isn't compiled in, die
 		#
 		if (!function_exists('xml_parser_create')) {
-			$this->error( "Failed to load PHP's XML Extension. " . 
+			$this->error( "Failed to load PHP's XML Extension. " .
 						  "http://www.php.net/manual/en/ref.xml.php",
 						   E_USER_ERROR );
 		}
-		
+
 		$parser = @xml_parser_create_ns("UTF-8","@");
 		xml_parser_set_option($parser,XML_OPTION_CASE_FOLDING,false);
 		if (!is_resource($parser))
@@ -178,20 +182,28 @@ class MagpieRSS {
 						  E_USER_ERROR );
 		}
 
-		
+
+
 		$this->parser = $parser;
-		
+
 		# pass in parser, and a reference to this object
 		# setup handlers
 		#
 		xml_set_object( $this->parser, $this );
-		xml_set_element_handler($this->parser, 
+		xml_set_element_handler($this->parser,
 				'feed_start_element', 'feed_end_element' );
-						
-		xml_set_character_data_handler( $this->parser, 'feed_cdata' ); 
-	
-		$status = xml_parse( $this->parser, $source );
-		
+
+		xml_set_character_data_handler( $this->parser, 'feed_cdata' );
+        $sourcenew = preg_replace("#^[^<]*#Du","",$source);
+	if ($sourcenew) {
+		$source = $sourcenew;
+	}
+        $dom = new domdocument();
+        $dom->recover = true;
+        $dom->loadXML($source);
+        $source = $dom->saveXML();
+        $status = xml_parse( $this->parser, $source );
+
 		if (! $status ) {
 			$errorcode = xml_get_error_code( $this->parser );
 			if ( $errorcode != XML_ERROR_NONE ) {
@@ -203,26 +215,25 @@ class MagpieRSS {
 				$this->error( $errormsg );
 			}
 		}
-		
+
 		xml_parser_free( $this->parser );
 
 		$this->normalize();
 	}
-	
+
 	function feed_start_element($p, $element, &$attrs) {
 		$el = $element = strtolower($element);
 		$attrs = array_change_key_case($attrs, CASE_LOWER);
-		
 		// check for a namespace, and split if found
 		$ns	= false;
 		if ( strpos( $element, '@' ) ) {
-			list($ns, $el) = split( '@', $element, 2); 
+			list($ns, $el) = split( '@', $element, 2);
 		}
 		if ( $ns and $ns != RDFNS) {
-			
+
 			$this->current_namespace = $this->namespaces[$ns];
 		}
-			
+
 		# if feed type isn't set, then this is first element of feed
 		# identify feed from root element
 		#
@@ -242,37 +253,37 @@ class MagpieRSS {
 			}
 			return;
 		}
-	
-		if ( $el == 'channel' ) 
+
+		if ( $el == 'channel' )
 		{
 			$this->inchannel = true;
 		}
-		elseif ($el == 'item' or $el == 'entry' ) 
+		elseif ($el == 'item' or $el == 'entry' )
 		{
 			$this->initem = true;
 			if ( isset($attrs[RDFNS.'@about']) ) {
-				$this->current_item['about'] = $attrs[RDFNS.'@about'];	
+				$this->current_item['about'] = $attrs[RDFNS.'@about'];
 			}
 		}
-		
+
 		// if we're in the default namespace of an RSS feed,
 		//  record textinput or image fields
-		elseif ( 
-			$this->feed_type == RSS and 
-			$this->current_namespace == '' and 
-			$el == 'textinput' ) 
+		elseif (
+			$this->feed_type == RSS and
+			$this->current_namespace == '' and
+			$el == 'textinput' )
 		{
 			$this->intextinput = true;
 		}
-		
+
 		elseif (
-			$this->feed_type == RSS and 
-			$this->current_namespace == '' and 
-			$el == 'image' ) 
+			$this->feed_type == RSS and
+			$this->current_namespace == '' and
+			$el == 'image' )
 		{
 			$this->inimage = true;
 		}
-		
+
 		# handle atom content constructs
 		elseif ( $this->feed_type == ATOM and in_array($el, $this->_CONTENT_CONSTRUCTS) )
 		{
@@ -280,99 +291,123 @@ class MagpieRSS {
 			if ($el == 'content' ) {
 				$el = 'atom_content';
 			}
-			
+
 			$this->incontent = $el;
-			
-			
+
+
 		}
-		
+
+		elseif ($el == 'enclosure') {
+            if (!isset($this->current_item['enclosure'])) {
+                $this->current_item['enclosure'] = array();
+            }
+            $this->current_item['enclosure'][] = $attrs;
+
+		}
 		// if inside an Atom content construct (e.g. content or summary) field treat tags as text
-		elseif ($this->feed_type == ATOM and $this->incontent ) 
+		elseif ($this->feed_type == ATOM and $this->incontent )
 		{
 			// if tags are inlined, then flatten
-			$attrs_str = join(' ', 
-					array_map('map_attrs', 
-					array_keys($attrs), 
+			$attrs_str = join(' ',
+					array_map('map_attrs',
+					array_keys($attrs),
 					array_values($attrs) ) );
-			
+
 			$this->append_content( "<$el $attrs_str>"  );
-					
+
 			array_unshift( $this->stack, $el );
 		}
-		
+
 		// Atom support many links per containging element.
 		// Magpie treats link elements of type rel='alternate'
 		// as being equivalent to RSS's simple link element.
 		//
-		elseif ($this->feed_type == ATOM and $el == 'link' ) 
+		elseif ($this->feed_type == ATOM and $el == 'link' )
 		{
-			if ( isset($attrs['rel']) and $attrs['rel'] == 'alternate' ) 
+			if ( isset($attrs['rel']) and $attrs['rel'] == 'alternate' )
 			{
 				$link_el = 'link';
 			}
 			else {
 				$link_el = 'link_' . $attrs['rel'];
 			}
-			
+
 			$this->append($link_el, $attrs['href']);
+		}
+		elseif ($this->feed_type == RSS and $el =='link' and $this->current_namespace == 'atom' && $attrs['rel'] == 'http://api.friendfeed.com/2008/03#sup') {
+		  //$this->current_item['sup_id'] = $attrs['href'];
+		  $this->current_item[$this->current_namespace][$el] = $attrs['href'];
+		  $this->append('link_sup', $attrs['href']);
 		}
 		// set stack[0] to current element
 		else {
+            if (in_array($this->current_namespace.':'.$el,$this->seperateContentNS)) {
+                if ($this->current_namespace) {
+                    if (isset($this->current_item[$this->current_namespace][$el])) {
+                        $this->current_item[$this->current_namespace][$el] .= " , ";
+                    }
+                } else {
+                    if (isset($this->current_item[$el])) {
+                        $this->current_item[$el] .= " , ";
+                    }
+                    $this->current_item['term'] = $attrs['term'];
+                }
+            }
 			array_unshift($this->stack, $el);
 		}
 	}
-	
 
-	
+
+
 	function feed_cdata ($p, $text) {
-		
-		if ($this->feed_type == ATOM and $this->incontent) 
+
+		if ($this->feed_type == ATOM and $this->incontent)
 		{
 			$this->append_content( $text );
 		}
 		else {
-			
+
 			$current_el = join('_', array_reverse($this->stack));
 			$this->append($current_el, $text);
 		}
 	}
-	
+
 	function feed_end_element ($p, $el) {
 		$el = strtolower($el);
 		if ( strpos( $el, '@' ) ) {
-			list($ns, $el) = split( '@', $el, 2); 
+			list($ns, $el) = split( '@', $el, 2);
 		}
 		if ( $ns ) {
 			$ns = $this->namespaces[$ns];
 		}
-		
-		if ( $el == 'item' or $el == 'entry' ) 
+
+		if ( $el == 'item' or $el == 'entry' )
 		{
-				
+
 			$this->items[] = $this->current_item;
 			$this->current_item = array();
 			$this->initem = false;
 		}
-		elseif ($this->feed_type == RSS and $this->current_namespace == '' and $el == 'textinput' ) 
+		elseif ($this->feed_type == RSS and $this->current_namespace == '' and $el == 'textinput' )
 		{
 			$this->intextinput = false;
 		}
-		elseif ($this->feed_type == RSS and $this->current_namespace == '' and $el == 'image' ) 
+		elseif ($this->feed_type == RSS and $this->current_namespace == '' and $el == 'image' )
 		{
 			$this->inimage = false;
 		}
 		elseif ($this->feed_type == ATOM and in_array($el, $this->_CONTENT_CONSTRUCTS) )
-		{	
+		{
 			$this->incontent = false;
 		}
-		elseif ($el == 'channel' or $el == 'feed' ) 
+		elseif ($el == 'channel' or $el == 'feed' )
 		{
 			$this->inchannel = false;
 		}
 		elseif ($this->feed_type == ATOM and $this->incontent  ) {
 			// balance tags properly
 			// note:  i don't think this is actually neccessary
-			if ( $this->stack[0] == $el ) 
+			if ( $this->stack[0] == $el )
 			{
 				$this->append_content("</$el>");
 			}
@@ -381,23 +416,33 @@ class MagpieRSS {
 			}
 
 			array_shift( $this->stack );
-		}
+		} elseif ($this->feed_type == ATOM and $el == 'category' && $this->current_item['term']) {
+            $this->current_item['category'] .= $this->current_item['term'];
+            array_shift( $this->stack );
+        }
 		else {
 			array_shift( $this->stack );
 		}
-		
+
 		$this->current_namespace = false;
 	}
-	
-	function concat (&$str1, $str2="") {
+
+	function concat (&$str1, $str2="", $initem = false) {
 		if (!isset($str1) ) {
 			$str1="";
 		}
-		$str1 .= $str2;
+        if ($str2 && $str1 && $initem) {
+            $str1 .=  " , " . $str2;
+        } elseif (is_array($str2)) {
+		$str1 = $str2;
+	} else {
+            $str1 .= $str2;
+        }
+
 	}
-	
-	
-	
+
+
+
 	function append_content($text) {
 		if ( $this->initem ) {
 			$this->concat( $this->current_item[ $this->incontent ], $text );
@@ -406,17 +451,17 @@ class MagpieRSS {
 			$this->concat( $this->channel[ $this->incontent ], $text );
 		}
 	}
-	
+
 	// smart append - field and namespace aware
 	function append($el, $text) {
-		if (!$el) {
+        if (!$el) {
 			return;
 		}
-		if ( $this->current_namespace ) 
+		if ( $this->current_namespace )
 		{
-			if ( $this->initem ) {
+            if ( $this->initem ) {
 				$this->concat(
-					$this->current_item[ $this->current_namespace ][ $el ], $text);
+                    $this->current_item[ $this->current_namespace ][ $el ], $text);
 			}
 			elseif ($this->inchannel) {
 				$this->concat(
@@ -448,10 +493,10 @@ class MagpieRSS {
 				$this->concat(
 					$this->channel[ $el ], $text );
 			}
-			
+
 		}
 	}
-	
+
 	function normalize () {
 		// if atom populate rss fields
 		if ( $this->is_atom() ) {
@@ -462,9 +507,9 @@ class MagpieRSS {
 					$item['description'] = $item['summary'];
 				if ( isset($item['atom_content']))
 					$item['content']['encoded'] = $item['atom_content'];
-				
+
 				$this->items[$i] = $item;
-			}		
+			}
 		}
 		elseif ( $this->is_rss() ) {
 			$this->channel['tagline'] = $this->channel['description'];
@@ -474,35 +519,35 @@ class MagpieRSS {
 					$item['summary'] = $item['description'];
 				if ( isset($item['content']['encoded'] ) )
 					$item['atom_content'] = $item['content']['encoded'];
-			
+
 				$this->items[$i] = $item;
 			}
 		}
 	}
-	
+
 	function error ($errormsg, $lvl=E_USER_WARNING) {
 		// append PHP's error message if track_errors enabled
-		if ( $php_errormsg ) { 
+		if ( $php_errormsg ) {
 			$errormsg .= " ($php_errormsg)";
 		}
 		$this->ERROR = $errormsg;
 		if ( MAGPIE_DEBUG ) {
-			trigger_error( $errormsg, $lvl);		
+			trigger_error( $errormsg, $lvl);
 		}
 		else {
 			error_log( $errormsg, 0);
 		}
 	}
-	
+
 	function is_rss () {
 		if ( $this->feed_type == RSS ) {
-			return $this->feed_version;	
+			return $this->feed_version;
 		}
 		else {
 			return false;
 		}
 	}
-	
+
 	function is_atom() {
 		if ( $this->feed_type == ATOM ) {
 			return $this->feed_version;
@@ -522,7 +567,7 @@ class MagpieRSS {
 		}
 		echo "</ol>";
 	}
-	
+
 	function show_channel () {
 		echo "channel:<br>";
 		echo "<ul>";
@@ -531,7 +576,7 @@ class MagpieRSS {
 		}
 		echo "</ul>";
 	}
-	
+
 	function show_item ($item) {
 		echo "item: $item[title]";
 		echo "<ul>";
@@ -552,9 +597,9 @@ class MagpieRSS {
 	}
 
 /*======================================================================*\
-	END DEBUGGING FUNCTIONS	
+	END DEBUGGING FUNCTIONS
 \*======================================================================*/
-	
+
 
 
 } # end class RSS

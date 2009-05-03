@@ -19,7 +19,12 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
 
                 <xsl:call-template name="middlecol"/>
                 <xsl:call-template name="rightcol"/>
-<script language="JavaScript" src="/js/search.js" type="text/javascript">
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-424540-3";
+urchinTracker();
 </script>
             </body>
         </html>
@@ -65,7 +70,6 @@ google_color_text = "000000";
 </fieldset>
 </div>
 -->
-<!--
   <div class="menu">
 <fieldset><legend><a href="http://del.icio.us/tag/php" title="PHP Radar">del.icio.us/tag/php</a></legend>
          <xsl:for-each select="/planet/rdf:RDF/rss:item[position() &lt; 11]">
@@ -79,7 +83,7 @@ google_color_text = "000000";
              </fieldset>
          </div>
        
--->        
+        
 
             <div class="menu">
                 <fieldset>

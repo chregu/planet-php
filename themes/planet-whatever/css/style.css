@@ -1,0 +1,362 @@
+#box, .box, .serendipity_Entry_Date {
+	width: 570px;
+	margin: 10px 20px;
+	padding: 0;
+}
+
+.feedcontent {
+margin: 1.12em 0;
+/*overflow: auto;
+max-height: 500px;*/
+}
+#pageNavi {
+    padding: 0;
+    width: 500px;
+    margin: 10px 20px;
+}
+
+fieldset
+{
+	margin: 0;
+	padding: 1em 2em;
+	border: #333333 dotted 1px;
+	text-align: left;
+    
+}
+
+
+legend,  .blogTitle
+{
+	padding: 0px 3px;
+	color: #195D00;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+    overflow: hidden;
+    
+}
+
+.blogTitle {
+    font-size: 12px;
+    text-decoration: none;
+    color: #195D00;
+}
+
+.menu legend, .buttons legend {
+    color: #195D00;
+    background-color: white;
+}
+
+
+
+.box legend a, .menu legend a { 
+color: #195D00;
+background-color: white;
+text-decoration: none; 
+
+}
+
+.box legend a:hover, .menu legend a:hover {
+    text-decoration: underline;
+}
+
+html, body {
+  margin:0px;
+  padding:0px;
+  font-size: 11px;
+  font-family: Verdana, Arial, Helvetica, sans-serif; 
+  color: #000000;
+  background-color: #FFFFFF;
+}    
+
+
+
+
+.blogLink, .blogLinkPad {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  text-indent: -10px;
+}
+
+.blogLinkPad {
+ padding-left: 15px;
+}
+
+.inlineBlogLink {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+
+
+
+.inlineBlogLink:hover, .blogLink:hover, .blogTitle:hover, .box legend:hover {
+  background-color: white;
+  text-decoration: underline;
+  
+}
+
+a {
+  color: #195D00;
+  background-color: transparent;
+}
+
+.submit{
+    border-style: dotted;
+    border-color: black;
+    background-color: white;
+    border-width: 1px;
+    margin-left: 5px;
+}
+            
+#head {
+  position: absolute;
+  top:0px;
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+  background: #217A00;
+}
+#head h1, #head h1 a {
+	font-size: 25px;
+	color: white;
+	text-decoration: none;
+}
+
+#head h1 {
+	margin-left: 20px;
+}
+
+#middlecontent  {
+  position: absolute;
+  left: 0px;
+  top: 90px;
+  background-color:#fff;
+  padding-right: 20px;
+  padding-left: 00px;
+  
+} 
+#edit {
+  float: right;
+}      
+#topnavi {
+  background-color: #195D00;
+  border-bottom: 1px #217A00 solid;
+  padding-left: 20px;
+  color: white;
+}
+#topnavi span {
+margin-left: 680px;
+}
+
+#topnavi a {
+  color: white;
+  text-decoration: none;
+}
+
+#rightcol , #serendipityRightSideBar {
+    position: absolute;
+  top: 100px;
+  left: 600px;
+  width: 340px;
+}
+
+.menu img, .buttons img {
+    margin-bottom: 5px;
+}
+
+.menu, .buttons, .serendipitySideBarItem {
+  
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  
+}
+#footer {
+  clear: both;
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 10px;
+  color: #333366;
+  width: 100%;
+  background-color: transparent;
+}
+.center{
+  text-align: center; 
+}
+
+.nnbe {
+  padding-left: 5px;
+}
+
+.serendipity_comment_source {
+	padding-top: 1em;
+}
+
+.serendipity_comment {
+	padding-bottom: 1em;
+}
+
+.phpcode, pre  {
+  overflow: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 11px;
+  line-height: 15px;
+  margin-top: 10px;
+  width: 93%;
+  display: block;
+  background-color: #eeeeee;
+  color: #000000;
+  max-height: 300px;
+} 
+
+img {
+	max-width: 400px;
+}
+
+.bloglink {
+    padding-bottom: 1em;   
+}
+
+.gallBig {
+     display: none; 
+     z-index: 10; 
+     left: 580px; 
+     position: absolute;
+}
+
+.pic {
+    border: 1px #dddddd solid;
+    padding-left: 1px;
+    padding-right: 1px;
+    margin-right: 1px;
+    color: #dddddd;
+}
+
+h5, h6 {
+    font-size: 12px;
+    margin-bottom: 0.8em;
+    margin-top: 0.8em;
+}
+
+.tooltip{
+    
+    color:#000;
+    font:lighter 11px/1.3 Arial,sans-serif;
+    text-decoration:none;
+    text-align:center;
+    background-color: white;
+    border: #333333 dotted 1px;
+	
+}
+
+.tooltip span.top{padding: 3px 8px 0;
+    }
+
+.tooltip b.bottom{padding:3px 8px 15px;color: #548912;
+    }
+    
+/* listview */
+
+.box .col1, .box .col2,  .box .col3    {
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 20px;
+    /*padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-left: 5px;
+    */
+    
+    background-color: #f9f9f9;
+    padding: 6px 5px 0px 5px;
+    font-size: 11px;
+}
+
+.listView {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+}
+
+.listView a {
+    color: black;
+    text-decoration: none;
+}
+
+.listView a:hover {
+    text-decoration: underline;
+}
+
+
+ .odd .col1, .odd .col2, .odd .col3 {
+    background: url(http://ping.blogug.ch/img/stripes.gif) repeat top left;
+}
+
+.box .col1 {
+    width: 35px;
+    
+    background-color:#f3f3f3;
+}
+
+.box .col2 {
+    width: 300px;
+    
+}
+
+.box .col3 {
+    width: 205px;
+    background-color:#f3f3f3;
+    
+    
+}
+
+.box, #pageNavi {
+    clear: left;
+}
+
+a.listText, a.listMore {
+  border: 1px solid #E3E3E3;
+  color: #B3B3B3;
+}
+
+a.listText:hover, a.listMore:hover {
+  
+  text-decoration: none;
+}
+.listMore {
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 2px;
+    
+}
+
+.moreDiv a.listMore, .moreText a.listMore {
+    text-decoration: none;
+}
+
+
+.listText {
+    
+    margin-right: 2px;
+}
+
+.moreDiv a, .moreText a {
+    text-decoration: underline;
+}
+
+h5.date {
+    clear: left;
+    color: #B3B3B3;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+}
+
+

@@ -1,0 +1,509 @@
+/* CSS by sis.slowli.com for *.blogug.ch - all rights reserved */
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #fff url(/themes/planet-whatever/img/bg.gif) no-repeat 930px 160px;
+	background-attachment:fixed;
+	color: #444;
+	font:62.5%/125% Verdana, Arial, Helvetica, Sans-Serif;
+}
+a {
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:visited {}
+a:hover {
+	border-bottom: 1px solid #f00;
+}
+#wrap {
+	width: 920px;
+	margin: 40px 0 0 0;
+}
+#header {
+	display: block;
+}
+h1 {
+	float: left;
+	width: 220px;
+}
+h1 a, h1 a:hover {
+	display: block;
+	width: 51px;
+	height: 102px;
+	background: url(/themes/planet-whatever/img/blogug.png) no-repeat top left;
+	border-bottom: 0;
+}
+h1 a span {
+	display: none;
+}
+h2, h3, h4 {
+	color: #444;
+}
+h2 {
+	font-size: 1.4em;
+	margin: 0 0 10px 0;
+}
+h3 {
+	font-size: 1.3em;
+	line-height: 1.6em;
+	padding: 0 0 0 0.4em;
+	margin: 0 0 1px 0;
+	background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+}
+h4 {
+	font-size: 1.1em;
+	text-transform: uppercase;
+	margin: 0 0 5px 0;
+}
+/* main nav */
+ul#nav {
+	list-style: none;
+	padding: 60px 0 0 0;
+}
+ul#nav li {
+	float: left;
+}
+ul#nav li a {
+	display: block;
+	width: 100px;
+	padding: 25px 0 2px 6px;
+	border-right: 1px dotted #aaa;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	color: #666;
+	text-decoration: none;
+}
+ul#nav li.first-child a {
+	border-left: 1px dotted #aaa;
+}
+ul#nav li a.current {
+	border-right: 1px dotted #888;
+	background: #f3f3f3;
+	color: #333;
+}
+ul#nav li a:hover {
+	border-right: 1px dotted #888;
+	border-bottom: 0;
+	background: #eee;
+	color: #333;
+}
+/* language switch */
+#lang {
+  position: absolute;
+  top: 0;
+  margin: 10px 0 0 740px;
+}
+#lang ul { list-style: none; }
+#lang ul li { padding: 0 3px; }
+#lang a { color: #888; line-height: 1.3em; }
+#lang a:hover { color: #333; }
+#lang ul li { display: inline; }
+/* content */
+#content {
+	clear: both;
+	padding: 5px 0 0 0;
+}
+/* subnav */
+#navigation {
+	clear: both;
+	width: 200px;
+	float: left;
+}
+ul.subnav {
+	margin: 20px 0 0 0;
+	list-style: none;
+}
+ul.subnav li {
+	display: inline; /* IE, pff */
+}
+ul.subnav li a {
+	display: block;
+	padding: 0 0 0 25px;
+	border-bottom: 1px dotted #aaa;
+	font-size: 1.0em;
+	line-height: 1.8em;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	color: #888;
+	text-decoration: none;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px 4px;
+}
+ul.subnav li a:hover {
+	border-bottom: 1px dotted #888;
+	color: #666;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px -26px;
+}
+ul.subnav li a.current {
+	border-bottom: 1px dotted #888;
+	color: #666;
+	background: url(/themes/planet-whatever/img/subnavicon.gif) no-repeat 7px -57px;
+	cursor: default;
+}
+/* searchbox */
+#sb {
+	width: 150px;
+	margin: 30px auto 0 auto;
+}
+#sb label {
+	display: block;
+}
+#sb input {
+	background: #f3f3f3;
+	border: 1px solid #aaa;
+	width: 100%;
+}
+#sb input:focus {
+	background: #f3f3f3;
+	border: 1px solid #FF3333;
+}
+/* misc centered stuff */
+ul.miscnav {
+	list-style: none;
+	margin: 40px 0 0 0;
+}
+ul.miscnav li {
+	text-align: center;
+	}
+ul.miscnav li a {
+	color: #666;
+	text-decoration: none;	
+}
+ul.miscnav li a:hover {
+	color: #666;
+	text-decoration: none;
+	border:0;
+}
+/* contentxt */
+#contentxt {
+	margin: 0 0 0 220px;
+	padding: 20px 0 0 0;
+}
+#content p {
+	margin: 0 8px 10px 0;
+}
+/* table */
+table {
+	background:#f9f9f9;
+	border-collapse:collapse;
+	width:99%;
+	border:5px solid #f9f9f9;
+	margin: 5px 0 10px 0;
+ 	font-size: 1em;/* IE 5 & 5.5 */
+	width: 695px;
+}
+table a {
+	font-weight: normal;
+}
+thead th {
+	padding: .5em 1em;
+ 	border-bottom:1px dotted #FFF;
+ 	font-size:1.2em;
+ 	text-align:left;
+	background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+}
+td {
+	padding:.5em 1em;
+}
+td.xml a img {
+	display: block;
+	margin: auto;
+	border:0;
+}
+td.xml a:hover {
+	border:0;
+}
+tbody tr.odd td {
+	background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+}
+tfoot td {
+	padding-bottom:1.5em;
+}
+col.odd {
+	background-color:#f3f3f3;
+}
+/* footer */
+#footer {
+	clear: both;
+	padding: 50px 0 2px 0;
+}
+#footer p {
+	margin: 0 0 0 220px;
+}
+
+/* chaos from old css and edits for new layout */
+
+#navigation .menu a {
+    font-weight: normal;
+    border-bottom: 1px  solid transparent;
+}
+
+#navigation .menu a:hover {
+        border-bottom: 1px solid #f00;
+}
+
+.blogLinkPad {
+ margin-left: 10px;
+ display: block;
+}
+
+fieldset
+{
+        margin: 0;
+        padding: 1em 2em;
+    margin-bottom: 2em;
+        border:  #aaa dotted 1px;
+        text-align: left;
+    
+    
+}
+
+.menu fieldset {
+    
+    padding-left: 1em;   
+    border: 0px;
+    border-bottom: 1px dotted #aaa;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    
+}
+
+
+legend,  .blogTitle
+{
+        padding: 0px 3px;
+        color: #000000;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 0.2em;
+    overflow: hidden;
+    
+    
+    
+}
+
+
+
+.blogTitle {
+    font-size: 12px;
+    text-decoration: none;
+    color: #000000;
+    
+}
+
+.menu legend, .buttons legend {
+    color: #000000;
+    background-color: white;
+    font-size: 9px;
+    padding: 0px 0px;
+}
+
+.box {
+    
+    margin-bottom: 2em;
+    font-size: 11px;
+}
+
+.box h3, .morediv h5{
+    padding: 2px 3px 2px 5px;
+    
+        color: #000000;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.2em;
+    overflow: hidden;
+    background: url(/themes/planet-whatever/img/stripes.gif) repeat top left;
+    
+}
+
+#content .box h4 {
+    padding: 4px 3px;
+        color: #000000;
+        font-weight: bold;
+        letter-spacing: 0.2em;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    line-height: 2em;    
+    
+}
+
+.morediv h6 {
+    background-image: none;
+    font-size: 13px;
+    background-color: #f3f3f3;
+    letter-spacing: normal;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 2px 0px 2px 4px;
+    font-weight: normal;
+    
+}
+
+.morediv div {
+    padding-left: 4px;
+}
+
+.morediv p {
+    padding-left: 4px;
+}
+
+.box h4 a {
+    font-size: 15px;
+}
+
+.box h3 a, .box legend a, .menu legend a { 
+color: #000000;
+text-decoration: none; 
+
+}
+
+.box .feedcontent {
+   
+    margin-bottom: 1em;
+    padding-left: 1em;
+    
+}
+
+
+#content .box p.date {
+     text-align: right;
+     margin-bottom: 1px;
+     padding-bottom: 0px;
+    
+}
+
+.box p.more,.box p.planetLinks, .box .morediv {
+      padding-left: 1em;
+}
+
+
+.box legend a:hover, .menu legend a:hover {
+    text-decoration: underline;
+}
+
+
+.gallBig {
+     display: none; 
+     z-index: 10; 
+     left: 180px; 
+     position: absolute;
+}
+
+
+.tooltip{
+    
+    color:#000;
+    font:lighter 11px/1.3 Arial,sans-serif;
+    text-decoration:none;
+    text-align:center;
+    background-color: white;
+    border: #333333 dotted 1px;
+	
+}
+
+.tooltip span.top{padding: 3px 8px 0;
+    }
+
+.tooltip b.bottom{padding:3px 8px 15px;color: #548912;
+    }
+    
+/* listview */
+
+.box .col1, .box .col2,  .box .col3    {
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 20px;
+    /*padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-left: 5px;
+    */
+    
+    background-color: #f9f9f9;
+    padding: 6px 5px 0px 5px;
+    font-size: 11px;
+}
+
+.listView {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+}
+
+.listView a {
+    color: black;
+    text-decoration: none;
+}
+
+.listView a:hover {
+    text-decoration: underline;
+}
+
+
+ .odd .col1, .odd .col2, .odd .col3 {
+    background: url(http://ping.blogug.ch/img/stripes.gif) repeat top left;
+}
+
+.box .col1 {
+    width: 35px;
+    
+    background-color:#f3f3f3;
+}
+
+.box .col2 {
+    width: 300px;
+    
+}
+
+.box .col3 {
+    width: 205px;
+    background-color:#f3f3f3;
+    
+    
+}
+
+.box, #pageNavi {
+    clear: left;
+}
+
+a.listText, a.listMore {
+  border: 1px solid #E3E3E3;
+  color: #B3B3B3;
+}
+
+a.listText:hover, a.listMore:hover {
+  
+  text-decoration: none;
+}
+.listMore {
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 2px;
+    
+}
+
+.moreDiv a.listMore, .moreText a.listMore {
+    text-decoration: none;
+}
+
+
+.listText {
+    
+    margin-right: 2px;
+}
+
+.moreDiv a, .moreText a {
+    text-decoration: underline;
+}
+
+h5.date {
+    clear: left;
+    color: #B3B3B3;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+}

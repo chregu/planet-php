@@ -200,34 +200,3 @@ a {
 img {
 	max-width: 400px;
 }
-
-#submit input, #submit textarea {
-    border: #333333 dotted 1px;
-}
-
-
-
-
-#submit label, #submit input {
-	display: block;
-	width: 190px;
-	float: left;
-	margin-bottom: 10px;
-}
-
-#submit label {
-	text-align: right;
-	width: 120px;
-	padding-right: 10px;
-}
-
-#submit br {
-	clear: left;
-}
-
-
-#submit label.url2, #submit input.url2 {
-  display:  none;    
-}
-    
-

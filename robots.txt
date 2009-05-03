@@ -1,7 +1,10 @@
 User-agent: *
-Disallow: /rss/
+Disallow: /rss
 Disallow: /rdf/
 Disallow: /atom/
 Disallow: /admin/
 Disallow: /stats/
-
+Disallow: /search/
+Disallow: /tag/
+Disallow: /kml/
+Disallow: /georss/

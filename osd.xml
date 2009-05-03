@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:php="http://php.net/xsl">
+  <ShortName>Planet Switzerland</ShortName>
+  <Description>Search for Planet Switzerland</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16">http://planet.blogug.ch/favicon.ico</Image>
+  <Url type="text/html" method="GET" template="http://planet.blogug.ch/search/{searchTerms}"/>
+  <Url type="application/atom+xml" method="GET" template="http://blog.bitflux.ch/atom/search/{searchTerms}"/>
+  <SearchForm>http://planet.blogug.ch/</SearchForm>
+</OpenSearchDescription>

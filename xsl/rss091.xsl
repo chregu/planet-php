@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:param name="channelLink" select="'http://planet-php.net'"/>
-    <xsl:param name="channelTitle" select="'Planet PHP'"/>
-    <xsl:param name="channelDescription" select="'People blogging about PHP'"/>
+    
+<xsl:import href="../inc/options.xsl"/>
 
 
     <xsl:template match="/">
@@ -30,6 +29,8 @@
     <xsl:template match="entries/entry">
         <item>
             <title>
+                                       <xsl:if test="haswerbung/text() = 1"><xsl:value-of select="$sponsoredEntries"/> </xsl:if>
+
 <xsl:value-of select="title"/> - <xsl:choose>
                 <xsl:when test="string-length(blog_author) &gt; 0 ">           
                 <xsl:value-of select="blog_author"/> <xsl:if test="blog_dontshowblogtitle = 0"> (<xsl:value-of select="blog_title"/>) </xsl:if>

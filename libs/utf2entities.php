@@ -1,7 +1,7 @@
 <?php
 
  function utf2entities($source) {
-        
+        return $source;
         // array used to figure what number to decrement from character order value
         // according to number of characters used to map unicode to ascii by utf-8
         $decrement[4] = 240;
