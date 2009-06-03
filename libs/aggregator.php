@@ -49,14 +49,18 @@ class aggregator {
             }
             //check if this blog already exists
             
-            if (!$feed->channel['link']) {
+  if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
-                    $feed->channel['link'] = $feed->channel['link_'];
-                } else { 
-                    print "NO channel/link... PLEASE FIX THIS\n";
-                    continue;
+                   $feed->channel['link'] = $feed->channel['link_'];
+                } else if (isset($feed->channel['link_self'])) {
+                   $feed->channel['link'] = $feed->channel['link_self'];
+                } else if (isset($feed->channel['atom']['link'])) {
+                   $feed->channel['link'] = $feed->channel['atom']['link'];
+                } else {
+               print "NO channel/link... PLEASE FIX THIS\n";
+               continue;
                 }
-            }
+           }
             
             $blog = $this->getBlogEntry($feed->channel['link']);
             if (!$blog) {
@@ -239,6 +243,8 @@ class aggregator {
             $dcdate = $this->fixdate($item['dc']['date']);
         } elseif (isset($item['pubdate'])) {
             $dcdate = $this->fixdate($item['pubdate']);
+        } elseif (isset($item['atom']['published'])) {
+            $dcdate = $this->fixdate($item['atom']['published']);
         } elseif (isset($item['published'])) {
             $dcdate = $this->fixdate($item['published']);
         } elseif (isset($item['created'])) {
