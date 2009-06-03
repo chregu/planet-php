@@ -93,6 +93,9 @@ class aggregator {
                 } else if (isset($item['id'])) {
                     $guid = $item['id'];
                     $item['guid'] = $item['id'];
+                } else if (isset($item['atom']['link'])) {
+                    $guid = $item['atom']['link'];
+                    $item['guid'] = $guid;
                 } else {
                     $guid = $item['link'];
                     $item['guid'] = $item['link'];
@@ -130,6 +133,7 @@ class aggregator {
                     $item['hasEnclosure'] = 0;
                 }
                 $item['md5']  = $this->generateMD5($item);
+
 
                 $feedInDB = $this->getEntry($guid, $item['link']);
                      if (MDB2::isError($feedInDB)) {
@@ -381,6 +385,8 @@ class aggregator {
             $dcdate = $this->fixdate($item['dc']['date']);
         } elseif (isset($item['pubdate'])) {
             $dcdate = $this->fixdate($item['pubdate']);
+        } elseif (isset($item['atom']['published'])) {
+            $dcdate = $this->fixdate($item['atom']['published']);
         } elseif (isset($item['published'])) {
             $dcdate = $this->fixdate($item['published']);
         } elseif (isset($item['created'])) {
@@ -473,6 +479,7 @@ class aggregator {
          return  $this->mdb->queryRow ("select * from feeds where link = '$url'",null,MDB2_FETCHMODE_ASSOC);
     }
     function getEntry($guid, $link = null, $db="entries") {
+
         if ($link) {
             return  $this->mdb->queryRow (
             "select * from $db where guid = ".$this->mdb->quote($guid)." UNION " .
