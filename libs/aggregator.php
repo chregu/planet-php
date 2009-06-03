@@ -44,8 +44,14 @@ class aggregator {
                continue;
            }
            //check if this blog already exists
-
-  if (!$feed->channel['link']) {
+		if (isset($feed->channel['atom'])) {
+			foreach($feed->channel['atom'] as $k => $v) {
+				if (!isset($feed->channel[$k])) {
+					$feed->channel[$k] = $v;
+				}
+			}
+		}
+	 if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
                    $feed->channel['link'] = $feed->channel['link_'];
                 } else if (isset($feed->channel['link_self'])) {
@@ -85,21 +91,27 @@ class aggregator {
             //loop through feeds
 
             foreach ($feed->items as $item) {
+	        if (isset($item['atom']) && is_array($item['atom'])) {
+			foreach($item['atom'] as $k => $v) {
+				if (!isset($item[$k])) {
+					$item[$k] = $v;
+				}
+			}
+		}
                 if (!isset($item['link']) && isset($item['link_'])) {
                         $item['link'] = $item['link_'];
                 }
+
 		if (isset($item['guid'])) {
                     $guid = $item['guid'];
                 } else if (isset($item['id'])) {
                     $guid = $item['id'];
                     $item['guid'] = $item['id'];
-                } else if (isset($item['atom']['link'])) {
-                    $guid = $item['atom']['link'];
-                    $item['guid'] = $guid;
                 } else {
                     $guid = $item['link'];
                     $item['guid'] = $item['link'];
                 }
+
                 $_date = strtotime($this->getDcDate($item,0 , true));
 
                 if ($_date and $_date < time() - 3600 * 24 * 180 ) {
