@@ -48,7 +48,13 @@ class aggregator {
                 continue;
             }
             //check if this blog already exists
-            
+               if (isset($feed->channel['atom'])) {
+                       foreach($feed->channel['atom'] as $k => $v) {
+                               if (!isset($feed->channel[$k])) {
+                                       $feed->channel[$k] = $v;
+                               }
+                       }
+               }            
   if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
                    $feed->channel['link'] = $feed->channel['link_'];
@@ -83,6 +89,13 @@ class aggregator {
             //loop through feeds
             
             foreach ($feed->items as $item) {
+               if (isset($item['atom']) && is_array($item['atom'])) {
+                       foreach($item['atom'] as $k => $v) {    
+                               if (!isset($item[$k])) {
+                                       $item[$k] = $v;
+                               }
+                       }
+               }
                 if (!isset($item['link']) && isset($item['link_'])) {
                     $item['link'] = $item['link_'];
                 }
