@@ -44,11 +44,14 @@ class aggregator {
                continue;
            }
            //check if this blog already exists
+
   if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
                    $feed->channel['link'] = $feed->channel['link_'];
                 } else if (isset($feed->channel['link_self'])) {
                    $feed->channel['link'] = $feed->channel['link_self'];
+                } else if (isset($feed->channel['atom']['link'])) {
+                   $feed->channel['link'] = $feed->channel['atom']['link'];
                 } else {
                print "NO channel/link... PLEASE FIX THIS\n";
                continue;
@@ -374,16 +377,18 @@ class aggregator {
     function getDcDate($item, $nowOffset = 0, $returnNull = false) {
         //we want the dates in UTC... Looks like MySQL can't handle timezones...
         //putenv("TZ=UTC");
-        if (isset($item['dc']['date'])) {
+ 	if (isset($item['dc']['date'])) {
             $dcdate = $this->fixdate($item['dc']['date']);
         } elseif (isset($item['pubdate'])) {
             $dcdate = $this->fixdate($item['pubdate']);
-        } elseif (isset($item['issued'])) {
-            $dcdate = $this->fixdate($item['issued']);
+        } elseif (isset($item['published'])) {
+            $dcdate = $this->fixdate($item['published']);
         } elseif (isset($item['created'])) {
             $dcdate = $this->fixdate($item['created']);
         } elseif (isset($item['modified'])) {
             $dcdate = $this->fixdate($item['modified']);
+        } elseif (isset($item['edited'])) {
+            $dcdate = $this->fixdate($item['edited']);
         } elseif (isset($item['updated'])) {
             $dcdate = $this->fixdate($item['updated']);
         } elseif ($returnNull) {
