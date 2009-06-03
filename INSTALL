@@ -12,10 +12,7 @@ INSTALLATION
 ************
 
 
-- checkout with subversion
-  svn co http://svn.bitflux.org/repos/public/planet-php/trunk planet-php
-
-  (or use a webdav client an copy it from the above http location)
+- get it from http://github.com/chregu/planet-php/
 
 - cp inc/config.inc.php-dist to inc/config.inc.php
 
