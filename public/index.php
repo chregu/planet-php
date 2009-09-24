@@ -19,11 +19,15 @@ die();
 }*/
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
-include dirname(__FILE__) . '/../inc/config.inc.php';
+ini_set("display_errors", 1);
 
-ini_set("log_errors",true);
+if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
+    die("No conf.");
+}
 
-include_once BX_POPOON_DIR."popoon.php";
+ini_set("log_errors", true); // FIXME: expensive
+
+include_once BX_POPOON_DIR . 'popoon.php';
 if (!isset($_GET['path'])) {
 	$_GET['path'] = '';
 }
