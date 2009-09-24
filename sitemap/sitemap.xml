@@ -4,7 +4,7 @@
 
     <map:components>
         <map:schemes>
-            <map:scheme name="config" path="/home/till/public_html/planet-php/inc/config.inc.php" global="yes" variable="BX_config"/>
+            <map:scheme name="config" path="BX_PROJECT_DIR:///inc/config.inc.php" global="yes" variable="BX_config"/>
         </map:schemes>
     </map:components>
 
@@ -67,9 +67,8 @@
                             <map:serialize type="xml"/>
                         </map:when>
 
-
                         <map:otherwise>
-                            <map:transform type="libxslt" src="{config://projectDir}/public/themes/{config://theme}/main.xsl">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR:///public/themes/{config://theme}/main.xsl">
                                 <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
                             </map:transform>
                             <map:transform type="tidy"/>
