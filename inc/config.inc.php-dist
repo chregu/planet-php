@@ -1,10 +1,10 @@
 <?php
 
 define(PATH_SEPARATOR,":");
-define('BX_PROJECT_DIR', dirname(__FILE__));
-define('BX_POPOON_DIR', BX_PROJECT_DIR.'libs/popoon/');
+define('BX_PROJECT_DIR', dirname(dirname(__FILE__)));
+define('BX_POPOON_DIR',  BX_PROJECT_DIR . '/libs/popoon/');
 define('BX_INCLUDE_DIR', BX_PROJECT_DIR. 'libs/');
-define('BX_TEMP_DIR', BX_PROJECT_DIR. 'tmp/');
+define('BX_TEMP_DIR',    BX_PROJECT_DIR. 'tmp/');
 
 // consider uncommenting this and move this to php.ini or similar
 ini_set('include_path',BX_INCLUDE_DIR.PATH_SEPARATOR.BX_POPOON_DIR.PATH_SEPARATOR.ini_get('include_path'));
