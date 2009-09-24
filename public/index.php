@@ -32,6 +32,7 @@ if (!isset($_GET['path'])) {
 	$_GET['path'] = '';
 }
 $sitemap = new popoon(
-    BX_PROJECT_DIR."/public/sitemap/sitemap.xml",$_GET["path"],
+    BX_PROJECT_DIR . "/sitemap/sitemap.xml",
+    $_GET['path'],
     NULL
 );
