@@ -67,7 +67,7 @@ class popoon_sitemap {
     *
     * @var string
     */
-    public $cacheDir = "./tmp/";
+    public $cacheDir = "/tmp/";
     
     
     /**
@@ -143,19 +143,19 @@ class popoon_sitemap {
         } else {
             $this->uri = $uri;
         }
-        
+
         //generate paths and ids
         $sitemapRealPath = realpath($sitemapFile);
         if (!$sitemapRealPath) {
             return popoon::raiseError("Sitemap $sitemapFile does not exist",POPOON_ERROR_FATAL);
         }
         $sitemapId = $this->generateSitemapID($sitemapRealPath);
-        /*		if (substr($this->cacheDir,0,1) != "/") {
-            $this->cacheDir = BX_PROJECT_DIR."/".$this->cacheDir;
-        }*/
+
+        $this->cacheDir = BX_PROJECT_DIR . "/" . $this->cacheDir;
+
         $sitemapCachedFile = $this->cacheDir . $sitemapId;
         //check if sitemapCache does exists and if it's older than the sitemap.xml
-        if ( (! (file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath))))
+        if ( (!(file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath))))
         {
             //if it is, make new sitemapCached file
             $err = $this->sitemap2php($sitemapRealPath,$sitemapCachedFile);
@@ -357,40 +357,45 @@ class popoon_sitemap {
                 return popoon::raiseError("The cache file ".realpath($sitemapCachedFile). " is not writable",POPOON_ERROR_FATAL);
             }
         }
-        
+
         //check if we have domxml/xslt
-        
+
         $xslDom = new DomDocument();
         $xslDom->load($this->sm2php_xsl_dir."/".$this->sm2php_xsl);
+
         if (!class_exists("XsltProcessor")) {
-            return popoon::raiseError("Popoon doesn't run without XSLT support in PHP.",POPOON_ERROR_FATAL,__FILE__,__LINE__);
+            return popoon::raiseError(
+                "Popoon doesn't run without XSLT support in PHP.",
+                POPOON_ERROR_FATAL,
+                __FILE__,
+                __LINE__
+            );
         }
         $xsl = new XsltProcessor();
         $xsl->importStylesheet($xslDom);
         $xsl->registerPhpFunctions();
+
         $xslincludesDom = new DomDocument();
         $xslincludesDom->load($this->sm2php_xsl_dir."/".$this->sm2phpincludes_xsl);
+
         $xslincludes = new XsltProcessor();
         $xslincludes->importStylesheet($xslincludesDom);
+
         $sm = new DomDocument();
-        if (! $sm->load($sitemapRealPath)) {
+        if (!$sm->load($sitemapRealPath)) {
             if (!file_exists($sitemapRealPath)) {
                 throw new PopoonFileNotFoundException($sitemapRealPath);
-            } else {
-                throw new PopoonXMLParseErrorException("Could not load $sitemapRealPath");
             }
+            throw new PopoonXMLParseErrorException("Could not load $sitemapRealPath");
         }
         $xsl->setParameter("","popoonDir",dirname(__FILE__));
-        
+
         $result = $xslincludes->transformToDoc($sm);
         $result = $xsl->transformToUri($result,$sitemapCachedFile);
-        
-        
-        
-        
+
         return True;
     }
-    
+
     function convertXML($object, &$xml) {
         if ($object->XmlFormat == "DomDocument")
         {
