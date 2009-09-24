@@ -120,7 +120,7 @@ class popoon {
 	* @see run()
     * @access public
 	*/
-    function __construct ($sitemapFile = null, $uri = null,  $options = NULL) {
+    public function __construct ($sitemapFile = null, $uri = null,  $options = NULL) {
         //clean uri (remove //) 
         $uri = htmlspecialchars(preg_replace("#/{2,}#","/",$uri));
         if ($options == NULL) {
@@ -135,6 +135,8 @@ class popoon {
         {
             $sm = $this->run(realpath($sitemapFile),$uri,$options);
         }
+
+        $this->cacheDir = dirname(dirname(dirname(__FILE__))) . '/tmp/';
 
         if ( $options->doOutputCacheSave($sm))
         {
