@@ -13,13 +13,13 @@
         <!-- pipeline for theme files -->
         <map:pipeline>
             <map:match matchtype="regex" type="uri" pattern="#themes/*(.*)#">
-                <map:read type="resource" src="BX_PROJECT_DIR://themes/{config://theme}/{1}" mime-type="auto"/>
+                <map:read type="resource" src="BX_PROJECT_DIR://public/themes/{config://theme}/{1}" mime-type="auto"/>
             </map:match>
         </map:pipeline>
 <!--        <map:pipeline>
             <map:match type="uri" pattern="blog/*">
                 <map:generate type="s9y" src="{1}"/>
-                <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/blog.xsl"/>
+                <map:transform type="libxslt" src="BX_PROJECT_DIR://public/themes/{config://theme}/blog.xsl"/>
                 <map:transform type="tidy">
                     <map:parameter name="remove-xmlns" value="true"/>
                 </map:transform>
@@ -93,7 +93,7 @@
 
 
                         <map:otherwise>
-                            <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/main.xsl">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://public/themes/{config://theme}/main.xsl">
                                 <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
                             </map:transform>
                             <map:transform type="tidy"/>
