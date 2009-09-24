@@ -18,7 +18,7 @@ INSTALLATION
 
 - adjust the dsn parameter (and other config options if you want)
 
-- make a "tmp" directory and make it writeable for the webserver
+- make tmp directory writeable for the webserver
 
 - import the db from div/db/mysql.sql
 
