@@ -18,15 +18,16 @@
 die();
 }*/
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-	
-include('./inc/config.inc.php');
+
+include dirname(__FILE__) . '/../inc/config.inc.php';
 
 ini_set("log_errors",true);
-include_once(BX_POPOON_DIR."popoon.php");
+
+include_once BX_POPOON_DIR."popoon.php";
 if (!isset($_GET['path'])) {
-	$_GET['path'] = "";
+	$_GET['path'] = '';
 }
-$sitemap = new popoon (BX_PROJECT_DIR."/sitemap/sitemap.xml",$_GET["path"],
-NULL
+$sitemap = new popoon(
+    BX_PROJECT_DIR."/public/sitemap/sitemap.xml",$_GET["path"],
+    NULL
 );
- 

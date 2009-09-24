@@ -1,30 +1,30 @@
 <?php
 while (getLoad() > 7) {
     print "load > 7. wait 20 sec. \n";
-    sleep(20);   
+    sleep(20);
 }
 
-include_once('MDB2.php');
-include_once('utf2entities.php');
+include_once 'MDB2.php';
+include_once 'utf2entities.php';
 //include_once('HTTP/Request.php');
 
-include_once('magpierss/rss_fetch.inc');
+include_once 'magpierss/rss_fetch.inc';
 
-class aggregator {
-    
+class aggregator
+{
     var $mdb = null;
-    
+
     function aggregator() {
         $this->__construct();
     }
-    
+
     function __construct() {
         $this->mdb = MDB2::connect($GLOBALS['BX_config']['dsn']);
         if(MDB2::isError($this->mdb)) {
             die('unable to connect to db');
         }
     }
-    
+
     function aggregateAllBlogs($id = null) {
         if ($id) {
             $where = "where ID = $id";
@@ -40,34 +40,34 @@ class aggregator {
             //get remote feed from magpie
             while (getLoad() > 8) {
                 print "load > 8. wait 20 sec. \n";
-                sleep(20);   
+                sleep(20);
             }
-            
-            $feed = $this->getRemoteFeed($row['link']);  
+
+            $feed = $this->getRemoteFeed($row['link']);
             if(!$feed) {
                 continue;
             }
             //check if this blog already exists
-               if (isset($feed->channel['atom'])) {
-                       foreach($feed->channel['atom'] as $k => $v) {
-                               if (!isset($feed->channel[$k])) {
-                                       $feed->channel[$k] = $v;
-                               }
-                       }
-               }            
-  if (!$feed->channel['link']) {
+            if (isset($feed->channel['atom'])) {
+                foreach ($feed->channel['atom'] as $k => $v) {
+                    if (!isset($feed->channel[$k])) {
+                        $feed->channel[$k] = $v;
+                    }
+                }
+            }
+            if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
-                   $feed->channel['link'] = $feed->channel['link_'];
+                    $feed->channel['link'] = $feed->channel['link_'];
                 } else if (isset($feed->channel['link_self'])) {
-                   $feed->channel['link'] = $feed->channel['link_self'];
+                    $feed->channel['link'] = $feed->channel['link_self'];
                 } else if (isset($feed->channel['atom']['link'])) {
-                   $feed->channel['link'] = $feed->channel['atom']['link'];
+                    $feed->channel['link'] = $feed->channel['atom']['link'];
                 } else {
-               print "NO channel/link... PLEASE FIX THIS\n";
-               continue;
+                    print "NO channel/link... PLEASE FIX THIS\n";
+                    continue;
                 }
            }
-            
+
             $blog = $this->getBlogEntry($feed->channel['link']);
             if (!$blog) {
                 $id = $this->insertBlogEntry($feed->channel);
@@ -77,7 +77,7 @@ class aggregator {
                 //TODO: check for changed channel entries
                 $id = $blog['id'];
                 if ($feed->channel['title'] && $blog['title'] != $feed->channel['title'] && $row['section'] != 'comments') {
-                    $this->updateBlogEntry($feed->channel, $id);   
+                    $this->updateBlogEntry($feed->channel, $id);
                 }
                 $newBlog = false;
             }
@@ -156,14 +156,18 @@ class aggregator {
         if (isset($item['content']['encoded']) && strlen($item['content']['encoded']) > $maxsize + 500) {
             print "TRUNCATE content_encoded on ". $item['title'] ."\n";
             $morebytes = (strlen($item['content']['encoded']) - $maxsize);
-            $item['content']['encoded'] = $this->getBody(substr($item['content']['encoded'],0,$maxsize));
-            $item['content']['encoded'] .= '<p><i>Truncated by Planet PHP, read more at <a href="'.$item['link'].'">the original</a> (another ' . $morebytes .' bytes)</i></p>'; 
+
+            $item['content']['encoded']  = $this->getBody(substr($item['content']['encoded'],0,$maxsize));
+            $item['content']['encoded'] .= '<p><i>Truncated by ' . PROJECT_NAME_HR;
+            $item['content']['encoded'] .= ', read more at <a href="' . $item['link'];
+            $item['content']['encoded'] .= '">the original</a> (another ' . $morebytes .' bytes)</i></p>';
+
         } else if (isset($item['description']) && strlen($item['description']) > $maxsize + 500) {
             print "TRUNCATE description ". $item['title'] ."\n";
             $morebytes = (strlen($item['description']) - $maxsize);
-            
+
             $item['description'] = $this->getBody(substr($item['description'],0,$maxsize));
-            $item['description'] .= '<p><i>Truncated by Planet PHP, read more at <a href="'.$item['link'].'">the original</a> (another ' . $morebytes .' bytes)</i></p>';
+            $item['description'] .= '<p><i>Truncated by ' . PROJECT_NAME_HR .', read more at <a href="'.$item['link'].'">the original</a> (another ' . $morebytes .' bytes)</i></p>';
         }
         return $item;
     }
@@ -218,11 +222,11 @@ class aggregator {
         }
         
         if (!isset($item['guid']) || $item['guid'] == '') {
-	    if (isset($item['origlink'])) {
+    	    if (isset($item['origlink'])) {
 	            $item['guid'] = $item['origlink'];
-	    } else { 
+	        } else {
 	            $item['guid'] = $item['link'];
-	    }
+	        }
         }
         
         $date =  $this->getDcDate($item, $offset);
@@ -281,11 +285,11 @@ class aggregator {
     function fixdate($date) {
         $date =  preg_replace("/([0-9])T([0-9])/","$1 $2",$date);
         $date =  preg_replace("/([\+\-][0-9]{2}):([0-9]{2})/","$1$2",$date);
-        $time = strtotime($date);        
+        $time = strtotime($date);
         //if time is too much in the future (more than 1 hours)
-        // set it to now()                  
-        if (($time - time()) > 3600)  {              
-            $time = time();             
+        // set it to now()
+        if (($time - time()) > 3600) {
+            $time = time();
         }
         $date =  gmdate("Y-m-d H:i:s O",$time);
         return $date;

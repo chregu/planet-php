@@ -29,13 +29,13 @@ if (!empty($_POST['id'])) {
         if ($_POST['accept'] == 'accept') {
             $mailtext = 'Hi
 
-We\'d like to inform you, that your Planet PHP submission for 
+We\'d like to inform you, that your ' . PROJECT_NAME_HR .' submission for 
 '. $_POST['url'].' was accepted and should show up in the next
-(max. 30) minutes on http://www.planet-php.net/
+(max. 30) minutes on ' . PROJECT_URL . '
 
 Thanks for your submission
 
-The Planet PHP team.
+The ' . PROJECT_NAME_HR . ' team.
 ';
             updatePost($db,1);
             
@@ -45,7 +45,8 @@ The Planet PHP team.
             if ($db->isError($res)) {
                 die("a DB errror happened: " . $res->getUserInfo());
             } else {
-                sendMail($_POST['email'],"Your Planet PHP submission for ". $_POST['url']. " was accepted",$mailtext);
+                // FIXME: XSS all over
+                sendMail($_POST['email'],"Your " . PROJECT_NAME_HR . " submission for ". $_POST['url']. " was accepted",$mailtext);
                 $xsl->load("../../themes/planet-php/static.xsl");
                 $dom->loadXML('<html><body>Blog added and mail sent.
                 <br/><a href="./">Back</a>
@@ -66,7 +67,7 @@ The Planet PHP team.
             
             updatePost($db,2);
             
-            sendMail($_POST['email'],"Your Planet PHP submission for ". $_POST['url']. " was rejected",$_POST['rejectreason']);
+            sendMail($_POST['email'],"Your " . PROJECT_NAME_HR . " submission for ". $_POST['url']. " was rejected",$_POST['rejectreason']);
                 $xsl->load("../../themes/planet-php/static.xsl");
                 $dom->loadXML('<html><body>Blog NOT added and mail sent.
                 <br/><a href="./">Back</a>
@@ -121,8 +122,8 @@ function getPostValue($name) {
 
 
 function sendMail($to,$subject,$text) {
-    $header = "From: Planet PHP <we@planet-php.net>\n";
-    $header .= "Bcc: we@planet-php.net";
+    $header = "From: " . PROJECT_NAME_HR . " <" . PROJECT_ADMIN . ">\n";
+    $header .= "Bcc: " . PROJECT_ADMIN_EMAIL;
     mail($to,$subject,$text,$header);
     
 }
