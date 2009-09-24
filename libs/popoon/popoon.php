@@ -20,30 +20,6 @@
 //
 // $Id: popoon.php 4282 2005-05-18 05:52:27Z chregu $
 
-// version check
-
-if (version_compare("4.9.9",phpversion()) > 0) {
-       ?>
-<pre>
-This is popoon for PHP 5!
-
-Please checkout (or update) the PHP 4 branch with
-
-cvs co -r POPOON_PHP4
-
-Or finally switch to PHP 5 ;)
-
-If questions ask on popoon-dev@lists.bitflux.ch
-</pre>
-<?php
-die();
-}
-
-if (!function_exists("__autoload")) {
-
-  include_once("autoload.php");  
-}
-
 /**
 * We have different error levels in popoon, it's much like
 *  the PHP error handling. With PEAR::raiseError you can
