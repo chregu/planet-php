@@ -4,7 +4,7 @@
 
     <map:components>
         <map:schemes>
-            <map:scheme name="config" path="BX_PROJECT_DIR:///inc/config.inc.php" global="yes" variable="BX_config"/>
+            <map:scheme name="config" path="/home/till/public_html/planet-php/inc/config.inc.php" global="yes" variable="BX_config"/>
         </map:schemes>
     </map:components>
 
@@ -13,39 +13,15 @@
         <!-- pipeline for theme files -->
         <map:pipeline>
             <map:match matchtype="regex" type="uri" pattern="#themes/*(.*)#">
-                <map:read type="resource" src="BX_PROJECT_DIR://public/themes/{config://theme}/{1}" mime-type="auto"/>
+                <map:read type="resource" src="{config://projectDir}/public/themes/{config://theme}/{1}" mime-type="auto"/>
             </map:match>
         </map:pipeline>
-<!--        <map:pipeline>
-            <map:match type="uri" pattern="blog/*">
-                <map:generate type="s9y" src="{1}"/>
-                <map:transform type="libxslt" src="BX_PROJECT_DIR://public/themes/{config://theme}/blog.xsl"/>
-                <map:transform type="tidy">
-                    <map:parameter name="remove-xmlns" value="true"/>
-                </map:transform>
-                <map:serialize type="xhtml">
-                    <map:parameter name="stripScriptCDATA" value="true"/>
-                    <map:parameter name="obfuscateMail" value="true"/>
-                </map:serialize>
-
-
-            </map:match>
-           
-
-        </map:pipeline>
--->
-         
-         
 
         <map:pipeline>
             <map:match type="uri" pattern="*.jpg">
                 <map:read type="resource" mime-type="auto" src="BX_PROJECT_DIR:///data/{1}.jpg"/>
             </map:match>
         </map:pipeline>
-   
-
-        
-
 
         <map:pipeline>
             <map:select type="uri">
@@ -93,7 +69,7 @@
 
 
                         <map:otherwise>
-                            <map:transform type="libxslt" src="BX_PROJECT_DIR://public/themes/{config://theme}/main.xsl">
+                            <map:transform type="libxslt" src="{config://projectDir}/public/themes/{config://theme}/main.xsl">
                                 <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
                             </map:transform>
                             <map:transform type="tidy"/>
