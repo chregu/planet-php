@@ -391,28 +391,33 @@ class popoon {
 
 function myErrorHandler ($errno, $errstr, $errfile, $errline) {
 	echo "$errno: $errstr in $errfile at line $errline\n";
-	if (function_exists("debug_backtrace"))
-{
-	echo "Backtrace\n";
-	$trace = debug_backtrace();
-	foreach($trace as $ent) {
-		if(isset($ent['file'])) echo $ent['file'].':';
-		if(isset($ent['function']))
-		{
-			echo $ent['function'].'(';
-			if(isset($ent['args']))
-			{
-				$args='';
-				foreach($ent['args'] as $arg) { $args.=$arg.','; }
-				echo rtrim($args,',');
-			}
-			echo ') ';
-		}
-		if(isset($ent['line'])) echo 'at line '.$ent['line'].' ';
-		if(isset($ent['file'])) echo 'in '.$ent['file'];
-		echo "<hr>";
-	}
-}
-}
+	if (!function_exists("debug_backtrace")) {
+        return;
+    }
 
-?>
+    echo "Backtrace\n";
+    $trace = debug_backtrace();
+    foreach ($trace as $ent) {
+        if (isset($ent['file'])) {
+            echo $ent['file'].':';
+        }
+		if (isset($ent['function'])) {
+            echo $ent['function'].'(';
+            if (isset($ent['args'])) {
+			    $args='';
+                foreach($ent['args'] as $arg) {
+                    $args.=$arg.',';
+                }
+	            echo rtrim($args,',');
+		    }
+			echo ') ';
+        }
+	    if (isset($ent['line'])) {
+            echo 'at line '.$ent['line'].' ';
+        }
+	    if (isset($ent['file'])) {
+            echo 'in '.$ent['file'];
+        }
+        echo "<hr>";
+    }
+}
