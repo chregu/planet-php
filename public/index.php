@@ -27,12 +27,13 @@ if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
 
 ini_set("log_errors", true); // FIXME: expensive
 
-include_once BX_POPOON_DIR . 'popoon.php';
+require BX_POPOON_DIR . 'popoon.php';
 if (!isset($_GET['path'])) {
 	$_GET['path'] = '';
 }
+
 $sitemap = new popoon(
-    BX_PROJECT_DIR . "/sitemap/sitemap.xml",
+    BX_PROJECT_DIR . '/sitemap/sitemap.xml',
     $_GET['path'],
     NULL
 );
