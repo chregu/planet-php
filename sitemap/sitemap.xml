@@ -68,6 +68,7 @@
                         </map:when>
 
                         <map:otherwise>
+                            <!-- <map:transform type="libxslt" src="/home/till/public_html/planet-php/public/themes/planet-php/main.xsl"> -->
                             <map:transform type="libxslt" src="BX_PROJECT_DIR:///public/themes/{config://theme}/main.xsl">
                                 <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
                             </map:transform>
