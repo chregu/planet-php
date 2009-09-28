@@ -31,6 +31,8 @@ define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
 $BX_config['webTimezone'] = "0";
 $BX_config['theme'] = 'planet-php';
 
+$BX_config['debugHost'] = '127.0.0.1'; // your ip
+
 define('VERBOSE', TRUE);
 define('MAGPIE_CACHE_DIR', BX_PROJECT_DIR.'/tmp/magpie/');
 define('MAGPIE_CACHE_AGE', 1000);
@@ -39,8 +41,8 @@ define('MAGPIE_USER_AGENT', PROJECT_NAME . 'Aggregator/0.2 (PHP5) (' . PROJECT_U
 
 $BX_config->setOutputCacheCallback("checkOutputCaching");
 function checkOutputCaching() {
-    if ($_SERVER['REMOTE_ADDR'] == "212.71.98.109") {
-        return false;  
+    if ($_SERVER['REMOTE_ADDR'] == $BX_config['debugHost']) {
+        return false;
     }
     return true;
 }
