@@ -3,7 +3,7 @@
 define(PATH_SEPARATOR,":");
 define('BX_PROJECT_DIR', dirname(dirname(__FILE__)));
 define('BX_POPOON_DIR',  BX_PROJECT_DIR . '/libs/popoon/');
-define('BX_INCLUDE_DIR', BX_PROJECT_DIR. 'libs/');
+define('BX_INCLUDE_DIR', BX_PROJECT_DIR. '/libs/');
 define('BX_TEMP_DIR',    BX_PROJECT_DIR. 'tmp/');
 
 // consider uncommenting this and move this to php.ini or similar
