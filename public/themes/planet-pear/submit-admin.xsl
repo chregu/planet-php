@@ -10,18 +10,13 @@
     <xsl:template match="/">
 
         <html>
-
             <xsl:call-template name="htmlhead"/>
             <body>
                 <xsl:call-template name="bodyhead"/>
-
                 <xsl:call-template name="middlecol"/>
-
-
             </body>
         </html>
     </xsl:template>
-
 
     <xsl:template name="middlecol">
         <div id="middlecontent">
@@ -49,10 +44,10 @@
                               <a href="{rss}">Link</a><xsl:text> </xsl:text> 
                               <a href="http://validator.w3.org/feed/check.cgi?url={rss}">Validate</a>
                               <br/>
-Why should your blog be on Planet PHP:<br/>
-                            <textarea name="description" id="description" cols="40" rows="10">
+                              Why should your blog be on Planet PEAR:<br/>
+                              <textarea name="description" id="description" cols="40" rows="10">
                                 <xsl:value-of select="description"/>
-                            </textarea>
+                              </textarea>
                             <br/>
                             <br/>
                             <input type="submit" name="accept" value="update only"/>
@@ -81,7 +76,7 @@ Please write a rejectreason (gets mailed to the blogowner): <br/>
 
 
     <xsl:template name="htmlheadtitle">
-    Planet PHP  - <xsl:value-of select="/html/head/title"/>
+    Planet PEAR  - <xsl:value-of select="/html/head/title"/>
     </xsl:template>
 
     <xsl:template match="*" mode="xhtml">
@@ -90,7 +85,6 @@ Please write a rejectreason (gets mailed to the blogowner): <br/>
             <xsl:apply-templates mode="xhtml"/>
         </xsl:element>
     </xsl:template>
-
 
 
     <xsl:template match="@*" mode="xhtml">

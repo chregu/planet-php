@@ -13,14 +13,10 @@
             <xsl:call-template name="htmlhead"/>
             <body>
                 <xsl:call-template name="bodyhead"/>
-
                 <xsl:call-template name="middlecol"/>
-                
-
             </body>
         </html>
     </xsl:template>
-    
 
     <xsl:template name="middlecol">
         <div id="middlecontent">
@@ -49,22 +45,17 @@
     
     
     <xsl:template match="error" mode="xhtml">
-    <xsl:if test="$error != ''">
-    <h2><xsl:value-of select="$error"/>
-    </h2>
-    </xsl:if>
+        <xsl:if test="$error != ''">
+            <h2><xsl:value-of select="$error"/></h2>
+        </xsl:if>
     </xsl:template>
-    
-    
-    
+
     <xsl:template match="*" mode="xhtml">
         <xsl:element name="{local-name()}">
             <xsl:apply-templates select="@*" mode="xhtml"/>
             <xsl:apply-templates mode="xhtml"/>
         </xsl:element>
     </xsl:template>
-
-
 
     <xsl:template match="@*" mode="xhtml">
         <xsl:copy-of select="."/>
