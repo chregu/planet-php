@@ -364,6 +364,14 @@ class aggregator
     }
 }
 
+/**
+ * This doesn't work if your system doesn't have /proc.
+ *
+ * Disabled for the time being.
+ *
+ * @return int
+ */
 function getLoad() {
+    return 0;
     return substr(file_get_contents("/proc/loadavg"),0,4);
 }
