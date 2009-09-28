@@ -22,24 +22,23 @@
     
 
     <xsl:template name="middlecol">
-	<xsl:apply-templates />
+    <xsl:apply-templates />
 
     </xsl:template>
-<xsl:template match="body[@id='serendipity_comment_page']">
+    <xsl:template match="body[@id='serendipity_comment_page']">
         <div id="middlecontent">
-	<xsl:apply-templates/>
-</div>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
-</xsl:template>
-
-<xsl:template match="div[@id='content']">
+    <xsl:template match="div[@id='content']">
         <div id="middlecontent">
-	<xsl:apply-templates/>
-</div>
-</xsl:template>
-	<xsl:template match="div[@class='serendipity_Entry_Date']">
-	  <xsl:apply-templates select="h4"/>
-</xsl:template>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="div[@class='serendipity_Entry_Date']">
+        <xsl:apply-templates select="h4"/>
+    </xsl:template>
 
     <xsl:template match="h4">
         <div class="box">
