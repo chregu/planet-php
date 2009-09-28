@@ -55,28 +55,27 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
     </xsl:template>
 
     <xsl:template match="blogs/blog">
-<xsl:if test="maxdate &gt; border">
-        <a href="{link}" class="blogLinkPad">
-    <xsl:choose>
+        <xsl:if test="maxdate &gt; border">
+            <a href="{link}" class="blogLinkPad">
+            <xsl:choose>
                 <xsl:when test="string-length(author) &gt; 0 ">           
-                <xsl:value-of select="author"/>     
-<xsl:if test="dontshowblogtitle = 0"> (<xsl:value-of select="title"/>) </xsl:if>
+                    <xsl:value-of select="author"/>     
+                    <xsl:if test="dontshowblogtitle = 0"> (<xsl:value-of select="title"/>) </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
-                <xsl:value-of select="title"/>
+                    <xsl:value-of select="title"/>
                 </xsl:otherwise>
-               </xsl:choose> 
-        </a>
-</xsl:if>
+            </xsl:choose> 
+            </a>
+        </xsl:if>
     </xsl:template>
-    
-    
-        <xsl:template match="/planet/entries[@section='releases']/entry">
 
+    <xsl:template match="/planet/entries[@section='releases']/entry">
         <a href="{link}" class="blogLinkPad">
             <xsl:value-of select="title"/>
         </a>
     </xsl:template>
+
     <xsl:template name="middlecol">
         <div id="middlecontent">
             <xsl:apply-templates select="/planet/entries[@section='default']/entry"/>
@@ -91,9 +90,7 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
             <div id="pageNavi">
                 <fieldset>
                     <legend>More Entries</legend>
-
                     <span style="float: right;">
-
                         <xsl:if test="$nextEntries &gt; 0">
                             <xsl:choose>
                                 <xsl:when test="$searchString">
@@ -104,8 +101,6 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:if>
-                   
-
                     </span>
                     <span style="float: left;">
                         <xsl:choose>
@@ -122,16 +117,12 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
-
                         </xsl:choose>
-
                     </span>
                     <br/>
                 </fieldset>
             </div>
-
         </div>
-
     </xsl:template>
 
     <xsl:template match="entries[@section='default']/entry">
@@ -139,75 +130,60 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
             <fieldset>
                 <legend>
                     <a href="{blog_link}">
-    <xsl:choose>
-                <xsl:when test="string-length(blog_author) &gt; 0 ">           
-                <xsl:value-of select="blog_author"/>     
-<xsl:if test="blog_dontshowblogtitle = 0"> (<xsl:value-of select="blog_title"/>) </xsl:if>
-                </xsl:when>
-                <xsl:otherwise>
-                <xsl:value-of select="blog_title"/>
-                </xsl:otherwise>
-               </xsl:choose> 
+                        <xsl:choose>
+                            <xsl:when test="string-length(blog_author) &gt; 0 ">           
+                                <xsl:value-of select="blog_author"/>     
+                                <xsl:if test="blog_dontshowblogtitle = 0"> (<xsl:value-of select="blog_title"/>) </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="blog_title"/>
+                            </xsl:otherwise>
+                        </xsl:choose> 
                     </a>
-
                 </legend>
-
                 <a href="{link}" class="blogTitle">
                     <xsl:value-of select="title"/>
                 </a>
-                <xsl:text> </xsl:text> 
-            (<xsl:value-of select="dc_date"/> UTC)
-<div class="feedcontent" >
-<xsl:choose>
-<xsl:when test="string-length(content_encoded) &gt; 0">
-             <xsl:value-of select="content_encoded" disable-output-escaping="yes"/>
+                <xsl:text></xsl:text> 
+                (<xsl:value-of select="dc_date"/> UTC)
+                <div class="feedcontent">
+                    <xsl:choose>
+                        <xsl:when test="string-length(content_encoded) &gt; 0">
+                            <xsl:value-of select="content_encoded" disable-output-escaping="yes"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="description" disable-output-escaping="yes"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-
                 <a href="{link}">Link</a>
             </fieldset>
         </div>
     </xsl:template>
 
-
     <xsl:template name="buttons">
         <div class="buttons">
             <fieldset>
                 <legend>Links</legend>
-                <a href="./rss/">
-                    <img border="0" alt="RSS 0.92" src="/images/rss092.gif" width="80" height="15"/>
+                <a href="./rss/"><img border="0" alt="RSS 0.92" src="/images/rss092.gif" width="80" height="15"/></a>
+                &#160;
+                <a href="./rdf/"><img border="0" alt="RDF 1." src="/images/rss1.gif" width="80" height="15"/></a>
+                <br />
+                <a href="./atom/"><img border="0" alt="Atom Feed" src="/images/atompixel.png" width="80" height="15"/></a>
+                &#160;
+                <a href="http://www.popoon.org/"><img alt="100% Popoon" border="0" src="/images/popoon.png" width="80" height="15"/>
                 </a>
-                 &#160;
-                 <a href="./rdf/"><img border="0" alt="RDF 1." src="/images/rss1.gif" width="80" height="15"/>
-                </a>
-
-
-                <br/>
-                <a href="./atom/">
-                    <img border="0" alt="Atom Feed" src="/images/atompixel.png" width="80" height="15"/>
-                </a>
-                  &#160;
-                  <a href="http://www.popoon.org/"><img alt="100% Popoon" border="0" src="/images/popoon.png" width="80" height="15"/>
-                </a>
-
-                <br/>
-                <a href="http://www.php.net/">
-                    <img border="0" alt="PHP5 powered" src="/images/phppowered.png" width="80" height="15"/>
-                </a>
-                  &#160;
-                  <a href="http://pear.php.net/"><img alt="PEAR" border="0" src="/images/pearpowered.png" width="80" height="15"/>
-                </a>
+                <br />
+                <a href="http://www.php.net/"><img border="0" alt="PHP5 powered" src="/images/phppowered.png" width="80" height="15"/></a>
+                &#160;
+                <a href="http://pear.php.net/"><img alt="PEAR" border="0" src="/images/pearpowered.png" width="80" height="15"/></a>
             </fieldset>
         </div>
-
 
         <div class="menu">
             <xsl:call-template name="planetarium"/>
         </div>
+
         <xsl:call-template name="commonRightBoxes"/>
     </xsl:template>
 
