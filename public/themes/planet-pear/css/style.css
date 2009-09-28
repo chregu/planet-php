@@ -1,0 +1,233 @@
+#box, .box, .serendipity_Entry_Date {
+	width: 500px;
+	margin: 10px 20px;
+	padding: 0;
+}
+
+.feedcontent {
+margin: 1.12em 0;
+/*overflow: auto;
+max-height: 500px;*/
+}
+#pageNavi {
+    padding: 0;
+    width: 500px;
+    margin: 10px 20px;
+}
+
+fieldset
+{
+	margin: 0;
+	padding: 1em 2em;
+	border: #333333 dotted 1px;
+	text-align: left;
+    
+}
+
+
+legend,  .blogTitle
+{
+	padding: 0px 3px;
+	color: #666699;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+    overflow: hidden;
+    
+}
+
+.blogTitle {
+    font-size: 12px;
+    text-decoration: none;
+    color: #666699;
+}
+
+.menu legend, .buttons legend {
+    color: #666699;
+    background-color: white;
+}
+
+
+
+.box legend a, .menu legend a { 
+color: #666699;
+background-color: white;
+text-decoration: none; 
+
+}
+
+.box legend a:hover, .menu legend a:hover {
+    text-decoration: underline;
+}
+
+html, body {
+  margin:0px;
+  padding:0px;
+  font-size: 11px;
+  font-family: Verdana, Arial, Helvetica, sans-serif; 
+  color: #000000;
+  background-color: #FFFFFF;
+}    
+
+
+
+
+.blogLink, .blogLinkPad {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  text-indent: -10px;
+}
+
+.blogLinkPad {
+ padding-left: 15px;
+}
+
+.inlineBlogLink {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+
+
+
+.inlineBlogLink:hover, .blogLink:hover, .blogTitle:hover, .box legend:hover {
+  background-color: white;
+  text-decoration: underline;
+  
+}
+
+a {
+  color: #666699;
+  background-color: transparent;
+}
+
+.submit{
+    border-style: dotted;
+    border-color: black;
+    background-color: white;
+    border-width: 1px;
+    margin-left: 5px;
+}
+            
+#head {
+  position: absolute;
+  top:0px;
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+  background: #9999CC;
+}
+#middlecontent {
+  position: absolute;
+  left: 20px;
+  top: 90px;
+  background-color:#fff;
+  padding-right: 20px;
+  padding-left: 20px;
+  
+} 
+#edit {
+  float: right;
+}      
+#topnavi {
+  background-color: #666699;
+  border-bottom: 1px #9999CC solid;
+  padding-left: 40px;
+  color: white;
+}
+
+#rightcol , #serendipityRightSideBar {
+    position: absolute;
+  top: 100px;
+  left: 600px;
+  width: 300px;
+}
+
+.menu img, .buttons img {
+    margin-bottom: 5px;
+}
+
+.menu, .buttons, .serendipitySideBarItem {
+  
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  
+}
+#footer {
+  clear: both;
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 10px;
+  color: #333366;
+  width: 100%;
+  background-color: transparent;
+}
+.center{
+  text-align: center; 
+}
+
+.nnbe {
+  padding-left: 5px;
+}
+
+.serendipity_comment_source {
+	padding-top: 1em;
+}
+
+.serendipity_comment {
+	padding-bottom: 1em;
+}
+
+.phpcode, pre  {
+  overflow: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 11px;
+  line-height: 15px;
+  margin-top: 10px;
+  width: 93%;
+  display: block;
+  background-color: #eeeeee;
+  color: #000000;
+  max-height: 300px;
+} 
+
+img {
+	max-width: 400px;
+}
+
+#submit input, #submit textarea {
+    border: #333333 dotted 1px;
+}
+
+
+
+
+#submit label, #submit input {
+	display: block;
+	width: 190px;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#submit label {
+	text-align: right;
+	width: 120px;
+	padding-right: 10px;
+}
+
+#submit br {
+	clear: left;
+}
+
+
+#submit label.url2, #submit input.url2 {
+  display:  none;    
+}
+    
+
