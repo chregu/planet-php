@@ -1,0 +1,22 @@
+# PEAR Web Mozilla Search Tab plug-in
+# Tomas V.V.Cox <cox idecnet.com>
+
+<search
+   name="Planet-PEAR"
+   description="Planet PEAR Blog Search"
+   method="GET"
+   action="http://www.planet-pear.org/"
+   update="http://www.planet-pear.org/planet-pear.src"
+   updateCheckDays=3
+>
+
+<input name="search" user>
+
+<interpret
+    browserResultType="result"
+    resultListStart="<!-- resultListStart -->"
+    resultListEnd="<!-- resultListEnd -->"
+    resultItemStart="<!-- resultItemStart -->"
+    resultItemEnd="<!-- resultItemEnd -->"
+>
+</search>
