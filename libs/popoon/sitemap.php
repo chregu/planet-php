@@ -543,7 +543,7 @@ class popoon_sitemap {
                 $_function   = "scheme_" . $scheme["scheme"] . "_onSitemapGeneration";
                 $_isFunction = function_exists($_function);
 
-                //var_dump("FUNCTION", $_function, $_isFunction);
+                //var_dump("FUNCTION", $_function, $_isFunction, $scheme['value']);
 
                 if ($_isFunction === true) {
                      return call_user_func($_function, $scheme["value"]);
