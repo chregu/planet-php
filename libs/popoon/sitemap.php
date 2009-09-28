@@ -339,6 +339,7 @@ class popoon_sitemap {
     * @return bool
     */
     function sitemap2php($sitemapRealPath, $sitemapCachedFile) {
+
         //file_exists and is writable should be the normal case...
         if (! is_writable($sitemapCachedFile))
         {
@@ -376,6 +377,7 @@ class popoon_sitemap {
         $xsl->registerPhpFunctions();
 
         $xslincludesDom = new DomDocument();
+
         $xslincludesDom->load($this->sm2php_xsl_dir."/".$this->sm2phpincludes_xsl);
 
         $xslincludes = new XsltProcessor();
@@ -392,6 +394,7 @@ class popoon_sitemap {
 
         $result = $xslincludes->transformToDoc($sm);
         $result = $xsl->transformToUri($result,$sitemapCachedFile);
+	exit;
 
         return True;
     }
@@ -466,51 +469,94 @@ class popoon_sitemap {
         }
     }
     
-    /* in the array doNotTranslate we can give some values, which should not be translated, as for example http...*/
-    function translateScheme($value, $doNotTranslate = array(), $onSitemapGeneration = false) {
+    /**
+     * in the array doNotTranslate we can give some values, which should not be
+     * translated, as for example http...
+     */
+    function translateScheme($value, $doNotTranslate = array(), $onSitemapGeneration = false)
+    {
         // don't do anything, if we don't have any scheme stuff in the $value;
         // strpos should be rather fast, i assume.
                 
-        if(is_object($value) || is_array($value) || strpos($value,":/") === false && strpos($value,"{") === false) {
-                
+        if (is_object($value)
+            || is_array($value)
+            || strpos($value,":/") === false
+            && strpos($value,"{") === false) {
+
+                // this is obviously not a "scheme://"
                 return $value;
         }
         
         $scheme = popoon_sitemap::getSchemeParts($value);
-        
-		//checks if value  ends with } and starts with { with no { after the first position
-                // then we don't need this fairly complicated preg from below and can substitute also arrays and alike
+
+        //checks if value  ends with } and starts with { with no { after the first position
+        // then we don't need this fairly complicated preg from below and can substitute also arrays and alike
                 
-        if ( !$onSitemapGeneration  && substr ($scheme["value"], -1,1) == "}" && strrpos ( $scheme["value"], "{") === 0) {
-                $scheme["value"] = substr($scheme["value"],1,-1);
-                
-                $scheme["value"] = @$this->maps[substr_count($scheme["value"],'../')][str_replace("../","",$scheme["value"])];
-        }
-        else if ($onSitemapGeneration) {
+        if ( !$onSitemapGeneration
+            && substr ($scheme["value"], -1,1) == "}"
+            && strrpos ( $scheme["value"], "{") === 0) {
+
+            $scheme["value"] = substr($scheme["value"],1,-1);
+
+            // WTF IS THIS
+            $scheme["value"] = $this->maps[substr_count($scheme["value"],'../')][str_replace("../","",$scheme["value"])];
+
+        } else if ($onSitemapGeneration) {
             
-            $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","popoon_sitemap::translateSchemeSubPartsOnSitemapGeneration('$1','$2')",$scheme["value"] );
+            $scheme["value"] = preg_replace(
+                "#\{([\./]*([^}]+))\}#e",
+                "popoon_sitemap::translateSchemeSubPartsOnSitemapGeneration('$1','$2')",
+                $scheme["value"]
+            );
+
         } else {
-            $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","\$this->translateSchemeSubParts('$1','$2')",$scheme["value"] );
+
+            $scheme["value"] = preg_replace(
+                "#\{([\./]*([^}]+))\}#e",
+                "\$this->translateSchemeSubParts('$1','$2')",
+                $scheme["value"]
+            );
+
         }
-        if (in_array($scheme["scheme"],$doNotTranslate)) {
+
+        //var_dump($scheme['value']);
+
+        if (in_array($scheme["scheme"], $doNotTranslate)) {
+
             return $value;
-        } else if ($scheme["scheme"] != "default") {
-            if (!@include_once("popoon/components/schemes/".$scheme["scheme"].".php")) {
+
+        } else if ($scheme["scheme"] != 'default') {
+
+            $_scheme_file  = BX_INCLUDE_DIR . 'popoon/components/schemes/';
+            $_scheme_file .= $scheme["scheme"]. '.php';
+
+            $_status = include_once $_scheme_file;
+            //var_dump("INCLUDE", $_scheme_file, $_status);
+
+            if ($_status === false) {
+
                 return $value;
             }
+
             if ($onSitemapGeneration) {
-                if (function_exists("scheme_".$scheme["scheme"]."_onSitemapGeneration")) {
-                     return call_user_func("scheme_".$scheme["scheme"]."_onSitemapGeneration",$scheme["value"]);
-                } else {
-                    return $value;
+
+                $_function   = "scheme_" . $scheme["scheme"] . "_onSitemapGeneration";
+                $_isFunction = function_exists($_function);
+
+                //var_dump("FUNCTION", $_function, $_isFunction);
+
+                if ($_isFunction === true) {
+                     return call_user_func($_function, $scheme["value"]);
                 }
-            } else {
-                return call_user_func("scheme_".$scheme["scheme"],$scheme["value"],$this);
+                return $value;
+
             }
+
+            return call_user_func("scheme_".$scheme["scheme"], $scheme["value"], $this);
+
         }
-        else {
-            return $scheme["value"];
-        }
+
+        return $scheme["value"];
     }
     
     function translateSchemeSubParts ($value, $value2) {
