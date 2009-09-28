@@ -22,7 +22,11 @@ INSTALLATION
 
 - import the db from div/db/mysql.sql
 
-- import the feeds with the libs/scripts/aggregate.php script
+- add blogs to blogs table
+
+- add feeds to feeds table
+
+- to import the entries run the ./libs/scripts/aggregate.php script
 
 - open the page ;)
 
