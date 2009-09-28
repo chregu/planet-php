@@ -13,7 +13,7 @@
         <!-- pipeline for theme files -->
         <map:pipeline>
             <map:match matchtype="regex" type="uri" pattern="#themes/*(.*)#">
-                <map:read type="resource" src="{config://projectDir}/public/themes/{config://theme}/{1}" mime-type="auto"/>
+                <map:read type="resource" src="BX_PROJECT_DIR:///public/themes/{config://theme}/{1}" mime-type="auto"/>
             </map:match>
         </map:pipeline>
 
