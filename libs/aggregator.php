@@ -12,13 +12,9 @@ include_once 'magpierss/rss_fetch.inc';
 
 class aggregator
 {
-    var $mdb = null;
+    protected $mdb = null;
 
-    function aggregator() {
-        $this->__construct();
-    }
-
-    function __construct() {
+    public function __construct() {
         $this->mdb = MDB2::connect($GLOBALS['BX_config']['dsn']);
         if(MDB2::isError($this->mdb)) {
             die('unable to connect to db');
@@ -26,8 +22,10 @@ class aggregator
     }
 
     function aggregateAllBlogs($id = null) {
+
+	$where = '';
         if ($id) {
-            $where = "where ID = $id";
+            $where .= "where ID = $id";
         }
         $res = $this->mdb->query("select ID,blogsID as blogsid, link, cats, section from feeds $where");
         if (MDB2::isError($res)) {

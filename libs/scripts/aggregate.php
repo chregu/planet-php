@@ -3,9 +3,13 @@
 include_once dirname(__FILE__) . '/../../inc/config.inc.php';
 include_once 'aggregator.php';
 
-if (!isset($argv[1]) || empty($argv[1])) {
-    echo "Usage ./aggregate.php foo\n";
-    exit(1);
+$blogId = null;
+if (isset($argv[1]) || !empty($argv[1])) {
+    $blogId = (int) $argv[1];
+    if ($blogId === 0) {
+        echo "Usage ./aggregate.php <int>\n";
+        exit(1);
+    }
 }
 
 $agg = new aggregator();
