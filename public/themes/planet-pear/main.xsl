@@ -28,7 +28,7 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
         <div id="rightcol">
             <div class="menu">
                 <fieldset>
-                    <legend>Search Planet PHP </legend>
+                    <legend>Search Planet PEAR</legend>
 
                     <form onsubmit="niceURL(); return false;" name="search" method="get" action="/">
                         <input id="searchtext" type="text" name="search">
@@ -43,44 +43,6 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
 		    <a id="searchbarLink" href="javascript:addEngine()">Mozilla Searchbar</a>
                 </fieldset>
             </div>
-<!--
-<div class="menu" >
-<fieldset style="padding-right: 0px; ">
-<legend>Sponsored Links</legend>
-<script type="text/javascript">
-google_ad_client = "pub-9425542660030190";
-google_ad_width = 250;
-google_ad_height = 250;
-google_ad_format = "250x250_as";
-google_ad_channel ="";
-google_color_border = "FFFFFF";
-google_color_bg = "FFFFFF";
-google_color_link = "666699";
-google_color_url = "666699";
-google_color_text = "000000";
-</script>
-<script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</fieldset>
-</div>
--->
-<!--
-  <div class="menu">
-<fieldset><legend><a href="http://del.icio.us/tag/php" title="PHP Radar">del.icio.us/tag/php</a></legend>
-         <xsl:for-each select="/planet/rdf:RDF/rss:item[position() &lt; 11]">
-        <a title="{rss:description} Categories: {dc:subject}" class="blogLinkPad" href="{rss:link}"><xsl:value-of select="rss:title"/></a>
-         </xsl:for-each>
-             </fieldset>
-         </div>
-        <div class="menu">
-        <fieldset><legend>PEAR/PECL Releases</legend>
-         <xsl:apply-templates select="/planet/entries[@section='releases']"/>
-             </fieldset>
-         </div>
-       
--->        
-
             <div class="menu">
                 <fieldset>
                     <legend>Blogs</legend>
@@ -250,7 +212,7 @@ google_color_text = "000000";
     </xsl:template>
 
     <xsl:template name="htmlheadtitle">
-   Planet PHP
-   </xsl:template>
+    Planet PEAR
+    </xsl:template>
 
 </xsl:stylesheet>

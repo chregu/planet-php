@@ -9,9 +9,6 @@
         </head>
     </xsl:template>
     <xsl:template name="htmlheadcommon">
-
-   
-
         <title><xsl:call-template name="htmlheadtitle"/></title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link href="/themes/planet-pear/css/style.css" rel="stylesheet" type="text/css"/>
@@ -51,20 +48,19 @@
 
     <xsl:template name="bodylogo">
             <a href="/">
-                <img src="/themes/planet-pear/img/php-planet.png" width="275" height="70" hspace="30" alt="Planet PHP" title="Planet PHP" border="0"/>
+                <img src="/themes/planet-pear/img/php-planet.png" width="275" height="70" hspace="30" alt="Planet PEAR" title="Planet PEAR" border="0"/>
             </a>
     </xsl:template>    
 
     <xsl:template name="commonRightBoxes">
-
         <div class="buttons">
             <fieldset>
-                <legend>Buttons</legend>
-                <img width="80" height="15" src="/themes/planet-pear/img/planet-php-button-1.jpg" alt="Planet PHP"/>
-                &#160;
-                <img width="80" height="15" src="/themes/planet-pear/img/planet-php-button-2.jpg" alt="Planet PHP"/>
-                <br/>
-                <img width="80" height="15" src="/themes/planet-pear/img/planet-php-button-3.jpg" alt="Planet PHP"/>
+                <legend>Link the Planet</legend>
+                <code>
+<![CDATA[
+<a href="http://www.planet-pear.org/">Planet PEAR</a>
+]]>
+                </code>
             </fieldset>
         </div>
         <div class="menu">
@@ -80,7 +76,6 @@
 
             <fieldset>
                 <legend>FAQ and Code</legend>
-
                 <a class="blogLinkPad" href="http://blog.liip.ch/archive/2005/05/26/planet-php-faq.html">Planet PHP FAQ</a>
                 <a class="blogLinkPad" href="/submit/">Add your PHP blog</a>
                 <a class="blogLinkPad" href="http://github.com/till/planet-php/">Code on GitHub</a>

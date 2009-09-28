@@ -26,7 +26,7 @@
       
 
     <xsl:template name="htmlheadtitle">
-  Planet PHP  - <xsl:value-of select="/html/head/title"/>
+    Planet PEAR  - <xsl:value-of select="/html/head/title"/>
     </xsl:template>
    
 

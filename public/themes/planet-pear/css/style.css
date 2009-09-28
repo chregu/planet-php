@@ -5,10 +5,11 @@
 }
 
 .feedcontent {
-margin: 1.12em 0;
-/*overflow: auto;
-max-height: 500px;*/
+    margin: 1.12em 0;
+    /* overflow: auto;
+    max-height: 500px; */
 }
+
 #pageNavi {
     padding: 0;
     width: 500px;
@@ -17,21 +18,20 @@ max-height: 500px;*/
 
 fieldset
 {
-	margin: 0;
-	padding: 1em 2em;
-	border: #333333 dotted 1px;
-	text-align: left;
-    
+    margin: 0;
+    padding: 1em 2em;
+    border: #333333 dotted 1px;
+    text-align: left;
 }
 
 
-legend,  .blogTitle
+legend, .blogTitle
 {
-	padding: 0px 3px;
-	color: #666699;
-	font-size: 14px;
-	font-weight: bold;
-	letter-spacing: 0.2em;
+    padding: 0px 3px;
+    color: #006600;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
     overflow: hidden;
     
 }
@@ -43,17 +43,16 @@ legend,  .blogTitle
 }
 
 .menu legend, .buttons legend {
-    color: #666699;
+    color: #006600;
     background-color: white;
 }
 
 
 
 .box legend a, .menu legend a { 
-color: #666699;
-background-color: white;
-text-decoration: none; 
-
+    color: #006600;
+    background-color: white;
+    text-decoration: none; 
 }
 
 .box legend a:hover, .menu legend a:hover {
@@ -118,7 +117,7 @@ a {
   padding: 0px;
   margin: 0px;
   width:100%;
-  background: #9999CC;
+  background: #4e9a06;
 }
 #middlecontent {
   position: absolute;
@@ -133,7 +132,7 @@ a {
   float: right;
 }      
 #topnavi {
-  background-color: #666699;
+  background-color: #006600;
   border-bottom: 1px #9999CC solid;
   padding-left: 40px;
   color: white;
