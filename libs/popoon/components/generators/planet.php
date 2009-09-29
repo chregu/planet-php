@@ -123,9 +123,22 @@ class popoon_components_generators_planet extends popoon_components_generator {
         return TRUE;
     }
     
-    function getEntries($from,$section,$startEntry) {
-          
-        $cdataFields = array("title","link","description","content_encoded","blog_title","blog_author","blog_link","guid");
+    function getEntries($from,$section,$startEntry)
+    {
+        $TZ          = $GLOBALS['BX_config']['webTimezone'];
+        $date_select = 'DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL %s HOUR), "%s") AS %s';
+
+        $dc_date  = sprintf($date_select, $TZ, '%e.%c.%Y, %H:%i', 'dc_date');
+        $date_iso = sprintf($date_select, $TZ, '%Y-%m-%dT%H:%i:00Z', 'date_iso');
+        $date_rfc = sprintf($date_select, $TZ, '%a, %d %b %Y %T +0000', 'date_rfc');
+
+        static $cdataFields = array(
+            "title", "link", "description",
+            "content_encoded",
+            "blog_title", "blog_author", "blog_link",
+            "guid"
+        );
+
         $res = $this->db->query('
         SELECT entries.ID,
         entries.title,
@@ -133,10 +146,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
         entries.guid,
         entries.description,
         entries.content_encoded,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i:00Z") as date_iso,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%a, %d %b %Y %T +0000") as date_rfc,
-        
+        ' . $dc_date . ',
+        ' . $date_iso . ',
+        ' . $date_rfc . ',        
         blogs.link as blog_Link,
 	feeds.author as blog_Author,
 	blogs.dontshowblogtitle as blog_dontshowblogtitle,
