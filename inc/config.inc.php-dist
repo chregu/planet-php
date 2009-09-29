@@ -1,4 +1,10 @@
 <?php
+define('PROJECT_NAME_HR',     'Planet-PHP');
+define('PROJECT_NAME',        'PlanetPHP');
+define('PROJECT_URL',         'http://planet-php.org');
+define('PROJECT_ADMIN_NAME',  'John Doe');
+define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
+
 // OVERRIDE CONSTANTS BEFORE DEFAULTS
 
 // load default constants
@@ -9,13 +15,6 @@ $BX_config['dsn'] = 'mysql://root:@localhost/planet-php';
 
 // webRoot (used inconsistently)
 $BX_config['webRoot'] = "/";
-
-
-define('PROJECT_NAME_HR',     'Planet-PHP');
-define('PROJECT_NAME',        'PlanetPHP');
-define('PROJECT_URL',         'http://planet-php.org');
-define('PROJECT_ADMIN_NAME',  'John Doe');
-define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
 
 $BX_config['webTimezone'] = "0";
 $BX_config['theme']       = 'planet-php';
