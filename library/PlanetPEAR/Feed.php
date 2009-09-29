@@ -55,10 +55,15 @@ class PlanetPEAR_Feed
         $feed            = $this->feed;
         $feed['entries'] = $this->entries;
 
-        $builder = new Zend_Feed_Builder($feed);
-        $feedObj = Zend_Feed::importBuilder($builder, $this->type);
+        try {
+            $builder = new Zend_Feed_Builder($feed);
+            $feedObj = Zend_Feed::importBuilder($builder, $this->type);
 
-        return $feedObj->saveXml();
+            return $feedObj->saveXml();
+
+        } catch (Exception $e) {
+            return "Error: {$e->getMessage()}";
+        }
     }
 
     /**
@@ -89,8 +94,8 @@ class PlanetPEAR_Feed
             'link'  => PROJECT_URL . '/feed.php?type=' . $this->type,
 
             // optional
-            'lastUpdate' => 'timestamp of the update date',
-            'published'  => 'timestamp of the publication date',
+            'lastUpdate' => mktime(),
+            'published'  => mktime(),
 
             // required
             'charset' => 'utf-8',
@@ -101,7 +106,7 @@ class PlanetPEAR_Feed
             'email'       => PROJECT_ADMIN_EMAIL,
 
             // optional, ignored if atom is used
-            'webmaster' => PROJECT_ADMIN_EMAIL,
+            //'webmaster' => PROJECT_ADMIN_EMAIL, // ' (' . PROJECT_ADMIN_NAME . ')',
 
             // optional
             'copyright' => 'All entries are copyright of their authors.',

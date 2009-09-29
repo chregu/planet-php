@@ -25,17 +25,24 @@ class PlanetPEAR_Feed_Entry
 
     public function __construct()
     {
+        $this->filter = new Zend_Filter_StripTags;
     }
 
     public function __call($method, $value)
     {
         $var = str_replace('set', '', strtolower($method));
 
-        if (!isset($this->data[$var])) {
-            throw new InvalidArgumentException("Unknown index '$var'.");
-        }
-        $this->data[$var] = $value;
+        $this->data[$var] = $value[0];
 
+        return $this;
+    }
+
+    public function setDescription($value)
+    {
+        if (!$value) {
+            $value = '';
+        }
+        $this->data['description'] = $this->filter->filter($value);
         return $this;
     }
 
