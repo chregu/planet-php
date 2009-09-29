@@ -29,8 +29,11 @@ class PlanetPEAR_Feed
      * @uses self::setType()
      * @uses self::reset()
      */
-    public function __construct($type)
+    public function __construct($type = null)
     {
+        if ($type === null) {
+            $type = 'rss';
+        }
         $this->setType($type);
         $this->reset();
     }
@@ -137,7 +140,7 @@ class PlanetPEAR_Feed
     public function createEntry()
     {
         $entry = new PlanetPEAR_Feed_Entry();
-        return;
+        return $entry;
     }
 
     /**
