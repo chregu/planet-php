@@ -25,12 +25,12 @@
 */
 class popoon_helpers_simplecache
 {
-    
     public $cacheDir = null;
-    private $bxst = array();
-    private $db = null;
+
+    private $bxst    = array();
+    private $db      = null;
     private $idField = "ID";
-    
+
     static function &getInstance()
     {
         static $instance;
@@ -64,29 +64,34 @@ class popoon_helpers_simplecache
         
         if ($lastModified  && ($lastModified >= $filemtime)) {
             return false;
-        } 
-        else if (!$lastModified && (!(file_exists($file)) || filemtime($file) >= $filemtime)) {
+        }
+
+        if (!$lastModified && (!(file_exists($file)) || filemtime($file) >= $filemtime)) {
             return false;
         }
-        else
-        {
-            /* this can be used, if we want to save the vars as php-file, so caches can cache it...
+
+        /* this can be used, if we want to save the vars as php-file, so caches can cache it...
+        include($cacheFile);
+        return $var;*/
+
+        if ($type == "serialize") {
+            return unserialize($this->readFile($cacheFile));
+        }
+
+        if ($type == "file") {
+            return $cacheFile;
+        }
+
+        if ($type == "plain") {
+            return $this->readFile($cacheFile);
+        }
+
+        if ($type == "php") {
             include($cacheFile);
-            return $var;*/
-            if ($type == "serialize") {
-                return unserialize($this->readFile($cacheFile));
-            } else if ($type == "file") {
-                return $cacheFile;
-            } else if ($type == "plain") {
-                return $this->readFile($cacheFile);
-            } else if ($type == "php") {
-                include($cacheFile);
-                return $var;
-            }
+            return $var;
         }
     }
-    
-    
+
     function simpleCacheWrite($file,$group,$param,$data,$type = "serialize")
     {
         if (!$this->cacheDir) {
@@ -94,8 +99,7 @@ class popoon_helpers_simplecache
         }
         if ($group != "fullpath") {
             $cacheFile = $this->simpleCacheGenerateName($group,$file,$param);
-        }
-        else {
+        } else {
             $cacheFile = $file;
         }
         if ($type == "moveFile") {
@@ -144,7 +148,7 @@ class popoon_helpers_simplecache
     function simpleCacheDelete($file,$group,$param)
     {
         if (!$this->cacheDir) {
-            $this->cacheDir = BX_PROJECT_DIR."/tmp/";
+            $this->cacheDir = BX_PROJECT_DIR . "/tmp/";
         }
         $cacheFile = $this->simpleCacheGenerateName($group, $file, $param);
         unlink($cacheFile);
@@ -153,7 +157,7 @@ class popoon_helpers_simplecache
     public function simpleCacheGenerateName($group,$file,$param = array())
     {
         if (!$this->cacheDir) {
-            $this->cacheDir = BX_PROJECT_DIR."/tmp/";
+            $this->cacheDir = BX_PROJECT_DIR . "/tmp/";
         }
         $md5 = md5($file . serialize($param));
         return ($this->cacheDir . $group . "/" . substr($md5,0,1) . "/" . $md5);
@@ -335,7 +339,6 @@ class popoon_helpers_simplecache
             return $cacheFileLastModified_mtime;
         }
         throw new Exception("SimpleCache HTTP Load Error. HTTP Error Code: $respCode", $respCode);
-        return false;
     }
     
     
@@ -344,19 +347,31 @@ class popoon_helpers_simplecache
     * reads a file and returns the content
     * 
     * file_get_contents is slightly faster than fopen/fread/fclose, but
-    *  only available in php4.3
+    * only available in php4.3
+    *
+    * @param string $file 
+    *
+    * @return mixed string or boolean
     */
-    function readFile($file) {
+    function readFile($file)
+    {
         return file_get_contents($file);
     }
     
-    /** creates a full path...
-    */
-    function mkpath($path) {
-        $dirs = explode("/",$path);
+    /**
+     * creates a full path, similar to mkdir -p.
+     *
+     * @param string $path The path to create.
+     *
+     * @return void
+     */
+    function mkpath($path)
+    {
+        $dirs = explode("/", $path);
         $path = $dirs[0];
-        for($i = 1;$i < count($dirs);$i++) {
-            $path .= "/".$dirs[$i];
+
+        for ($i = 1;$i < count($dirs);$i++) {
+            $path .= "/" . $dirs[$i];
             if(!is_dir($path)) {
                 mkdir($path);
             }
@@ -371,9 +386,11 @@ class popoon_helpers_simplecache
     * @return   integer number of removed files
     * @throws   Boolean
     */
-    function deleteDir($dir) {
-        if (!($dh = opendir($dir)))
-        return false;
+    function deleteDir($dir)
+    {
+        if (!($dh = opendir($dir))) {
+            return false;
+        }
         
         $num_removed = 0;
         $file = readdir($dh);
@@ -405,7 +422,5 @@ class popoon_helpers_simplecache
         }
         
         return $num_removed;
-    } // end func deleteDir
-    
+    } // end func deleteDir   
 }
-?>
