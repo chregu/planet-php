@@ -23,8 +23,8 @@
 * @package  admin
 *
 */
-
-class popoon_helpers_simplecache {
+class popoon_helpers_simplecache
+{
     
     public $cacheDir = null;
     private $bxst = array();
@@ -35,8 +35,7 @@ class popoon_helpers_simplecache {
     {
         static $instance;
         
-        if (!isset($instance))
-        {
+        if (!isset($instance)) {
             $instance = new popoon_helpers_simplecache();
         }
         return $instance;
@@ -90,9 +89,8 @@ class popoon_helpers_simplecache {
     
     function simpleCacheWrite($file,$group,$param,$data,$type = "serialize")
     {
-        if (!$this->cacheDir)
-        {
-            $this->cacheDir = BX_PROJECT_DIR."/tmp/";
+        if (!$this->cacheDir) {
+            $this->cacheDir = BX_PROJECT_DIR . "/tmp/";
         }
         if ($group != "fullpath") {
             $cacheFile = $this->simpleCacheGenerateName($group,$file,$param);
@@ -104,62 +102,61 @@ class popoon_helpers_simplecache {
             if (!file_exists(dirname($cacheFile))) {
                 $this->mkpath(dirname($cacheFile));
             }
-            rename($data,$cacheFile); 
-        } else {
-            $fd = @fopen ($cacheFile,"wb");
-            if (!$fd) {
-                //if directory does not exist, create it
-                if (!(@mkdir(dirname($cacheFile)))) {
-                    //if we can't generate the dir for the to be cached file
-                    // try to make it for the whole path
-                    // this should happen very seldom, or better said, only once 
-                    // then we have all the needed directories (new one letter dirs
-                    //  are handled by the statement above, the whole mkpath stuff
-                    //  is only needed for new group dirs, which do not change often
-                    $this->mkpath(dirname($cacheFile));
-                }
-                $fd = fopen ($cacheFile,"wb");
-            }
-            if ($type == "serialize") {
-                fwrite ($fd,serialize($data));
-            } elseif ($type == "plain" || $type == "file") {
-                fwrite ($fd,$data);
-            } else if ($type == "php") {
-                fwrite ($fd, '<?php $var = ');
-                fwrite($fd,var_export($data,1));
-                fwrite ($fd, '?>');        
-            } 
-            fclose($fd);
+            rename($data,$cacheFile);
+            return;
         }
+
+        $fd = @fopen ($cacheFile,"wb");
+        if (!$fd) {
+            //if directory does not exist, create it
+            if (!(@mkdir(dirname($cacheFile)))) {
+                //if we can't generate the dir for the to be cached file
+                // try to make it for the whole path
+                // this should happen very seldom, or better said, only once 
+                // then we have all the needed directories (new one letter dirs
+                //  are handled by the statement above, the whole mkpath stuff
+                //  is only needed for new group dirs, which do not change often
+                $this->mkpath(dirname($cacheFile));
+            }
+            $fd = fopen ($cacheFile,"wb");
+        }
+        if ($type == "serialize") {
+            fwrite ($fd,serialize($data));
+        } elseif ($type == "plain" || $type == "file") {
+            fwrite ($fd,$data);
+        } else if ($type == "php") {
+            fwrite ($fd, '<?php $var = ');
+            fwrite($fd,var_export($data,1));
+            fwrite ($fd, '?>');        
+        } 
+        fclose($fd);
     }
     
     function simpleCacheFlush($group = "")
     {
-        if (!$this->cacheDir)
-        {
-            $this->cacheDir = BX_PROJECT_DIR."/tmp/";
+        if (!$this->cacheDir) {
+            $this->cacheDir = BX_PROJECT_DIR . "/tmp/";
         }
         
-        $this->deleteDir($this->cacheDir."/".$group);
+        $this->deleteDir($this->cacheDir . "/" . $group);
     }
     
     function simpleCacheDelete($file,$group,$param)
     {
-        if (!$this->cacheDir)
-        {
+        if (!$this->cacheDir) {
             $this->cacheDir = BX_PROJECT_DIR."/tmp/";
         }
-        $cacheFile = $this->simpleCacheGenerateName($group,$file,$param);
-        unlink ($cacheFile);
+        $cacheFile = $this->simpleCacheGenerateName($group, $file, $param);
+        unlink($cacheFile);
     }
     
-    public function simpleCacheGenerateName($group,$file,$param = array()) {
-        if (!$this->cacheDir)
-        {
+    public function simpleCacheGenerateName($group,$file,$param = array())
+    {
+        if (!$this->cacheDir) {
             $this->cacheDir = BX_PROJECT_DIR."/tmp/";
         }
         $md5 = md5($file . serialize($param));
-        return ($this->cacheDir.$group."/".substr($md5,0,1)."/".$md5);
+        return ($this->cacheDir . $group . "/" . substr($md5,0,1) . "/" . $md5);
     }
     /**
     * Reads content of remote page
@@ -174,8 +171,8 @@ class popoon_helpers_simplecache {
     * @param int $expire an unixtime. If last-checked is < than this, it will be checked again 
     *
     */
-    public function simpleCacheHttpRead ($url,$expire = -1) {
-        
+    public function simpleCacheHttpRead ($url,$expire = -1)
+    {
         $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url);
         // if expire is less than the above number, it's meant to be relative..
         if ($expire < 100000000) {
@@ -189,12 +186,11 @@ class popoon_helpers_simplecache {
                     //touch the file, so we don't have to read it on every request..
                     touch ($cacheFile);
                     return $this->readFile($cacheFile);
-                } else {
-                    return "<html><title>Could not load '".htmlspecialchars($url)."': \n" . htmlspecialchars($e->getMessage())."</title></html>";
                 }
+                return "<html><title>Could not load '".htmlspecialchars($url)."': \n" . htmlspecialchars($e->getMessage())."</title></html>";
             }
         }
-        else if (!file_exists($cacheFile)){
+        if (!file_exists($cacheFile)){
             $this->simpleCacheHttpLastModified($url, $expire);
         }
         return $this->readFile($cacheFile);
