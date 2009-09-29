@@ -196,8 +196,8 @@ class popoon_helpers_simplecache
         return $this->readFile($cacheFile);
     }
     
-    public function simpleCacheRemoteArrayRead ($url, $expire = -1) {
-        
+    public function simpleCacheRemoteArrayRead ($url, $expire = -1)
+    {
         if ($content = $this->simpleCacheCheck($url, "simpleCacheRemote",null,"serialize",$expire)) {
             return $content;
         }
@@ -207,8 +207,8 @@ class popoon_helpers_simplecache
         return $array;
     }
     
-    public function simpleCacheRemoteImplodeRead ($url, $implode = "|", $expire = -1) {
-       
+    public function simpleCacheRemoteImplodeRead ($url, $implode = "|", $expire = -1)
+    {
         if ($content = $this->simpleCacheCheck($url, "simpleCacheRemote",null,"plain",$expire)) {
             return $content;
         }
@@ -237,108 +237,105 @@ class popoon_helpers_simplecache
     * @param int $expire an unixtime. If last-checked is < than this, it will be checked again
     * @returns int unixtime of last modified
     */
-    
-    public function simpleCacheHttpLastModified($url,  $expire = 1, $proxy = "") {
+    public function simpleCacheHttpLastModified($url,  $expire = 1, $proxy = "")
+    {
         $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url);
-        $cacheFile_mtime = @ filemtime($cacheFile);
-        $cacheFileLastModified = $cacheFile.".lastmodified";
-        $cacheFileLastModified_mtime = @ filemtime($cacheFileLastModified);        
+
+        $cacheFile_mtime             = @filemtime($cacheFile);
+        $cacheFileLastModified       = $cacheFile.".lastmodified";
+        $cacheFileLastModified_mtime = @filemtime($cacheFileLastModified);
+
         /* if we checked the cache later than expire time, just return LastModified date
         This way, we can prevent to ask the http-server on every hit, if we set
         for example  $expire = now() - 1 hour, we only check the server every hour.
         It would be quite stupid to ask the server on every request, even a 304 answer
         needs an established connection, which is really slow for doing on every request
         */
+
         if ($cacheFile_mtime && $expire > 0 && $cacheFile_mtime > $expire) {
             if ($cacheFileLastModified_mtime) {
                 return $cacheFileLastModified_mtime ;
             } 
-            else {
-                return $cacheFile_mtime;
-            }
+            return $cacheFile_mtime;
         }
+
         // if we checked a long time ago, try to get it
-        else {
-            include_once("HTTP/Request.php");
-            $req = new HTTP_Request($url,array("timeout" => 5));
-            $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev: 3517 $ (http://popoon.org)');
+        include_once("HTTP/Request.php");
+        $req = new HTTP_Request($url,array("timeout" => 5));
+        $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev: 3517 $ (http://popoon.org)');
             
-            if ($cacheFileLastModified_mtime) {
-                $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
-            }
-            if ($proxy) {
-                
-                $proxy = parse_url('http://'.$proxy);
-                if (!isset($proxy['user'])) {
-                    $proxy['user'] = null;
-                }
-                if (!isset($proxy['pass'])) {
-                    $proxy['pass'] = null;
-                }
-                if (!isset($proxy['port'])) {
-                    $proxy['port'] = 8080;
-                }
-                $req->setProxy($proxy['host'], $proxy['port'], $proxy['user'], $proxy['pass']);   
-            }
-            $req->sendRequest();
-            
-            $respCode = $req->getResponseCode();
-            if ($respCode == 200) {
-                // check if we have a a last-modified response...                 
-                if ($lastModifiedResponse = $req->getResponseHeader("last-modified")) {
-                    
-                    $lastmodified = strtotime($lastModifiedResponse);
-                    // check if modified date changed, if yes, save it and touch the lastmodified file
-                    if ($lastmodified != $cacheFileLastModified_mtime) {
-                        $this->simpleCacheWrite($cacheFile,"fullpath",null,$req->getResponseBody(),"plain");
-                        touch($cacheFileLastModified,$lastmodified);
-                    }  
-                    
-                } 
-                /* if we don't have a last-modified header, we compare the md5 fingerprint to the one 
-                we cached. This takes evt. more time, _but_ we first save one filewrite if it's the same
-                and - more importantly - we can return the modified date of the first successfull
-                retrieval. This will help a lot with st2xml and compo caching in popoon
-                TODO: E-Tag caching
-                */
-                else {
-                    $_newcontent = $req->getResponseBody();
-                    if (file_exists($cacheFile)) {
-                        $md5_oldcontent = md5($this->readFile($cacheFile));
-                        $md5_newcontent = md5($_newcontent);
-                    } 
-                    else {
-                        $md5_oldcontent = false;
-                    }
-                    
-                    // if content is the same, we can return the mtime of the timestamp cache file
-                    if ($md5_oldcontent && $md5_oldcontent == $md5_newcontent) {
-                        $lastmodified = $cacheFileLastModified_mtime;
-                    } 
-                    // otherwise write it and touch the lastmodified file
-                    else {
-                        
-                        $this->simpleCacheWrite($cacheFile,"fullpath",null,$_newcontent,"plain");
-                        $lastmodified = time();
-                        touch($cacheFileLastModified,$lastmodified);
-                    }
-                }
-                if (!touch($cacheFile, time())) {
-                    trigger_error("$cacheFile not touchable",E_USER_WARNING);
-                }
-                return $lastmodified;
-            } 
-            // if a 304 came back, content didn't change... no need to get it, just touch the file
-            else  if ($respCode == 304) {
-                touch($cacheFile, time());
-                return $cacheFileLastModified_mtime;
-            } 
-            else {
-                throw new Exception("SimpleCache HTTP Load Error. HTTP Error Code: $respCode", $respCode);
-                return false;
-            }
+        if ($cacheFileLastModified_mtime) {
+            $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
         }
-        
+        if ($proxy) {
+                
+            $proxy = parse_url('http://'.$proxy);
+            if (!isset($proxy['user'])) {
+                $proxy['user'] = null;
+            }
+            if (!isset($proxy['pass'])) {
+                $proxy['pass'] = null;
+            }
+            if (!isset($proxy['port'])) {
+                $proxy['port'] = 8080;
+            }
+            $req->setProxy($proxy['host'], $proxy['port'], $proxy['user'], $proxy['pass']);   
+        }
+        $req->sendRequest();
+            
+        $respCode = $req->getResponseCode();
+        if ($respCode == 200) {
+            // check if we have a a last-modified response...                 
+            if ($lastModifiedResponse = $req->getResponseHeader("last-modified")) {
+                    
+                $lastmodified = strtotime($lastModifiedResponse);
+                // check if modified date changed, if yes, save it and touch the lastmodified file
+                if ($lastmodified != $cacheFileLastModified_mtime) {
+                    $this->simpleCacheWrite($cacheFile,"fullpath",null,$req->getResponseBody(),"plain");
+                    touch($cacheFileLastModified,$lastmodified);
+                }  
+            } 
+            /* if we don't have a last-modified header, we compare the md5 fingerprint to the one 
+            we cached. This takes evt. more time, _but_ we first save one filewrite if it's the same
+            and - more importantly - we can return the modified date of the first successfull
+            retrieval. This will help a lot with st2xml and compo caching in popoon
+            TODO: E-Tag caching
+            */
+            else {
+                $_newcontent = $req->getResponseBody();
+                if (file_exists($cacheFile)) {
+                    $md5_oldcontent = md5($this->readFile($cacheFile));
+                    $md5_newcontent = md5($_newcontent);
+                } 
+                else {
+                    $md5_oldcontent = false;
+                }
+                    
+                // if content is the same, we can return the mtime of the timestamp cache file
+                if ($md5_oldcontent && $md5_oldcontent == $md5_newcontent) {
+                    $lastmodified = $cacheFileLastModified_mtime;
+                } 
+                // otherwise write it and touch the lastmodified file
+                else {
+                        
+                    $this->simpleCacheWrite($cacheFile,"fullpath",null,$_newcontent,"plain");
+                    $lastmodified = time();
+                    touch($cacheFileLastModified,$lastmodified);
+                }
+            }
+            if (!touch($cacheFile, time())) {
+                trigger_error("$cacheFile not touchable",E_USER_WARNING);
+            }
+            return $lastmodified;
+        }
+
+        // if a 304 came back, content didn't change... no need to get it, just touch the file
+        if ($respCode == 304) {
+            touch($cacheFile, time());
+            return $cacheFileLastModified_mtime;
+        }
+        throw new Exception("SimpleCache HTTP Load Error. HTTP Error Code: $respCode", $respCode);
+        return false;
     }
     
     
