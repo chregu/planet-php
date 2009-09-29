@@ -55,20 +55,19 @@
                 <map:otherwise>
                     <map:select type="uri">
                         <map:when test="/rss*">
-                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/rss091.xsl"/>
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR:///xsl/rss091.xsl"/>
                             <map:serialize type="xml"/>
                         </map:when>
                         <map:when test="/rdf*">
-                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/rss1.xsl"/>
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR:///xsl/rss1.xsl"/>
                             <map:serialize type="xml"/>
                         </map:when>
                         <map:when test="/atom*">
-                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/atom1.xsl"/>
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR:///xsl/atom1.xsl"/>
                             <map:serialize type="xml"/>
                         </map:when>
 
                         <map:otherwise>
-                            <!-- <map:transform type="libxslt" src="/home/till/public_html/planet-php/public/themes/planet-php/main.xsl"> -->
                             <map:transform type="libxslt" src="BX_PROJECT_DIR:///public/themes/{config://theme}/main.xsl">
                                 <map:parameter name="startEntry" value="phpglobals://_GET[start]" default="0"/>
                             </map:transform>
