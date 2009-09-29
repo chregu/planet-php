@@ -5,6 +5,8 @@ define('PROJECT_URL',         'http://planet-php.org');
 define('PROJECT_ADMIN_NAME',  'John Doe');
 define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
 
+define('SECRET_FEED_HASH', ''); // if set, this hides your feeds
+
 // OVERRIDE CONSTANTS BEFORE DEFAULTS
 
 // load default constants
