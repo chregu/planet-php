@@ -54,9 +54,8 @@ class popoon_helpers_simplecache {
     
     function simpleCacheCheck($file,$group,$param = null, $type="serialize",$lastModified = false)
     {
-        if (!$this->cacheDir)
-        {
-            $this->cacheDir = BX_PROJECT_DIR."/tmp/";
+        if (!$this->cacheDir) {
+            $this->cacheDir = BX_PROJECT_DIR . "/tmp/";
         }
         $cacheFile = $this->simpleCacheGenerateName($group,$file,$param);
         $filemtime = @filemtime($cacheFile);
