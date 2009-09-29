@@ -158,11 +158,11 @@ class PlanetPEAR_Feed
      *
      * @return $this
      */
-    public functions setType($type)
+    public function setType($type)
     {
         $type = strtolower(trim($type));
 
-        if (!in_array($type, array('rss', 'atom')) {
+        if (!in_array($type, array('rss', 'atom'))) {
             throw new InvalidArgumentException("Type: '{$type}' is not supported.");
         }
         $this->type = $type;
@@ -171,4 +171,4 @@ class PlanetPEAR_Feed
     }
 }
 
-spl_autoload_register(arrat('PlanetPEAR_Feed', 'autoload'));
+spl_autoload_register(array('PlanetPEAR_Feed', 'autoload'));
