@@ -1,48 +1,25 @@
 <?php
+// OVERRIDE CONSTANTS BEFORE DEFAULTS
 
-define(PATH_SEPARATOR,":");
-define('BX_PROJECT_DIR', dirname(dirname(__FILE__)));
-define('BX_POPOON_DIR',  BX_PROJECT_DIR . '/libs/popoon/');
-define('BX_INCLUDE_DIR', BX_PROJECT_DIR. '/libs/');
-define('BX_TEMP_DIR',    BX_PROJECT_DIR. 'tmp/');
+// load default constants
+include dirname(__FILE__) . '/config.defaults.inc.php';
 
-// consider uncommenting this and move this to php.ini or similar
-ini_set('include_path',BX_INCLUDE_DIR.PATH_SEPARATOR.BX_POPOON_DIR.PATH_SEPARATOR.ini_get('include_path'));
-include_once BX_POPOON_DIR.'/autoload.php';
+// database config
+$BX_config['dsn'] = 'mysql://root:@localhost/planet-php';
 
-//this global is somehow ugly...
-$GLOBALS['POOL'] = popoon_pool::getInstance("popoon_classes_config");
-$BX_config       = $GLOBALS['POOL']->config;
-
-
-
-$BX_config['dsn'] = 'mysql://user:pass@localhost/planet-php';
+// webRoot (used inconsistently)
 $BX_config['webRoot'] = "/";
 
 
-// local timezone relative to utc (in hours)
-
-define('PROJECT_NAME_HR', 'Planet-PHP');
-define('PROJECT_NAME', 'PlanetPHP');
-define('PROJECT_URL', 'http://planet-php.org');
-define('PROJECT_ADMIN_NAME', 'John Doe');
+define('PROJECT_NAME_HR',     'Planet-PHP');
+define('PROJECT_NAME',        'PlanetPHP');
+define('PROJECT_URL',         'http://planet-php.org');
+define('PROJECT_ADMIN_NAME',  'John Doe');
 define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
 
 $BX_config['webTimezone'] = "0";
-$BX_config['theme'] = 'planet-php';
+$BX_config['theme']       = 'planet-php';
 
-$BX_config['debugHost'] = '127.0.0.1'; // your ip
-
-define('VERBOSE', TRUE);
-define('MAGPIE_CACHE_DIR', BX_PROJECT_DIR.'/tmp/magpie/');
-define('MAGPIE_CACHE_AGE', 1000);
-define('MAGPIE_USER_AGENT', PROJECT_NAME . 'Aggregator/0.2 (PHP5) (' . PROJECT_URL . ')');
+$BX_config['debugHost']   = '127.0.0.1';
 
 
-$BX_config->setOutputCacheCallback("checkOutputCaching");
-function checkOutputCaching() {
-    if ($_SERVER['REMOTE_ADDR'] == $BX_config['debugHost']) {
-        return false;
-    }
-    return true;
-}
