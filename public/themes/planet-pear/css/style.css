@@ -28,7 +28,7 @@ fieldset
 legend, .blogTitle
 {
     padding: 0px 3px;
-    color: #006600;
+    color: #4e9a06;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 0.2em;
@@ -39,7 +39,7 @@ legend, .blogTitle
 .blogTitle {
     font-size: 12px;
     text-decoration: none;
-    color: #666699;
+    color: #4e9a06;
 }
 
 .menu legend, .buttons legend {
@@ -50,7 +50,7 @@ legend, .blogTitle
 
 
 .box legend a, .menu legend a { 
-    color: #006600;
+    color: #4e9a06;
     background-color: white;
     text-decoration: none; 
 }
@@ -99,7 +99,7 @@ html, body {
 }
 
 a {
-  color: #666699;
+  color: #4e9a06;
   background-color: transparent;
 }
 

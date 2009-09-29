@@ -8,10 +8,12 @@
             <xsl:call-template name="htmlheadcommon"/>
         </head>
     </xsl:template>
+
     <xsl:template name="htmlheadcommon">
         <title><xsl:call-template name="htmlheadtitle"/></title>
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link href="/themes/planet-pear/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="/themes/planet-pear/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/themes/planet-pear/favicon.ico" type="image/x-icon" /> 
+        <link href="/themes/planet-pear/css/style.css" rel="stylesheet" type="text/css" />
 
         <xsl:if test="$startEntry > 0">
             <meta name="robots" content="noindex,follow"/> 
