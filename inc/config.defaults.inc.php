@@ -22,7 +22,7 @@ if (!defined('BX_INCLUDE_DIR')) {
     define('BX_INCLUDE_DIR', BX_PROJECT_DIR. '/libs/');
 }
 if (!defined('BX_TEMP_DIR')) {
-    define('BX_TEMP_DIR', BX_PROJECT_DIR. 'tmp/');
+    define('BX_TEMP_DIR', BX_PROJECT_DIR. '/tmp/');
 }
 
 // consider commenting this out and move this to php.ini or similar
