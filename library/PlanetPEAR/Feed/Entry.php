@@ -27,8 +27,10 @@ class PlanetPEAR_Feed_Entry
     {
     }
 
-    public function __set($var, $value)
+    public function __call($method, $value)
     {
+        $var = str_replace('set', '', strtolower($method));
+
         if (!isset($this->data[$var])) {
             throw new InvalidArgumentException("Unknown index '$var'.");
         }
