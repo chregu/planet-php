@@ -29,6 +29,7 @@ if (!empty($query)) {
 }
 
 $planet = new PlanetPEAR;
+$planet->setQuery($query);
 
 $controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']));
 
@@ -45,7 +46,12 @@ try {
 
     $viewData['blogs']     = $planet->getBlogs();
     $viewData['BX_config'] = $BX_config;
-    $viewData['nav']       = $planet->getNavigation($from);
+
+    if ($planet->isQuery() === false) {
+        $viewData['nav'] = $planet->getNavigation($from);
+    } else {
+        $viewData['nav'] = array('prev' => null, 'next' => null);
+    }
 
     $planet->render('planet.tpl', $viewData);
 

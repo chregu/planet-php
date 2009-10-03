@@ -218,4 +218,18 @@ class PlanetPEAR
         #var_dump($navigation, $startKey); exit;
         return $navigation;
     }
+
+    public function isQuery()
+    {
+        if (!empty($this->query)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function setQuery($query)
+    {
+        $this->query = trim($query);
+        return $this;
+    }
 }
