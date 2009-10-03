@@ -136,6 +136,13 @@ class PlanetPEAR
         return $res;
     }
 
+    /**
+     * Return the navigation options for previous and next.
+     *
+     * @param int $startKey The current start.
+     *
+     * @return array
+     */
     public function getNavigation($startKey)
     {
         $from = 'FROM entries'
@@ -143,17 +150,29 @@ class PlanetPEAR
             . ' LEFT JOIN blogs ON feeds.blogsID = blogs.ID'
             . ' WHERE 1';
 
-        $sql = "
-        SELECT count(*) $from
-        LIMIT $startKey, {$this->tally}
-        ";
+        $sql   = "SELECT count(*) $from";
+        $count = $this->db->queryOne($sql);
+        if (MDB2::isError($count)) {
+            throw new RuntimeException($count->getUserInfo(), $count->getCode());
+        }
 
-        $navigation = array();
+        $prevKey = null;
         if ($startKey !== 0) {
             $prevKey = $startKey - $this->tally;
             if ($prevKey < 0) {
-                $prevKey = 0;
+                $prevKey = null;
             }
         }
+
+        $nextKey = null;
+        if ($count > ($startKey + $this->tally)) {
+            $nextKey = $startKey + $this->tally;
+        }
+
+        $navigation = array(
+            'prev' => $prevKey,
+            'next' => $nextKey,
+        );
+        return $navigation;
     }
 }
