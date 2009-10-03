@@ -12,6 +12,15 @@ class PlanetPEAR
         }
     }
 
+    public function render($tpl, $vars)
+    {
+        extract($vars);
+
+        $file = TEMPLATE_DIR . $tpl;
+
+        return include $file;
+    }
+
     /**
      * @param string $section See feeds table.
      *
