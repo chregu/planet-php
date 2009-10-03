@@ -4,7 +4,7 @@
   <title>Planet PEAR administration</title>
  </head>
  <body>
-<h1>mi casa su casa</h1>
+<h1>mi casa es su casa</h1>
 {error}
 <!-- BEGIN feed.list -->
 <table class="feedlist" border="1">
