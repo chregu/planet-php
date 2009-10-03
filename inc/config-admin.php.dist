@@ -1,0 +1,5 @@
+<?php
+define('PDO_DSN', 'mysql:host=localhost;dbname=planet');
+define('PDO_USERNAME', 'user');
+define('PDO_PASSWORD', 'pass');
+?>

@@ -5,7 +5,7 @@
 AddDefaultCharset utf-8
 php_value default_charset utf-8
 
-RewriteEngine On
+RewriteEngine Off
 
 RewriteCond %{REQUEST_URI}   !^/*themes/planet-pear/.*
 RewriteCond %{REQUEST_URI}   !^/*themes/standard/.*
