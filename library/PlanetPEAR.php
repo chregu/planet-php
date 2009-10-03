@@ -41,12 +41,13 @@ class PlanetPEAR
     /**
      * Return blogs on the planet, which were active in the last 90 days.
      *
-     * @param string $section default :-)
+     * @param string  $section  default :-)
+     * @param boolean $forceAll Force it to return all blogs, not just the active ones.
      *
      * @return array
      * @throws RuntimeException In case of an error from MDB2.
      */
-    public function getBlogs($section = 'default')
+    public function getBlogs($section = 'default', $forceAll = false)
     {
         $today = date('Y-m-d H:00',time());
 
@@ -146,5 +147,13 @@ class PlanetPEAR
         SELECT count(*) $from
         LIMIT $startKey, {$this->tally}
         ";
+
+        $navigation = array();
+        if ($startKey !== 0) {
+            $prevKey = $startKey - $this->tally;
+            if ($prevKey < 0) {
+                $prevKey = 0;
+            }
+        }
     }
 }
