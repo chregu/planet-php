@@ -12,6 +12,7 @@
   <link href="/themes/<?php echo $BX_config['theme']; ?>/css/style.css" rel="stylesheet" type="text/css" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
   <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
+  <link rel="outline" type="text/x-opml" title="OPML Feed list" href="/opml" />
  </head>
  <body>
   <div id="head">
@@ -64,7 +65,7 @@
 
    <div class="menu">
     <fieldset>
-     <legend>Blogs</legend>
+     <legend><a href="/opml">Blogs</a></legend>
     <?php foreach ($blogs as $blog): ?>
     <a href="<?php echo $blog['link']; ?>" class="blogLinkPad"><?php echo $blog['author']; ?></a>
     <?php endforeach; ?>
