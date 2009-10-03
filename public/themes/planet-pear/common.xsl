@@ -49,7 +49,7 @@
 
     <xsl:template name="bodylogo">
         <a href="/">
-            <img src="/themes/planet-pear/img/php-planet.png" width="275" height="70" hspace="30" alt="Planet PEAR" title="Planet PEAR" border="0"/>
+            <img src="/themes/planet-pear/img/pear-planet.png" width="305" height="70" hspace="30" alt="Planet PEAR" title="Planet PEAR" border="0"/>
         </a>
     </xsl:template>    
 

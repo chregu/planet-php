@@ -191,7 +191,7 @@
 </xsl:template>
 <!--<xsl:template name="bodylogo">
   <a href="/blog/">
-                <img src="./themes/img/php-planet.png" width="275" height="70" hspace="30" alt="Planet PHP" title="Planet PHP" border="0"/>
+                <img src="./themes/img/pear-planet.png" width="305" height="70" hspace="30" alt="Planet PHP" title="Planet PHP" border="0"/>
             </a>
 </xsl:template>    
 -->
