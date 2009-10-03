@@ -5,32 +5,35 @@
 AddDefaultCharset utf-8
 php_value default_charset utf-8
 
-RewriteEngine Off
+#RewriteEngine On
 
-RewriteCond %{REQUEST_URI}   !^/*themes/planet-pear/.*
-RewriteCond %{REQUEST_URI}   !^/*themes/standard/.*
-RewriteRule ^/*themes/(.+)$  ./themes/planet-pear/$1 [L]
+#RewriteCond %{REQUEST_URI}   !^/*themes/planet-pear/.*
+#RewriteCond %{REQUEST_URI}   !^/*themes/standard/.*
+#RewriteRule ^/*themes/(.+)$  ./themes/planet-pear/$1 [L]
 
 # 195.226.16.50
-RewriteCond %{REMOTE_ADDR} 72.55.156.179   
-RewriteRule /*rdf/ ./rippers/rdf.php [L]
+#RewriteCond %{REMOTE_ADDR} 72.55.156.179   
+#RewriteRule /*rdf/ ./rippers/rdf.php [L]
 
 
+#RewriteCond     %{REQUEST_URI}  !^/*themes/planet-pear/.*
+#RewriteCond     %{REQUEST_URI}  !^/*index.php
+#RewriteCond     %{REQUEST_URI}  !^.*info.php
+#RewriteCond     %{REQUEST_URI}  !^.*test.php
+#RewriteCond     %{REQUEST_URI}  !^.*js/
+#RewriteCond     %{REQUEST_URI}  !^.*ping/
+#RewriteCond     %{REQUEST_URI}  !^.*images/
+#RewriteCond     %{REQUEST_URI}  !^.*rippers/
+#RewriteCond     %{REQUEST_URI}  !^.*submit/
+#RewriteCond     %{REQUEST_URI}  !^.*robots.txt
+#RewriteCond     %{REQUEST_URI}  !^.*admin/
+#RewriteCond     %{REQUEST_URI}  !^.*_vti_.*
+#RewriteCond     %{REQUEST_URI}  !favicon.ico
+#RewriteCond     %{REQUEST_URI}  !search.html
+#RewriteCond     %{REQUEST_URI}  !planet-php.src
+#RewriteRule ^(.+)$ ./index.php?path=$1 [QSA]
 
-RewriteCond     %{REQUEST_URI}  !^/*themes/planet-pear/.*
-RewriteCond     %{REQUEST_URI}  !^/*index.php
-RewriteCond     %{REQUEST_URI}  !^.*info.php
-RewriteCond     %{REQUEST_URI}  !^.*test.php
-RewriteCond     %{REQUEST_URI}  !^.*js/
-RewriteCond     %{REQUEST_URI}  !^.*ping/
-RewriteCond     %{REQUEST_URI}  !^.*images/
-RewriteCond     %{REQUEST_URI}  !^.*rippers/
-RewriteCond     %{REQUEST_URI}  !^.*submit/
-RewriteCond     %{REQUEST_URI}  !^.*robots.txt
-RewriteCond     %{REQUEST_URI}  !^.*admin/
-RewriteCond     %{REQUEST_URI}  !^.*_vti_.*
-RewriteCond     %{REQUEST_URI}  !favicon.ico
-RewriteCond     %{REQUEST_URI}  !search.html
-RewriteCond     %{REQUEST_URI}  !planet-php.src
-RewriteRule ^(.+)$ ./index.php?path=$1 [QSA]
-
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ /router.php
