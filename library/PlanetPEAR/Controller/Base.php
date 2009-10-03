@@ -1,8 +1,10 @@
 <?php
 abstract class PlanetPEAR_Controller_Base
 {
-    public function __construct()
+    protected $planet;
+
+    public function __construct(PlanetPEAR $planet)
     {
-        // maybe init global stuff here
+        $this->planet = $planet;
     }
 }

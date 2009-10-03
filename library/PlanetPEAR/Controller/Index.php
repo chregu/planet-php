@@ -5,6 +5,7 @@
 class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
 {
     protected $data;
+    protected $planet;
 
     public function index()
     {
@@ -13,8 +14,7 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
 
     public function page($from)
     {
-        $planet = new PlanetPEAR;
-        $this->data['entries'] = $planet->getEntries('default', $from);
+        $this->data['entries'] = $this->planet->getEntries('default', $from);
 
         return $this->data;
     }
