@@ -27,9 +27,9 @@ $controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']
 $controllerObj = new $controller;
 
 if (!isset($match['from'])) {
-    $data = call_user_func(array($controller, $match['action']);
+    $data = call_user_func(array($controllerObj, $match['action']));
 } else {
-    $data = call_user_func_array(array($controller, $match['action']), array($match['from']));
+    $data = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
 }
 
 var_dump($data);
