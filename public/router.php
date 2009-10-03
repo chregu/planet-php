@@ -29,14 +29,11 @@ $controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']
 $controllerObj = new $controller($planet);
 
 if (!isset($match['from'])) {
-    $entries = call_user_func(array($controllerObj, $match['action']));
+    $viewData = call_user_func(array($controllerObj, $match['action']));
 } else {
-    $entries = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
+    $viewData = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
 }
 
-$viewData = array(
-    'BX_config' => $BX_config,
-    'entries'   => $entries,
-);
+$viewData['BX_config'] = $BX_config;
 
 $planet->render('planet.tpl', $viewData);

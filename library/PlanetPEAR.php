@@ -16,7 +16,7 @@ class PlanetPEAR
     {
         extract($vars);
 
-        var_dump($vars, $entries); 
+        //var_dump($entries); 
 
         $file = TEMPLATE_DIR . $tpl;
 
