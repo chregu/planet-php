@@ -6,7 +6,7 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
 {
     public function index()
     {
-        $this->page(0);
+        return $this->page(0);
     }
 
     public function page($from)
