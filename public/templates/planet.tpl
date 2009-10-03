@@ -40,7 +40,15 @@
 
    <div id="pageNavi">
     <fieldset>
-     <legend>More Entries</legend><span style="float: right;"><a href="/?start=10">Next 10 Older Entries</a></span><br />
+     <legend>More Entries</legend>
+<?php if ($nav['next'] !== null): ?>
+<span style="float: right;"><a href="/index/<?php echo $nav['next']; ?>">Next 10 Older Entries</a></span>
+<?php endif; ?>
+<?php if ($nav['prev'] !== null): ?>
+<span style="float: left;"><a href="/index/<?php echo $nav['prev']; ?>">Previous 10 Newer Entries</a></span>
+<?php endif; ?>
+
+<br />
     </fieldset>
    </div>
   </div>

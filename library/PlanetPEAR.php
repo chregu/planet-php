@@ -192,6 +192,7 @@ class PlanetPEAR
             'prev' => $prevKey,
             'next' => $nextKey,
         );
+        #var_dump($navigation, $startKey); exit;
         return $navigation;
     }
 }

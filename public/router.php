@@ -31,11 +31,14 @@ $controllerObj = new $controller($planet);
 
 if (!isset($match['from'])) {
     $viewData = call_user_func(array($controllerObj, $match['action']));
+    $from     = 0;
 } else {
     $viewData = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
+    $from     = (int) $match['from'];
 }
 
 $viewData['blogs']     = $planet->getBlogs();
 $viewData['BX_config'] = $BX_config;
+$viewData['nav']       = $planet->getNavigation($from);
 
 $planet->render('planet.tpl', $viewData);
