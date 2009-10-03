@@ -23,6 +23,8 @@ try {
     die("Something went wrong.");
 }
 
+$query = (string) @$_GET['string'];
+
 $planet = new PlanetPEAR;
 
 $controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']));
@@ -30,12 +32,12 @@ $controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']
 $controllerObj = new $controller($planet);
 
 if (!isset($match['from'])) {
-    $viewData = call_user_func(array($controllerObj, $match['action']));
-    $from     = 0;
+    $from = 0;
 } else {
-    $viewData = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
-    $from     = (int) $match['from'];
+    $from = (int) $match['from'];
 }
+
+$viewData = call_user_func_array(array($controllerObj, $match['action']), array($from, $query));
 
 $viewData['blogs']     = $planet->getBlogs();
 $viewData['BX_config'] = $BX_config;
