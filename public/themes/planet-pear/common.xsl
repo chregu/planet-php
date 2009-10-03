@@ -18,9 +18,8 @@
         <xsl:if test="$startEntry > 0">
             <meta name="robots" content="noindex,follow"/> 
         </xsl:if>
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.planet-pear.org/rss/" />
-        <link rel="alternate" type="application/rdf+xml" title="RDF" href="http://www.planet-pear.org/rdf/" />
-        <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://www.planet-pear.org/atom/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
+        <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
     </xsl:template>
     <xsl:template name="bodyhead">
 
