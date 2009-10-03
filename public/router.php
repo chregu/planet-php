@@ -40,10 +40,15 @@ if (!isset($match['from'])) {
     $from = (int) $match['from'];
 }
 
-$viewData = call_user_func_array(array($controllerObj, $match['action']), array($from, $query));
+try {
+    $viewData = call_user_func_array(array($controllerObj, $match['action']), array($from, $query));
 
-$viewData['blogs']     = $planet->getBlogs();
-$viewData['BX_config'] = $BX_config;
-$viewData['nav']       = $planet->getNavigation($from);
+    $viewData['blogs']     = $planet->getBlogs();
+    $viewData['BX_config'] = $BX_config;
+    $viewData['nav']       = $planet->getNavigation($from);
 
-$planet->render('planet.tpl', $viewData);
+    $planet->render('planet.tpl', $viewData);
+
+} catch (Exception $e) {
+    die("Just come back later.");
+}
