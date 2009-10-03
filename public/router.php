@@ -23,7 +23,7 @@ try {
     die("Something went wrong.");
 }
 
-$query = (string) @$_GET['string'];
+$query = (string) @$_GET['search'];
 
 $planet = new PlanetPEAR;
 
