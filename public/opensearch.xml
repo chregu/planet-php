@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription
+ xmlns="http://a9.com/-/spec/opensearch/1.1/"
+ xmlns:moz="http://www.mozilla.org/2006/browser/search/"
+>
+ <ShortName>Planet PEAR</ShortName>
+ <LongName>Planet PEAR feed search</LongName>
+ <Description>Finds PEAR blog posts</Description>
+ <Tags>php pear planet blog post</Tags>
+ <Developer>Christian Weiske</Developer>
+ <Contact>cweiske@php.net</Contact>
+ <Url type="text/html" 
+  template="http://planet-pear.org/search/{searchTerms}"/>
+ <Image height="16" width="16" type="image/vnd.microsoft.icon">http://planet-pear.org/themes/planet-pear/favicon.ico</Image>
+ <Query role="example" searchTerms="MDB2" />
+ <SyndicationRight>open</SyndicationRight>
+ <AdultContent>false</AdultContent>
+ <Language>en-us</Language>
+ <OutputEncoding>UTF-8</OutputEncoding>
+ <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>
