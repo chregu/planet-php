@@ -3,4 +3,5 @@ tmp
 s9y
 s9y.
 inc/config.inc.php
+inc/config-admin.php
 public/info.php
