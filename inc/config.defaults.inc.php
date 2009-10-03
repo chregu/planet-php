@@ -34,6 +34,10 @@ ini_set('include_path',
 );
 include_once BX_POPOON_DIR . '/autoload.php';
 
+if (!defined('TEMPLATE_DIR')) {
+    define('TEMPLATE_DIR', BX_PROJECT_DIR . '/public/templates/');
+}
+
 
 /////////// MAGPIE RELATED 
 if (!defined('VERBOSE')) {
