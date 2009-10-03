@@ -9,12 +9,23 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
 
     public function index()
     {
-        return $this->page(0);
+        return $this->page(0, null);
     }
 
-    public function page($from)
+    /**
+     * page action
+     *
+     * @param int    $from  The start key.
+     * @param string $query Search query.
+     *
+     * @return array
+     */
+    public function page($from, $query)
     {
-        $this->data['entries'] = $this->planet->getEntries('default', $from);
+        if (empty($query)) {
+            $query = null;
+        }
+        $this->data['entries'] = $this->planet->getEntries('default', $from, $query);
 
         return $this->data;
     }

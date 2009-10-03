@@ -40,6 +40,9 @@
 <?php endforeach; ?>
 
    <div id="pageNavi">
+
+<?php if ($nav['next'] !== null || $nav['prev'] !== null): ?>
+
     <fieldset>
      <legend>More Entries</legend>
 <?php if ($nav['next'] !== null): ?>
@@ -51,6 +54,9 @@
 
 <br />
     </fieldset>
+
+<?php endif; ?>
+
    </div>
   </div>
   <div id="rightcol">

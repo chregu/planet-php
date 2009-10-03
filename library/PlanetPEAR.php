@@ -98,13 +98,13 @@ class PlanetPEAR
     /**
      * Return the entries for the current scope.
      *
-     * @param string $section See feeds table.
+     * @param string $section    See feeds table.
      * @param int    $startEntry For the limit query.
-     *
+     * @param mixed  $query      null with no search, and string if a search is triggered.
      * @return array
      * @throws RuntimeException In case of an error.
      */
-    public function getEntries($section = 'default', $startEntry = 0)
+    public function getEntries($section = 'default', $startEntry = 0, $query = null)
     {
         $TZ          = $GLOBALS['BX_config']['webTimezone'];
         $date_select = 'DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL %s HOUR), "%s") AS %s';
@@ -131,6 +131,29 @@ class PlanetPEAR
 
         $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
+        $where = '';
+        $tally = $this->tally;
+
+        if ($query !== null) {
+
+            if (strlen($query) <= 3) { // FIXME: this is sucky, sucky
+
+                $sqlQuery = $this->db->quote('%' . $query .'%');
+
+                $where .= " AND content_encoded LIKE {$sqlQuery}";
+                $where .= " OR entries.description LIKE {$sqlQuery}";
+                $where .= " OR entries.title LIKE {$sqlQuery} ";
+            } else {
+                $where .= " AND match(entries.description, entries.content_encoded, entries.title)";
+                $where .= " against(". $this->db->quote($query) . ") ";
+            }
+
+            $startKey = 0;
+            $tally    = 100;
+        }
+
+        //var_dump($where); exit;
+
         $res = $this->db->queryAll('
         SELECT entries.ID,
         entries.title,
@@ -145,9 +168,9 @@ class PlanetPEAR
         feeds.author as blog_Author,
         blogs.dontshowblogtitle as blog_dontshowblogtitle,
         if(length(blogs.title) > '. ($length + 5) .' , concat(left(blogs.title,'. ($length) .')," ..."), blogs.Title) as blog_Title
-        ' . $from . ' AND feeds.section = "' . $section . '" ' . $this->queryRestriction . '
+        ' . $from . ' AND feeds.section = "' . $section . '" ' . $where . $this->queryRestriction . '
         ORDER BY entries.dc_date DESC
-        LIMIT '. $startEntry . ',' . $this->tally);
+        LIMIT '. $startEntry . ',' . $tally);
 
         if (MDB2::isError($res)) {
             throw new RuntimeException($res->getUserInfo(), $res->getCode());
