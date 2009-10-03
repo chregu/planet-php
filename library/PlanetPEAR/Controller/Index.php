@@ -22,6 +22,9 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
      */
     public function page($from, $query)
     {
+        if (empty($query)) {
+            $query = null;
+        }
         $this->data['entries'] = $this->planet->getEntries('default', $from, $query);
 
         return $this->data;
