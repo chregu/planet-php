@@ -77,6 +77,25 @@ class PlanetPEAR
     }
 
     /**
+     * Fetch and return a list of all feeds
+     *
+     * @return array Array of arrays. Arrays contain: title, blogurl and feedurl
+     */
+    public function getFeeds()
+    {
+        $sql = 'SELECT blogs.link as blogurl, title, feeds.link as feedurl'
+            . ' FROM blogs, feeds'
+            . ' WHERE blogs.id = feeds.blogsID';
+        $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
+
+        $res = $this->db->queryAll($sql);
+        if (MDB2::isError($res)) {
+            throw new RuntimeException($res->getUserInfo(), $res->getCode());
+        }
+        return $res;
+    }
+
+    /**
      * Return the entries for the current scope.
      *
      * @param string $section See feeds table.

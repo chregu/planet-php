@@ -40,11 +40,13 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
  </head>
  <body>
 XML;
-        foreach ($this->planet->getBlogs('default', true) as $data) {
+        foreach ($this->planet->getFeeds('default') as $data) {
             echo '<outline type="rss" text="'
                 . htmlspecialchars($data['title'])
+                . '" htmlUrl="'
+                . htmlspecialchars($data['blogurl'])
                 . '" xmlUrl="'
-                . htmlspecialchars($data['link'])
+                . htmlspecialchars($data['feedurl'])
                 . '" />' . "\n";
         }
         echo <<< XML
