@@ -17,7 +17,7 @@ try {
     $match = $m->match($_SERVER['REQUEST_URI']);
 
     if ($match === null) {
-        $match = array('controller' => 'planet', 'action' => 'index');
+        $match = array('controller' => 'index', 'action' => 'index');
     }
 } catch (Net_URL_Mapper_Exception $e) {
     die("Something went wrong.");
