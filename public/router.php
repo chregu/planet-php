@@ -24,6 +24,9 @@ try {
 }
 
 $query = (string) @$_GET['search'];
+if (!empty($query)) {
+    $match['action'] = 'page';
+}
 
 $planet = new PlanetPEAR;
 

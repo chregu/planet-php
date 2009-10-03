@@ -98,13 +98,13 @@ class PlanetPEAR
     /**
      * Return the entries for the current scope.
      *
-     * @param string $section See feeds table.
+     * @param string $section    See feeds table.
      * @param int    $startEntry For the limit query.
-     *
+     * @param mixed  $query      null with no search, and string if a search is triggered.
      * @return array
      * @throws RuntimeException In case of an error.
      */
-    public function getEntries($section = 'default', $startEntry = 0, $key = null)
+    public function getEntries($section = 'default', $startEntry = 0, $query = null)
     {
         $TZ          = $GLOBALS['BX_config']['webTimezone'];
         $date_select = 'DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL %s HOUR), "%s") AS %s';
@@ -134,7 +134,7 @@ class PlanetPEAR
         $where = '';
         $tally = $this->tally;
 
-        if ($key !== null) {
+        if ($query !== null) {
 
             if (strlen($query) <= 3) { // FIXME: this is sucky, sucky
 
@@ -151,6 +151,8 @@ class PlanetPEAR
             $startKey = 0;
             $tally    = 100;
         }
+
+        //var_dump($where); exit;
 
         $res = $this->db->queryAll('
         SELECT entries.ID,
