@@ -7,6 +7,7 @@ if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
 // Init Router
 try {
     $m = Net_URL_Mapper::getInstance();
+    $m->connect('opml', array('controller' => 'index', 'action' => 'opml'));
     $m->connect('index', array('controller' => 'index', 'action' => 'index'));
     $m->connect('index/:from', array('controller' => 'index', 'action' => 'page'));
 
