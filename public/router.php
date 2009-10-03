@@ -6,9 +6,8 @@ $m = Net_URL_Mapper::getInstance();
 $m->connect('index', array('controller' => 'planet', 'action' => 'index'));
 $m->connect('index/:from', array('controller' => 'planet', 'action' => 'page'));
 
-$m->setScriptName('router.php');
-
-var_dump($_SERVER['REQUEST_URI']); exit;
+#$m->setScriptName('router.php');
+#var_dump($_SERVER['REQUEST_URI']); exit;
 
 $match = $m->match($_SERVER['REQUEST_URI']);
 
