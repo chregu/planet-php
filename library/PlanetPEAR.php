@@ -1,9 +1,15 @@
 <?php
 class PlanetPEAR
 {
-    protected $db;
-    protected $queryRestriction;
+    protected $db; // MDB2_Common
+    protected $queryRestriction; // no idea
+    protected $tally = 10; // blog entries per page
 
+    /**
+     * @param MDB2_Common $db Optional MDB2 object.
+     *
+     * @return $this
+     */
     public function __construct(MDB2_Common $db = null)
     {
         if ($db !== null) {
@@ -13,7 +19,15 @@ class PlanetPEAR
         }
     }
 
-    public function render($tpl, $vars)
+    /**
+     * Render the template.
+     *
+     * @param string $tpl  The filename.
+     * @param array  $vars The template vars.
+     *
+     * @return boolean
+     */
+    public function render($tpl, array $vars)
     {
         extract($vars);
 
@@ -27,12 +41,13 @@ class PlanetPEAR
     /**
      * Return blogs on the planet, which were active in the last 90 days.
      *
-     * @param string $section default :-)
+     * @param string  $section  default :-)
+     * @param boolean $forceAll Force it to return all blogs, not just the active ones.
      *
      * @return array
      * @throws RuntimeException In case of an error from MDB2.
      */
-    public function getBlogs($section = 'default')
+    public function getBlogs($section = 'default', $forceAll = false)
     {
         $today = date('Y-m-d H:00',time());
 
@@ -93,7 +108,7 @@ class PlanetPEAR
             "guid"
         );
 
-        $length = 35;
+        $length = 35; // blog title
 
         $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
@@ -113,11 +128,51 @@ class PlanetPEAR
         if(length(blogs.title) > '. ($length + 5) .' , concat(left(blogs.title,'. ($length) .')," ..."), blogs.Title) as blog_Title
         ' . $from . ' AND feeds.section = "' . $section . '" ' . $this->queryRestriction . '
         ORDER BY entries.dc_date DESC
-        LIMIT '. $startEntry . ', 10');
+        LIMIT '. $startEntry . ',' . $this->tally);
 
         if (MDB2::isError($res)) {
             throw new RuntimeException($res->getUserInfo(), $res->getCode());
         }
         return $res;
+    }
+
+    /**
+     * Return the navigation options for previous and next.
+     *
+     * @param int $startKey The current start.
+     *
+     * @return array
+     */
+    public function getNavigation($startKey)
+    {
+        $from = 'FROM entries'
+            . ' LEFT JOIN feeds ON entries.feedsID = feeds.ID'
+            . ' LEFT JOIN blogs ON feeds.blogsID = blogs.ID'
+            . ' WHERE 1';
+
+        $sql   = "SELECT count(*) $from";
+        $count = $this->db->queryOne($sql);
+        if (MDB2::isError($count)) {
+            throw new RuntimeException($count->getUserInfo(), $count->getCode());
+        }
+
+        $prevKey = null;
+        if ($startKey !== 0) {
+            $prevKey = $startKey - $this->tally;
+            if ($prevKey < 0) {
+                $prevKey = null;
+            }
+        }
+
+        $nextKey = null;
+        if ($count > ($startKey + $this->tally)) {
+            $nextKey = $startKey + $this->tally;
+        }
+
+        $navigation = array(
+            'prev' => $prevKey,
+            'next' => $nextKey,
+        );
+        return $navigation;
     }
 }
