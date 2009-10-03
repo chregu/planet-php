@@ -18,7 +18,7 @@ class PlanetPEAR
      * @return array
      * @throws Exception In case of an error.
      */
-    public function getEntries($section = 'default')
+    public function getEntries($section = 'default', $startEntry = 0)
     {
         $TZ          = $GLOBALS['BX_config']['webTimezone'];
         $date_select = 'DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL %s HOUR), "%s") AS %s';
@@ -41,8 +41,7 @@ class PlanetPEAR
             "guid"
         );
 
-        $length     = 35;
-        $startEntry = 0;
+        $length = 35;
 
         $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
