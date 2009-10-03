@@ -132,6 +132,8 @@ class PlanetPEAR
         $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
         $where = '';
+        $tally = $this->tally;
+
         if ($key !== null) {
 
             if (strlen($query) <= 3) { // FIXME: this is sucky, sucky
@@ -145,6 +147,9 @@ class PlanetPEAR
                 $where .= " AND match(entries.description, entries.content_encoded, entries.title)";
                 $where .= " against(". $this->db->quote($query) . ") ";
             }
+
+            $startKey = 0;
+            $tally    = 100;
         }
 
         $res = $this->db->queryAll('
@@ -163,7 +168,7 @@ class PlanetPEAR
         if(length(blogs.title) > '. ($length + 5) .' , concat(left(blogs.title,'. ($length) .')," ..."), blogs.Title) as blog_Title
         ' . $from . ' AND feeds.section = "' . $section . '" ' . $where . $this->queryRestriction . '
         ORDER BY entries.dc_date DESC
-        LIMIT '. $startEntry . ',' . $this->tally);
+        LIMIT '. $startEntry . ',' . $tally);
 
         if (MDB2::isError($res)) {
             throw new RuntimeException($res->getUserInfo(), $res->getCode());
