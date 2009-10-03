@@ -8,6 +8,8 @@ $m->connect('index/:from', array('controller' => 'planet', 'action' => 'page'));
 
 $m->setScriptName('router.php');
 
+var_dump($_SERVER['REQUEST_URI']); exit;
+
 $match = $m->match($_SERVER['REQUEST_URI']);
 
 if ($match === null) {
