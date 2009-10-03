@@ -35,6 +35,7 @@ if (!isset($match['from'])) {
     $viewData = call_user_func_array(array($controllerObj, $match['action']), array($match['from']));
 }
 
+$viewData['blogs']     = $planet->getBlogs();
 $viewData['BX_config'] = $BX_config;
 
 $planet->render('planet.tpl', $viewData);

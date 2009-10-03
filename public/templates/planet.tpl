@@ -56,7 +56,10 @@
 
    <div class="menu">
     <fieldset>
-     <legend>Blogs</legend><a href="http://blog.pear.php.net" class="blogLinkPad">PEAR</a><a href="http://blogs.linux.ie/kenguest" class="blogLinkPad">Ken Guest's online diary</a><a href="http://till.klampaeckel.de/blog/" class="blogLinkPad">till's blog</a><a href="http://cweiske.de/tagebuch/?tag=pear" class="blogLinkPad">Christians Tagebuch</a>
+     <legend>Blogs</legend>
+    <?php foreach ($blogs as $blog): ?>
+    <a href="<?php echo $blog['link']; ?>" class="blogLinkPad"><?php echo $blog['author']; ?></a>
+    <?php endforeach; ?>
     </fieldset>
    </div>
    <div class="buttons">
@@ -94,7 +97,7 @@
     <fieldset>
      <legend>Sponsors</legend>
      <div class="nnbe">
-      Hosted by <a class="inlineBlogLink" href="http://till.klampaeckel.de">till</a><br />
+      Hosted by <a class="inlineBlogLink" href="http://till.klampaeckel.de">Till Klampaeckel</a><br />
       Logo designed by <a class="inlineBlogLink" href="http://viebrock.ca/">Colin Viebrock</a>, enhanced by <a href="http://cweiske.de">Christian Weiske</a>.
      </div>
     </fieldset>

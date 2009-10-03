@@ -2,6 +2,7 @@
 class PlanetPEAR
 {
     protected $db;
+    protected $queryRestriction;
 
     public function __construct(MDB2_Common $db = null)
     {
@@ -24,10 +25,50 @@ class PlanetPEAR
     }
 
     /**
-     * @param string $section See feeds table.
+     * Return blogs on the planet, which were active in the last 90 days.
+     *
+     * @param string $section default :-)
      *
      * @return array
-     * @throws Exception In case of an error.
+     * @throws RuntimeException In case of an error from MDB2.
+     */
+    public function getBlogs($section = 'default')
+    {
+        $today = date('Y-m-d H:00',time());
+
+        $sql = "
+        select
+            blogs.link as link,
+            blogs.title as title,
+        blogs.dontshowblogtitle  as dontshowblogtitle,
+            feeds.author as author,
+            unix_timestamp(max(entries.dc_date)) as maxDate,
+            unix_timestamp(date_sub('$today', INTERVAL 90 DAY)) as border
+            from blogs left join feeds on feeds.blogsID = blogs.ID
+            left join entries on entries.feedsID = feeds.ID
+            where entries.dc_date > 0 and feeds.section = " . $this->db->quote($section) . "
+            ". $this->queryRestriction . "
+            group by blogs.link
+            order by maxDate DESC
+        ";
+
+        $this->db->setFetchMode(MDB2_FETCHMODE_ASSOC);
+
+        $res = $this->db->queryAll($sql);
+        if (MDB2::isError($res)) {
+            throw new RuntimeException($res->getUserInfo(), $res->getCode());
+        }
+        return $res;
+    }
+
+    /**
+     * Return the entries for the current scope.
+     *
+     * @param string $section See feeds table.
+     * @param int    $startEntry For the limit query.
+     *
+     * @return array
+     * @throws RuntimeException In case of an error.
      */
     public function getEntries($section = 'default', $startEntry = 0)
     {
@@ -70,12 +111,12 @@ class PlanetPEAR
         feeds.author as blog_Author,
         blogs.dontshowblogtitle as blog_dontshowblogtitle,
         if(length(blogs.title) > '. ($length + 5) .' , concat(left(blogs.title,'. ($length) .')," ..."), blogs.Title) as blog_Title
-        ' . $from . ' AND feeds.section = "' . $section . '" ' . $queryRestriction . '
+        ' . $from . ' AND feeds.section = "' . $section . '" ' . $this->queryRestriction . '
         ORDER BY entries.dc_date DESC
         LIMIT '. $startEntry . ', 10');
 
         if (MDB2::isError($res)) {
-            throw new Exception($res->getUserInfo(), $res->getCode());
+            throw new RuntimeException($res->getUserInfo(), $res->getCode());
         }
         return $res;
     }
