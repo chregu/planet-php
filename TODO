@@ -1,0 +1,15 @@
+## Clean up
+
+ * remove popoon related
+ * dig into lib/scripts/aggregate.php
+ * move templates out of document root
+ * improve DB query handling (really use MDB2)
+
+## Features
+
+ * implement "Show only blogs active within the last 90 days"
+ * implement submit form
+ * implement a cache
+ * unify database layer for planet and admin
+ * improve search
+ * improve templating (e.g. get rid off HTML_Template_IT)
