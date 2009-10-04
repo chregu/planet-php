@@ -28,10 +28,18 @@
 <?php foreach ($entries as $entry): ?>
    <div class="box">
     <fieldset>
-     <legend><a href="<?php echo $entry['blog_link']; ?>"><?php echo $entry['blog_author']; ?></a></legend><a href="<?php echo $entry['link']; ?>" class="blogTitle"><?php echo $entry['title']; ?></a> (<?php echo $entry['dc_date']; ?>)
+     <legend><a href="<?php echo $entry['blog_link']; ?>"><?php echo $entry['blog_author']; ?></a></legend>
+     <a href="<?php echo $entry['link']; ?>" class="blogTitle"><?php echo $entry['title']; ?></a>
+     (<?php echo $entry['dc_date']; ?>)
      <div class="feedcontent">
       <p>
-        <?php echo $entry['content_encoded']; ?>
+        <?php
+        if (!empty($entry['content_encoded'])) {
+          echo $entry['content_encoded'];
+        } else {
+          echo $entry['description'];
+        }
+        ?>
       </p>
 
      </div><a href="<?php echo $entry['link']; ?>">Link</a>
