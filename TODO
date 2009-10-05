@@ -9,7 +9,7 @@
 
  * implement "Show only blogs active within the last 90 days"
  * implement submit form
- * implement a cache
  * unify database layer for planet and admin
  * improve search
  * improve templating (e.g. get rid off HTML_Template_IT)
+ * implement cache control in aggregate.php
