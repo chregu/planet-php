@@ -89,8 +89,10 @@
    <div class="buttons">
 
     <fieldset>
-     <legend>Links</legend><a href="#"><img border="0" alt="RSS 0.92" src="/images/rss092.gif" width="80" height="15" /></a> &#160; <a href="#"><img border="0" alt="RDF 1." src="/images/rss1.gif" width="80" height="15" /></a><br />
-     <a href="#"><img border="0" alt="Atom Feed" src="/images/atompixel.png" width="80" height="15" /></a> &#160; <br />
+     <legend>Links</legend>
+     <a href="#"><img border="0" alt="RSS 0.92" src="/images/rss092.gif" width="80" height="15" /></a>
+     &#160; <a href="http://feeds.feedburner.com/PLANETPEAR"><img border="0" alt="RDF 1." src="/images/rss1.gif" width="80" height="15" /></a><br />
+     <a href="http://feeds.feedburner.com/PLANETPEAR-ATOM"><img border="0" alt="Atom Feed" src="/images/atompixel.png" width="80" height="15" /></a> &#160; <br />
      <a href="http://www.php.net/"><img border="0" alt="PHP5 powered" src="/images/phppowered.png" width="80" height="15" /></a> &#160; <a href="http://pear.php.net/"><img alt="PEAR" border="0" src="/images/pearpowered.png" width="80" height="15" /></a>
     </fieldset>
 
@@ -114,7 +116,10 @@
    </div>
    <div class="menu">
     <fieldset>
-     <legend>FAQ and Code</legend><a class="blogLinkPad" href="http://blog.liip.ch/archive/2005/05/26/planet-php-faq.html">Planet PHP FAQ</a><a class="blogLinkPad" href="/submit/">Add your PHP blog</a><a class="blogLinkPad" href="http://github.com/till/planet-php/">Code on GitHub</a>
+     <legend>FAQ and Code</legend>
+     <a class="blogLinkPad" href="http://blog.liip.ch/archive/2005/05/26/planet-php-faq.html">Planet PHP FAQ</a>
+     <a class="blogLinkPad" href="#" onclick="alert('To be fixed.');">Add your PHP blog</a>
+     <a class="blogLinkPad" href="http://github.com/till/planet-php/">Code on GitHub</a>
     </fieldset>
    </div>
    <div class="menu">
