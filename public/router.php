@@ -47,31 +47,34 @@ $controllerObj = new $controller($planet);
 
 $cacheName = $planet->getCacheName();
 
-if ($query !== null) {
-    $cacheName = 'search' . $query;
-} else {
-    $cacheName = sprintf(
-        '%s-%s-%s',
-        strtolower($match['controller']),
-        strtolower($match['action']),
-        $from
-    );
-}
+if (!file_exists(BX_TEMP_DIR . '/' . $cacheName)) {
+    ob_start();
+    try {
+        $viewData = call_user_func_array(array($controllerObj, $match['action']), array($from, $query));
 
-try {
-    $viewData = call_user_func_array(array($controllerObj, $match['action']), array($from, $query));
+        $viewData['blogs']     = $planet->getBlogs();
+        $viewData['BX_config'] = $BX_config;
 
-    $viewData['blogs']     = $planet->getBlogs();
-    $viewData['BX_config'] = $BX_config;
+        if ($planet->isQuery() === false) {
+            $viewData['nav'] = $planet->getNavigation($from);
+        } else {
+            $viewData['nav'] = array('prev' => null, 'next' => null);
+        }
 
-    if ($planet->isQuery() === false) {
-        $viewData['nav'] = $planet->getNavigation($from);
-    } else {
-        $viewData['nav'] = array('prev' => null, 'next' => null);
+        $planet->render('planet.tpl', $viewData);
+
+    } catch (Exception $e) {
+        die("Just come back later.");
     }
+    $page = ob_get_contents();
+    ob_end_clean();
 
-    $planet->render('planet.tpl', $viewData);
-
-} catch (Exception $e) {
-    die("Just come back later.");
+    $fp = fopen(BX_TEMP_DIR . '/' . $cacheName, 'w');
+    if ($fp) {
+        fwrite($fp, $page);
+        fclose($fp);
+    }
+    echo $page;
+} else {
+    echo file_get_contents(BX_TEMP_DIR . '/' . $cacheName);
 }
