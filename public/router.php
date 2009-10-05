@@ -26,19 +26,36 @@ try {
 $query = (string) @$_GET['search'];
 if (!empty($query)) {
     $match['action'] = 'page';
+} else {
+    $query = null;
 }
-
-$planet = new PlanetPEAR;
-$planet->setQuery($query);
-
-$controller = 'PlanetPEAR_Controller_' . ucfirst(strtolower($match['controller']));
-
-$controllerObj = new $controller($planet);
 
 if (!isset($match['from'])) {
     $from = 0;
 } else {
     $from = (int) $match['from'];
+}
+
+$planet = new PlanetPEAR;
+$planet->setController($match['controller']);
+$planet->setAction($match['action']);
+$planet->setFrom($from);
+$planet->setQuery($query);
+
+$controller    = 'PlanetPEAR_Controller_' . $planet->getController();
+$controllerObj = new $controller($planet);
+
+$cacheName = $planet->getCacheName();
+
+if ($query !== null) {
+    $cacheName = 'search' . $query;
+} else {
+    $cacheName = sprintf(
+        '%s-%s-%s',
+        strtolower($match['controller']),
+        strtolower($match['action']),
+        $from
+    );
 }
 
 try {

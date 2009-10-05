@@ -6,6 +6,11 @@ class PlanetPEAR
     protected $tally = 10; // blog entries per page
 
     /**
+     * Request data.
+     */
+    protected $controller, $action, $from, $query;
+
+    /**
      * @param MDB2_Common $db Optional MDB2 object.
      *
      * @return $this
@@ -74,6 +79,24 @@ class PlanetPEAR
             throw new RuntimeException($res->getUserInfo(), $res->getCode());
         }
         return $res;
+    }
+
+    public function getCacheName()
+    {
+        if ($this->isQuery()) {
+            return 'search' . $query;
+        }
+        return sprintf(
+            '%s-%s-%s',
+            $this->controller,
+            $this->action,
+            $this->from
+        );
+    }
+
+    public function getController()
+    {
+        return $this->controller;
     }
 
     /**
@@ -219,12 +242,32 @@ class PlanetPEAR
         return $navigation;
     }
 
+
+
     public function isQuery()
     {
         if (!empty($this->query)) {
             return true;
         }
         return false;
+    }
+
+    public function setAction($action)
+    {
+        $this->action = strtolower($action);
+        return $this;
+    }
+
+    public function setController($controller)
+    {
+        $this->controller = ucfirst(strtolower($controller));
+        return $this;
+    }
+
+    public function setFrom($from)
+    {
+        $this->from = $from;
+        return $this;
     }
 
     public function setQuery($query)
