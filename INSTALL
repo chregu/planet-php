@@ -6,6 +6,7 @@ PREQUISITES
 - A database (only tested with mysql, but should work with others, too)
 - MDB2 ( pear install MDB2)
 - Cache (pear install Cache), if you want caching
+- Net_URL_Mapper (pear install Net_URL_Mapper from pear beta channel)
 
 
 INSTALLATION
