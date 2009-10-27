@@ -31,4 +31,7 @@ INSTALLATION
 
 - Administration has to be done via phpMyAdmin (or similar), just add your 
    RSS feeds to the feeds table. The rest should be done automatically.
+
+- Add a crontab:
+   */5 * * * * /path/to/php-cli /path/to/planet-code/libs/scripts/aggregate.php
 .
