@@ -14,4 +14,9 @@ if (isset($argv[1]) || !empty($argv[1])) {
 
 $agg = new aggregator();
 $agg->aggregateAllBlogs($argv[1]);
-
+if ($agg->isNew() === true) {
+    $tmp = dirname(__FILE__) . '/../../tmp';
+    foreach (glob($tmp . '/Index-*') as $file) {
+        unlink($file);
+    }
+}

@@ -13,6 +13,7 @@ include_once 'magpierss/rss_fetch.inc';
 class aggregator
 {
     protected $mdb = null;
+    protected $hasUpdates = false;
 
     public function __construct() {
         $this->mdb = MDB2::connect($GLOBALS['BX_config']['dsn']);
@@ -21,10 +22,23 @@ class aggregator
         }
     }
 
+    /**
+     * This is to determine if we need to clear the cache after the aggregate script
+     * ran and tried to discover new blogs and entries.
+     *
+     * @return boolean
+     * @see    self::aggregateAllBlogs()
+     * @see    self::insertEntry()
+     */
+    public function isNew()
+    {
+        return $this->hasUpdates;
+    }
+
     function aggregateAllBlogs($id = null) {
 
 	$where = '';
-        if ($id) {
+        if ($id !== null) {
             $where .= "where ID = $id";
         }
         $res = $this->mdb->query("select ID,blogsID as blogsid, link, cats, section from feeds $where");
@@ -79,6 +93,11 @@ class aggregator
                 }
                 $newBlog = false;
             }
+
+            if ($newBlog === true) {
+                $this->hasUpdates = true;
+            }
+
             // update id, if not the same
             if ($row['blogsid'] != $id) {
                 $this->updateFeedBlogID($row['link'], $id);
@@ -166,7 +185,8 @@ class aggregator
         return $item;
     }
 
-    function getBody($html) {
+    function getBody($html)
+    {
 
         $d = new DomDocument();
         $html = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body>'.$html.'</body>';
@@ -180,14 +200,16 @@ class aggregator
         return $body;
     }
 
-    function generateMD5($item) {
+    function generateMD5($item)
+    {
         return md5($item['title'] .$item['link'] . $item['description'] .$item['content']['encoded']);
     }
 
     /**
      * @todo Replace mysql_* calls with MDB2
      */
-    function updateEntry($item, $entryID) {
+    function updateEntry($item, $entryID)
+    {
         $date  = $this->getDcDate($item, 0,true);
         $query = "update entries set " .
         " link =  '" .mysql_escape_string(utf2entities($item['link'])) . "'," .
@@ -205,9 +227,8 @@ class aggregator
         if (MDB2::isError($res)) {
             print "DB ERROR: ". $res->getMessage() . "\n". $res->getUserInfo(). "\n";
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**
@@ -247,9 +268,11 @@ class aggregator
         if (MDB2::isError($res)) {
             print "DB ERROR: ". $res->getMessage() . "\n". $res->getUserInfo(). "\n";
             return false;
-        } else {
-            return $id;
         }
+
+        $this->hasUpdates = true;
+
+        return $id;
     }
 
     function getDcDate($item, $nowOffset = 0, $returnNull = false) {
