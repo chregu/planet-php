@@ -393,10 +393,15 @@ class MagpieRSS {
 		if (!isset($str1) ) {
 			$str1="";
 		}
+		
+		if (is_array($str1))
+		{
+			$str1[] = $str2;
+			return;
+		}
+		
 		$str1 .= $str2;
 	}
-	
-	
 	
 	function append_content($text) {
 		if ( $this->initem ) {
