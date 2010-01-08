@@ -31,6 +31,7 @@
             <updated>
                 <xsl:value-of select="/planet/entries/entry[1]/date_iso"/>
             </updated>
+            <link rel="hub" href="http://pubsubhubbub.appspot.com"/>
 
             <xsl:apply-templates select="/planet/entries/entry"/>
         </feed>
