@@ -90,7 +90,13 @@
                             <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/atom1.xsl"/>
                             <map:serialize type="xml"/>
                         </map:when>
-
+                        <map:when test="/json*">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/json.xsl">
+							    <map:parameter name="cb" value="phpglobals://_GET[cb]" default="0"/>
+								<map:parameter type="options" name="registerPhpFunctions" value="'true'"/>
+						    </map:transform>
+                            <map:serialize type="json"/>
+                        </map:when>
 
                         <map:otherwise>
                             <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/main.xsl">
