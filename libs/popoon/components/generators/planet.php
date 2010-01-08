@@ -72,7 +72,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
             break;
             default:
             $xml .= $this->getEntries( $from.$where , $section ,$startEntry);    
-            $xml .= $this->getEntries( $from." where 1=1", "releases",0);
+            //$xml .= $this->getEntries( $from." where 1=1", "releases",0);
         }
         
         
