@@ -49,6 +49,15 @@
 
         <map:pipeline>
             <map:select type="uri">
+				<map:when test="/~">
+                    <map:match type="uri" pattern="~*">
+                        <map:generate type="planet">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="redirect" value="{1}"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+				
                 <map:when test="/search">
                     <map:match type="uri" pattern="search/*">
                         <map:generate type="planet">
