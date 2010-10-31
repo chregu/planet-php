@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href="/themes/<?php echo $BX_config['theme']; ?>/favicon.ico" type="image/x-icon" />
   <link href="/themes/<?php echo $BX_config['theme']; ?>/css/style.css" rel="stylesheet" type="text/css" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
-  <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
   <link rel="outline" type="text/x-opml" title="OPML Feed list" href="/opml" />
   <link rel="search" type="application/opensearchdescription+xml" title="Planet PEAR search" href="/opensearch.xml" />
  </head>

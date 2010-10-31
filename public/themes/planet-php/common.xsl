@@ -22,7 +22,7 @@
 </xsl:if>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.planet-php.org/rss/" />
 <link rel="alternate" type="application/rdf+xml" title="RDF" href="http://www.planet-php.org/rdf/" />
-<link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://www.planet-php.org/atom/" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://www.planet-php.org/atom/" />
 </xsl:template>
     <xsl:template name="bodyhead">
 
