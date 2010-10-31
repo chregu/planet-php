@@ -13,11 +13,11 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
   <link rel="alternate" type="application/atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
   <link rel="outline" type="text/x-opml" title="OPML Feed list" href="/opml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Planet PEAR search" href="/opensearch.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="<?php echo PROJECT_NAME_HR; ?> search" href="/opensearch.xml" />
  </head>
  <body>
   <div id="head">
-   <a href="/"><img src="/themes/planet-pear/img/pear-planet.png" width="305" height="70" hspace="30" alt="Planet PEAR" title="Planet PEAR" border="0" /></a>
+   <a href="/"><img src="/themes/planet-pear/img/pear-planet.png" width="305" height="70" hspace="30" alt="<?php echo PROJECT_NAME_HR; ?>" border="0" /></a>
    <div id="topnavi">
     All news in one place
    </div>
