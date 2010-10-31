@@ -19,7 +19,7 @@
             <meta name="robots" content="noindex,follow"/> 
         </xsl:if>
         <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
-        <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
+        <link rel="alternate" type="application/atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
     </xsl:template>
     <xsl:template name="bodyhead">
 

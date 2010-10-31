@@ -173,7 +173,7 @@
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://planet.oscom.org/rss/" />
   <link rel="alternate" type="application/rdf+xml" title="RDF" href="http://planet.oscom.org/rdf/" />
-  <link rel="alternate" type="application/x.atom+xml" title="Atom" href="http://planet.oscom.org/atom/" />
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="http://planet.oscom.org/atom/" />
         </head>
     </xsl:template>
 
