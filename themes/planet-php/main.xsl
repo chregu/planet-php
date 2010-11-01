@@ -43,6 +43,13 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.o
 		    <a id="searchbarLink" href="javascript:addEngine()">Mozilla Searchbar</a>
                 </fieldset>
             </div>
+            <div class="menu">
+                <fieldset>
+                    <legend>Twitter</legend>
+
+                    <div class="nnbe">Follow <a class="inlineBlogLink" href="http://twitter.com/planetphp">@planetphp</a> on Twitter</div>
+            </fieldset>
+            </div>
 <!--
 <div class="menu" >
 <fieldset style="padding-right: 0px; ">
@@ -243,12 +250,12 @@ google_color_text = "000000";
         </div>
 
 
+        <xsl:call-template name="commonRightBoxes"/>
         <div class="menu">
             <xsl:call-template name="planetarium"/>
         </div>
-        <xsl:call-template name="commonRightBoxes"/>
-    </xsl:template>
 
+        </xsl:template>
     <xsl:template name="htmlheadtitle">
    Planet PHP
    </xsl:template>
