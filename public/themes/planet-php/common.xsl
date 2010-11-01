@@ -58,24 +58,7 @@
 
 <xsl:template name="commonRightBoxes">
 
-        <div class="buttons">
-            <fieldset>
-                <legend>Buttons</legend>
-                <img width="80" height="15" src="/themes/img/planet-php-button-1.jpg" alt="Planet PHP"/>
-        &#160;
-<img width="80" height="15" src="/themes/img/planet-php-button-2.jpg" alt="Planet PHP"/>
-                <br/>
-                <img width="80" height="15" src="/themes/img/planet-php-button-3.jpg" alt="Planet PHP"/>
-            </fieldset>
-        </div>
-        <div class="menu">
-
-            <fieldset>
-                <legend>Contact</legend>
-                <a class="blogLinkPad" href="mailto:we@planet-php.net">we@planet-php.net</a>
-            </fieldset>
-
-        </div>
+      
 
         <div class="menu">
 
@@ -92,12 +75,34 @@
         <div class="menu">
 
             <fieldset>
+                <legend>Contact</legend>
+                <a class="blogLinkPad" href="mailto:we@planet-php.net">we@planet-php.net</a>
+            </fieldset>
+
+        </div>
+        <div class="menu">
+
+            <fieldset>
                 <legend>Sponsors</legend>
                <div class="nnbe">Hosted by <a class="inlineBlogLink" href="http://www.netzwirt.ch">netzwirt.ch</a> and <a class="inlineBlogLink" href="http://www.liip.ch">Liip</a>. <br/>
+               Maintained by <a class="inlineBlogLink" href="http://chregu.tv">Chregu Stocker</a>, <a class="inlineBlogLink" href="http://schlitt.info/">Tobias Schlitt</a> and more.<br/>
+               
 Logo designed by <a class="inlineBlogLink" href="http://viebrock.ca/">Colin Viebrock</a>.
+<br/>
+Twitter account by <a class="inlineBlogLink" href="http://sepehr.ws/">Sepehr Lajevardi</a>
 </div>
             </fieldset>
 
+        </div>
+          <div class="buttons">
+            <fieldset>
+                <legend>Buttons</legend>
+                <img width="80" height="15" src="/themes/img/planet-php-button-1.jpg" alt="Planet PHP"/>
+        &#160;
+<img width="80" height="15" src="/themes/img/planet-php-button-2.jpg" alt="Planet PHP"/>
+                <br/>
+                <img width="80" height="15" src="/themes/img/planet-php-button-3.jpg" alt="Planet PHP"/>
+            </fieldset>
         </div>
 
 </xsl:template>

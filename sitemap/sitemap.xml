@@ -25,6 +25,15 @@
 
         <map:pipeline>
             <map:select type="uri">
+				<map:when test="/~">
+                    <map:match type="uri" pattern="~*">
+                        <map:generate type="planet">
+                            <map:parameter name="db" value="config://dsn"/>
+                            <map:parameter name="redirect" value="{1}"/>
+                        </map:generate>
+                    </map:match>
+                </map:when>
+				
                 <map:when test="/search">
                     <map:match type="uri" pattern="search/*">
                         <map:generate type="planet">
@@ -65,6 +74,13 @@
                         <map:when test="/atom*">
                             <map:transform type="libxslt" src="BX_PROJECT_DIR:///xsl/atom1.xsl"/>
                             <map:serialize type="xml"/>
+                        </map:when>
+                        <map:when test="/json*">
+                            <map:transform type="libxslt" src="BX_PROJECT_DIR://xsl/json.xsl">
+							    <map:parameter name="cb" value="phpglobals://_GET[cb]" default="0"/>
+								<map:parameter type="options" name="registerPhpFunctions" value="'true'"/>
+						    </map:transform>
+                            <map:serialize type="json"/>
                         </map:when>
 
                         <map:otherwise>

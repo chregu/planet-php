@@ -20,3 +20,16 @@ if ($agg->isNew() === true) {
         unlink($file);
     }
 }
+
+$noti = new lx_notifier();
+
+$url = "http://www.planet-php.net/";
+$topicurls = array(
+        $url . 'atom/',
+);
+
+$hubs = array("http://pubsubhubbub.appspot.com");
+$noti->addPubSubHubs($topicurls, $hubs);
+    $noti->notifyAll();
+
+

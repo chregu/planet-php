@@ -60,14 +60,17 @@ class aggregator
                 continue;
             }
             //check if this blog already exists
-            if (isset($feed->channel['atom'])) {
-                foreach ($feed->channel['atom'] as $k => $v) {
-                    if (!isset($feed->channel[$k])) {
-                        $feed->channel[$k] = $v;
-                    }
-                }
-            }
-            if (!$feed->channel['link']) {
+               if (isset($feed->channel['atom'])) {
+                       foreach($feed->channel['atom'] as $k => $v) {
+                               if (!isset($feed->channel[$k])) {
+                                       $feed->channel[$k] = $v;
+                               }
+                       }
+               }     
+                   
+                   
+               
+           if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
                     $feed->channel['link'] = $feed->channel['link_'];
                 } else if (isset($feed->channel['link_self'])) {
@@ -78,6 +81,10 @@ class aggregator
                     print "NO channel/link... PLEASE FIX THIS\n";
                     continue;
                 }
+               
+           }
+           if (isset($feed->channel['link_hub'])) {
+               print "pubsubhubbub found in ".$feed->channel['link'] ." to " . $feed->channel['link_hub'] . "\n"; 
            }
 
             $blog = $this->getBlogEntry($feed->channel['link']);

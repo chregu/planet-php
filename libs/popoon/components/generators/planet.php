@@ -19,7 +19,25 @@ class popoon_components_generators_planet extends popoon_components_generator {
     
     function DomStart(&$xml)
     {
-	include_once("MDB2.php");
+        
+        include_once("MDB2.php");
+        if ( $redirect = $this->getParameterDefault("redirect")) {
+             $this->db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
+             $id = $this->url2id($redirect);
+             if ($id) {
+                 $query = "select link from entries where ID = $id";
+                 $link = $this->db->queryOne($query);
+                 if ($link) {
+                     header("Location: $link", 301);
+                     die();
+                 }
+             }
+             
+             header("Location: http://planet-php.net/", 302);
+             die();
+        }
+            
+
         if (!isset($GLOBALS['BX_config']['webTimezone'])) {
             $GLOBALS['BX_config']['webTimezone'] = $GLOBALS['BX_config']['serverTimezone'];
         }
@@ -72,7 +90,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
             break;
             default:
             $xml .= $this->getEntries( $from.$where , $section ,$startEntry);    
-            $xml .= $this->getEntries( $from." where 1=1", "releases",0);
+            //$xml .= $this->getEntries( $from." where 1=1", "releases",0);
         }
         
         
@@ -192,10 +210,14 @@ class popoon_components_generators_planet extends popoon_components_generator {
                     }
                     $xml .= '</'.$key.'>';
                 }
+                if ($rowField == 'entry') {
+                    $xml .= '<shortid>'.$this->id2url($row['id']) ."</shortid>";
+                }
                 $xml .= '</'.$rowField.'>';
                 
-                
+                   
             }
+            
             
         } 
         else {
@@ -204,6 +226,45 @@ class popoon_components_generators_planet extends popoon_components_generator {
         }
         return $xml;
     }
+    
+    protected function url2id($short) {        
+        $base = 63;
+        $symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+        
+        $len = strlen($short);
+        $total = 0;
+        for ($i = 0;  $i < $len;$i++) {
+            $pos = strpos($symbols,$short{$i});
+            $multi = pow($base,$len - $i - 1);
+            $c =  $pos * $multi . "\n";
+            $total += $c;
+            
+        }
+        
+        return $total;
+    }
+    
+    protected function id2url($val) {
+        if (0 == $val) {
+            return 0;
+        }
+        $base = 63;
+        $symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+        $result = '';
+        $exp = $oldpow = 1;
+        while ($val > 0 && $exp < 10) {
+
+            $pow = pow($base, $exp++);
+
+            $mod = ($val % $pow);
+            // print $mod ."\n";
+            $result = substr($symbols, $mod / $oldpow, 1) . $result;
+            $val -= $mod;
+            $oldpow = $pow;
+        }
+        return $result;
+    }
+
 }
 
 
