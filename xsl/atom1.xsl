@@ -43,6 +43,7 @@
        <xsl:value-of select="title"/>
        </title>
             <link rel="alternate" type="text/html" href="{link}" title="{title}"/>
+            <link rel="shortlink" type="text/html" href="http://planet-php.org/~{shortid}" title="Shortlink to {link}"/>
             <author>
                 <name>
     <xsl:choose>

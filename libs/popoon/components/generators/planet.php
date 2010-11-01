@@ -198,10 +198,14 @@ class popoon_components_generators_planet extends popoon_components_generator {
                     }
                     $xml .= '</'.$key.'>';
                 }
+                if ($rowField == 'entry') {
+                    $xml .= '<shortid>'.$this->id2url($row['id']) ."</shortid>";
+                }
                 $xml .= '</'.$rowField.'>';
                 
-                
+                   
             }
+            
             
         } 
         else {
@@ -211,7 +215,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         return $xml;
     }
     
-    function url2id($short) {        
+    protected function url2id($short) {        
         $base = 63;
         $symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
         
@@ -226,6 +230,27 @@ class popoon_components_generators_planet extends popoon_components_generator {
         }
         
         return $total;
+    }
+    
+    protected function id2url($val) {
+        if (0 == $val) {
+            return 0;
+        }
+        $base = 63;
+        $symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
+        $result = '';
+        $exp = $oldpow = 1;
+        while ($val > 0 && $exp < 10) {
+
+            $pow = pow($base, $exp++);
+
+            $mod = ($val % $pow);
+            // print $mod ."\n";
+            $result = substr($symbols, $mod / $oldpow, 1) . $result;
+            $val -= $mod;
+            $oldpow = $pow;
+        }
+        return $result;
     }
 
 }
