@@ -190,6 +190,11 @@ class MagpieRSS {
 						
 		xml_set_character_data_handler( $this->parser, 'feed_cdata' ); 
 	
+    $dom = new domdocument();      
+        $dom->recover = true;
+        $dom->loadXML($source);
+        $source = $dom->saveXML();
+
 		$status = xml_parse( $this->parser, $source );
 		
 		if (! $status ) {
@@ -242,7 +247,6 @@ class MagpieRSS {
 			}
 			return;
 		}
-	
 		if ( $el == 'channel' ) 
 		{
 			$this->inchannel = true;
@@ -306,7 +310,11 @@ class MagpieRSS {
 		//
 		elseif ($this->feed_type == ATOM and $el == 'link' ) 
 		{
-			if ( isset($attrs['rel']) and $attrs['rel'] == 'alternate' ) 
+			if ( isset($attrs['rel']) and $attrs['rel'] == 'alternate' and $attrs['type'] == 'text/html') 
+			{
+				$link_el = 'link_html';
+			}
+			else if ( isset($attrs['rel']) and $attrs['rel'] == 'alternate' ) 
 			{
 				$link_el = 'link';
 			}

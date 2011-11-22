@@ -1,6 +1,6 @@
 <?php
-while (getLoad() > 7) {
-    print "load > 7. wait 20 sec. \n";
+while (getLoad() > 15) {
+    print "load > 15. wait 20 sec. \n";
     sleep(20);   
 }
 
@@ -29,7 +29,7 @@ class aggregator {
         if ($id) {
             $where = "where ID = $id";
         }
-        $res = $this->mdb->query("select ID,blogsID as blogsid, link, cats, section from feeds $where");
+        $res = $this->mdb->query("select ID,blogsID as blogsid, link, cats, section from feeds $where order by rand()");
         if (MDB2::isError($res)) {
             print $res->getMessage();
             print "\n";
@@ -38,13 +38,14 @@ class aggregator {
         }
         while ($row = $res->fetchRow(MDB2_FETCHMODE_ASSOC)) {
             //get remote feed from magpie
-            while (getLoad() > 8) {
-                print "load > 8. wait 20 sec. \n";
+            while (getLoad() > 20) {
+                print "load > 20. wait 20 sec. \n";
                 sleep(20);   
             }
-            
+ 
             $feed = $this->getRemoteFeed($row['link']);  
             if(!$feed) {
+                print "Somethings wrong with " . $row['link'] ."\n";
                 continue;
             }
             //check if this blog already exists
@@ -56,8 +57,10 @@ class aggregator {
                        }
                }     
                    
-                   
-               
+                   var_dump($feed->channel);
+              if ($feed->channel['link_html']) {
+                   $feed->channel['link'] = $feed->channel['link_html'];
+		} else {
                if (!$feed->channel['link']) {
                 if (isset($feed->channel['link_'])) {
                    $feed->channel['link'] = $feed->channel['link_'];
@@ -69,6 +72,7 @@ class aggregator {
                print "NO channel/link... PLEASE FIX THIS\n";
                continue;
                 }
+		}
                
            }
            if (isset($feed->channel['link_hub'])) {
