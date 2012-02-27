@@ -109,7 +109,9 @@ class aggregator {
                 if (!isset($item['link']) && isset($item['link_'])) {
                     $item['link'] = $item['link_'];
                 }
-                
+                if (!isset($item['link']) && isset($item['id'])) {
+                    $item['link'] = $item['id'];
+                }
                 if (!isset($item['content']['encoded']) && isset($item['atom_content'])) {
                     $item['content']['encoded'] = $item['atom_content'];
                 }
