@@ -6,7 +6,7 @@
 
 		<fieldset>
                 <legend>Planetarium</legend>
-                <a class="blogLinkPad" href="http://planet.pear.php.net/">Planet PEAR</a>
+                <a class="blogLinkPad" href="http://planet-pear.net/">Planet PEAR</a>
 		<a class="blogLinkPad" href="http://www.planet-index.org/">Planet Index</a>
 		<a class="blogLinkPad" href="http://www.planetapache.org/">Apache</a>
 		<a class="blogLinkPad" href="http://planet.arslinux.com/">Ars Linux</a>
