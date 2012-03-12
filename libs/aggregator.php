@@ -57,7 +57,6 @@ class aggregator {
                        }
                }     
                    
-                   var_dump($feed->channel);
               if ($feed->channel['link_html']) {
                    $feed->channel['link'] = $feed->channel['link_html'];
 		} else {
@@ -109,8 +108,16 @@ class aggregator {
                 if (!isset($item['link']) && isset($item['link_'])) {
                     $item['link'] = $item['link_'];
                 }
+                if (!isset($item['link']) && isset($item['link_html'])) {
+                    $item['link'] = $item['link_html'];
+                }
                 if (!isset($item['link']) && isset($item['id'])) {
                     $item['link'] = $item['id'];
+                }
+
+                if (strpos($item['link'],"http") !== 0) {
+                   print "ERROR, item link " . $item['link'] . " doesn't start with http\n";
+                    continue;
                 }
                 if (!isset($item['content']['encoded']) && isset($item['atom_content'])) {
                     $item['content']['encoded'] = $item['atom_content'];
